@@ -1,0 +1,379 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold py-3 mb-4">
+    <a href="javascript:void(0)"  ><i  class="ti ti-chevron-left" style="font-size: 2rem;margin-top: -5px;"></i></a>
+    <span class="text-muted fw-light">Feed /</span> Detail
+  </h4>
+  <div class="row">
+    <!-- User Sidebar -->
+
+    <!--/ User Sidebar -->
+
+    <!-- User Content -->
+    <div class="col-xl-12 col-lg-6 col-md-6 order-0 order-md-1">
+      <!-- User Pills -->
+      <div class="nav-align-top mb-4">
+        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+          <li class="nav-item">
+            <button
+              type="button"
+              class="nav-link active"
+              role="tab"
+              data-bs-toggle="tab"
+              data-bs-target="#navs-pills-justified-home"
+              aria-controls="navs-pills-justified-home"
+              aria-selected="true"
+            >
+              <i class="ti ti-camera ti-xs me-1"></i>Image
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              type="button"
+              class="nav-link"
+              role="tab"
+              data-bs-toggle="tab"
+              data-bs-target="#navs-pills-justified-profile"
+              aria-controls="navs-pills-justified-profile"
+              aria-selected="false"
+            >
+              <i class="ti ti-lock ti-music me-1"></i>Audio
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              type="button"
+              class="nav-link"
+              role="tab"
+              data-bs-toggle="tab"
+              data-bs-target="#navs-pills-justified-messages"
+              aria-controls="navs-pills-justified-messages"
+              aria-selected="false"
+            >
+              <i class="ti ti-video ti-xs me-1"></i>Video
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              type="button"
+              class="nav-link"
+              role="tab"
+              data-bs-toggle="tab"
+              data-bs-target="#navs-pills-detail"
+              aria-controls="navs-pills-detail"
+              aria-selected="false"
+            >
+              <i class="ti ti-detail ti-xs me-1"></i>Detail
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" *ngIf="media$|async as feed">
+          <div
+            class="tab-pane fade show active"
+            id="navs-pills-justified-home"
+            role="tabpanel"
+          >
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <img
+                      class="img-fluid d-flex mx-auto my-4 rounded"
+                      [src]="feed.data.metaData.imageJson.image"
+                      alt="Card image cap"
+                    />
+                    <div class="d-flex justify-content-center">
+                      <a
+                      *ngIf="feed.data.imageStatus==2;else image_not_generated"
+                        [href]="feed.data.imageUrl" target="_blank"
+                        class="btn btn-sm btn-primary me-3"
+                        
+                      >
+                        <span
+                          ><i class="ti ti-download me-0 me-sm-1 ti-xs"></i
+                          ><span class="d-none d-sm-inline-block"
+                            >Download</span
+                          ></span
+                        ></a
+                      >
+                      <ng-template #image_not_generated>
+                        <a
+                        (click)="processImage(feed)"
+                        href="javascript:void(0);"
+                        class="btn btn-sm btn-primary me-3"
+                        data-bs-target="#editUser"
+                        data-bs-toggle="modal"
+                      >
+                        <span
+                          ><i class="ti brand-inertia me-0 me-sm-1 ti-xs"></i
+                          ><span class="d-none d-sm-inline-block"
+                            >Process Image</span
+                          ></span
+                        ></a
+                      >
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  <div class="col-md-3">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div
+                          class="d-flex justify-content-center"
+                          style="margin-top: 65px"
+                        >
+                          <span>Wevenat Male 31</span>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                          <a
+                            href="javascript:;"
+                            class="btn btn-sm btn-primary me-3"
+                            data-bs-target="#editUser"
+                            data-bs-toggle="modal"
+                          >
+                            <span
+                              ><i class="ti ti-paly me-0 me-sm-1 ti-xs"></i
+                              ><span class="d-none d-sm-inline-block"
+                                >TTS</span
+                              ></span
+                            ></a
+                          >
+                        </div>
+                        <div
+                          class="d-flex justify-content-center"
+                          style="margin-top: 130px"
+                        >
+                          <a
+                          *ngIf="feed.data.audioStatus==2;else audio_not_generated"
+                            [href]="feed.data.audioUrl" target="_blank"
+                            class="btn btn-sm btn-primary me-3"
+                          >
+                            <span
+                              ><i class="ti ti-download me-0 me-sm-1 ti-xs"></i
+                              ><span class="d-none d-sm-inline-block"
+                                >Download</span
+                              ></span
+                            ></a
+                          >
+                          <ng-template #audio_not_generated>
+                            <button *ngIf="feed.data.audioStatus==1"  class="btn btn-sm btn-primary me-3 waves-effect waves-light" type="button" >
+                              <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                              Processing...
+                            </button>
+                            <a *ngIf="feed.data.audioStatus==0" (click)="processAudio(feed.data)"
+                            href="javascript:;"
+                            class="btn btn-sm btn-primary me-3"
+                            data-bs-target="#editUser"
+                            data-bs-toggle="modal"
+                          >
+                            <span
+                              ><i class="ti  me-0 me-sm-1 ti-xs"></i
+                              ><span class="d-none d-sm-inline-block"
+                                >Process Audio</span
+                              ></span
+                            ></a
+                          >
+                          </ng-template>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                  <div class="col-md-3">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <img
+                          class="img-fluid d-flex mx-auto my-4 rounded"
+                          [src]="feed.data.metaData.videoJson.image"
+                          style="max-height: 199px;"
+                          alt="Card image cap"
+                        />
+                        <div
+                          class="d-flex justify-content-center"
+                          style="margin-top: 21px"
+                        >
+                          <a 
+                           *ngIf="feed.data.videoStatus==2;else video_not_generated"
+                            style="margin-left: 10px"
+                            [href]="feed.data.videoUrl" target="_blank"
+                            class="btn btn-sm btn-primary me-3"
+                           
+                          >
+                            <span
+                              ><i class="ti ti-download me-0 me-sm-1 ti-xs"></i
+                              ><span class="d-none d-sm-inline-block"
+                                >Download</span
+                              ></span
+                            ></a
+                          >
+                          <ng-template #video_not_generated>
+                            <button *ngIf="feed.data.videoStatus==1" (click)="processVideo(feed.data.metaData.videoJson);feed.data.generating_video==true" class="btn btn-sm btn-primary me-3 waves-effect waves-light" type="button" >
+                              <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                              Processing...
+                            </button>
+                            <a *ngIf="feed.data.videoStatus==0" (click)="processVideo(feed.data)"
+                            href="javascript:;"
+                            class="btn btn-sm btn-primary me-3"
+                            data-bs-target="#editUser"
+                            data-bs-toggle="modal"
+                          >
+                            <span
+                              ><i class="ti  me-0 me-sm-1 ti-xs"></i
+                              ><span class="d-none d-sm-inline-block"
+                                >Process Video</span
+                              ></span
+                            ></a
+                          >
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card mb-4">
+                          <div class="card-body">
+                            <p class="mt-2 small text-uppercase text-muted">
+                              Details
+                            </p>
+                            <div class="info-container">
+                              <ul class="list-unstyled">
+                                <li class="mb-2">
+                                  <span class="fw-semibold me-1"
+                                    >Published Date:</span
+                                  >
+                                  <span>{{feed.data.created|date}}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                  <span class="fw-semibold me-1">Claim:</span>
+                                  <span>{{feed.data.metaData.claim.frameText}}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                  <span class="fw-semibold me-1">Status:</span>
+                                  <span class="badge bg-label-success"
+                                    >Published</span
+                                  >
+                                </li>
+
+                                <li class="mb-2 pt-1">
+                                  <span class="fw-semibold me-1"
+                                    >Languages:</span
+                                  >
+                                  <span>{{feed.data.language.language}}</span>
+                                </li>
+
+                                <li class="pt-1">
+                                  <span class="fw-semibold me-1">Creator:</span>
+                                  <!-- <span>{{feed.data.creator.firstName}} {{feed.data.creator.lastName}}</span> -->
+                                </li>
+                              </ul>
+                              <div
+                                class="d-flex justify-content-center"
+                                style="margin-top: 30px"
+                              >
+                                <a
+                                  href="javascript:;"
+                                  class="btn btn-sm btn-secondary me-3"
+                                  data-bs-target="#editUser"
+                                  data-bs-toggle="modal"
+                                  >Edit</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                   
+                   
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="navs-pills-justified-profile"
+                    role="tabpanel"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 mb-3">
+                        <audio class="w-100" id="plyr-audio-player" controls>
+                          <source
+                            src="../../assets/audio/Water_Lily.mp3"
+                            type="audio/mp3"
+                          />
+                        </audio>
+                      </div>
+                      <div class="col-md-6 col-lg-6 mb-3">
+                        <button
+                          class="btn btn-secondary add-new btn-primary"
+                          tabindex="0"
+                          aria-controls="DataTables_Table_0"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasAddUser"
+                        >
+                          <span
+                            ><i class="ti ti-download me-0 me-sm-1 ti-xs"></i
+                            ><span class="d-none d-sm-inline-block"
+                              >Download</span
+                            ></span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="navs-pills-detail"
+                    role="tabpanel"
+                  >
+                    <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+                      <!-- User Card -->
+
+                      <!-- /User Card -->
+                      <!-- Plan Card -->
+                      <!-- /Plan Card -->
+                    </div>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    id="navs-pills-justified-messages"
+                    role="tabpanel"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 mb-3">
+                        <video
+                          class="w-100"
+                          poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+                          id="plyr-video-player"
+                          playsinline
+                          controls
+                        >
+                          <source
+                            src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                            type="video/mp4"
+                          />
+                        </video>
+                      </div>
+
+                      <div class="col-md-6 col-lg-6 mb-3">
+                        <button
+                          class="btn btn-secondary add-new btn-primary"
+                          tabindex="0"
+                          aria-controls="DataTables_Table_0"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasAddUser"
+                        >
+                          <span
+                            ><i class="ti ti-download me-0 me-sm-1 ti-xs"></i
+                            ><span class="d-none d-sm-inline-block"
+                              >Download</span
+                            ></span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

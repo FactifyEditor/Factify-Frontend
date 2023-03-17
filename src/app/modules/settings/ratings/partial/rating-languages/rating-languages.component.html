@@ -1,0 +1,30 @@
+<div
+  id="accountDetailsValidation"
+  class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework"
+>
+  <div class="mb-3 row mt-20">
+    <div class="col-sm-3">
+      <label class="switch switch-success">
+        <input
+          type="checkbox"
+          [(ngModel)]="language.isEnabled"
+          class="switch-input"
+          [checked]="language.isEnabled"
+        />
+        <span class="switch-toggle-slider">
+          <span class="switch-on">
+            <i class="ti ti-check"></i>
+          </span>
+          <span class="switch-off">
+            <i class="ti ti-x"></i>
+          </span>
+        </span>
+        <span class="switch-label">Enable</span>
+      </label>
+    </div>
+    <div class="col-sm-9">
+      <input [(ngModel)]="language.rating" class="form-control" type="text" />
+    </div>
+    <div class="col-12 d-flex justify-content-between mt-4"></div>
+  </div>
+</div>

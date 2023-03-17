@@ -1,0 +1,47 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">    <a  class="">
+
+      <i  class="ti ti-chevron-left" style="font-size: 2rem;margin-top: -5px;"></i>
+    </a> <span class="text-muted fw-light">Settings /Languages/</span> Add New</h4>
+      <div class="card">
+        <div class="card-body">
+
+
+<div id="accountDetailsValidation" class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework">
+    <form class="example-form" [formGroup]="languageForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsUsername">Language Name</label>
+        <input type="text" formControlName="language" name="multiStepsUsername" id="multiStepsUsername" class="form-control" placeholder="Hindi">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['language'].touched && f['language'].errors" class="invalid-feedback">
+            <div *ngIf="f['language'].errors['language']">Language Name is required!</div>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsUsername">Language Code</label>
+        <input type="text" formControlName="value" name="multiStepsUsername" id="multiStepsUsername" class="form-control" placeholder="in-Hi">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['value'].touched && f['value'].errors" class="invalid-feedback">
+            <div *ngIf="f['value'].errors['value']">Last Name is required!</div>
+          </div>
+      </div>
+    </div>
+      
+      
+      
+      
+      <div class="col-12 d-flex justify-content-between mt-4">
+       
+        <button [disabled]="languageForm.invalid" class="btn btn-primary btn-next waves-effect waves-light">
+          <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Save</span>
+          <i class="ti ti-arrow-right ti-xs"></i>
+        </button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+</div>
+</div>

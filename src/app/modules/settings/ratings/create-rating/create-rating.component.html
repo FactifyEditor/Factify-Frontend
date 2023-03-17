@@ -1,0 +1,159 @@
+
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Settings/Ratings/</span>{{headerText}}
+  </h4>
+  <div class="card">
+    <div class="card-body">
+      <div
+        id="accountDetailsValidation"
+        *ngIf="languages$ | async as languages"
+        class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework"
+      >
+        <form
+          class="example-form"
+          [formGroup]="ratingForm"
+          (ngSubmit)="submitForm(languages.data)"
+        >
+          <div class="row g-3">
+            <div class="col-sm-12 fv-plugins-icon-container">
+              <label class="form-label" for="multiStepsUsername">Rating</label>
+              <input
+                type="text"
+                formControlName="rating"
+                name="multiStepsUsername"
+                id="multiStepsUsername"
+                class="form-control"
+                placeholder="Name"
+              />
+              <div class="fv-plugins-message-container invalid-feedback">
+                <div
+                  *ngIf="f['rating'].touched && f['rating'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['rating'].errors['rating']">
+                    First Name is required!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 fv-plugins-icon-container">
+              <label class="form-label" for="multiStepsUsername"
+                >Description</label
+              >
+              <textarea
+                type="text"
+                formControlName="description"
+                name="multiStepsUsername"
+                id="multiStepsUsername"
+                class="form-control"
+                placeholder="Description"
+              ></textarea>
+              <div class="fv-plugins-message-container invalid-feedback">
+                <div
+                  *ngIf="f['description'].touched && f['description'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['description'].errors['description']">
+                    Description is required!
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3 row  mt-20   " >
+              <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+                >Image</label
+              >
+              <div class="col-md-2">
+                <div class="image-upload">
+                  <label style="cursor: pointer" for="file_upload">
+                    <img src="" alt="" class="uploaded-image" />
+                    <div class="h-100">
+                      <div class="dplay-tbl">
+                        <div class="dplay-tbl-cell">
+                          <i class="ti ti-upload upload_icon"></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <input
+                       data-required="image"
+                        type="file"
+                        name="image_name"
+                        id="file_upload"
+                        accept="image/*"
+                        class="image-input"
+                        (change)="uploadImageFile($event)"
+                        data-traget-resolution="image_resolution"
+                        value=""
+                    />
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="preview" *ngIf="preview && preview !== null" class="card" style="max-width:125px">
+                  <img  class="card-img" [src]="preview"  alt="Card image cap">
+                </div>
+              </div>
+            </div>
+            <div class="bs-stepper-content">
+              <div id="account-details" class="content active dstepper-block">
+                <div class="content-header mb-3">
+                  <h6 class="mb-0">Languages</h6>
+                </div>
+                <div >
+                  <div class="mb-3 row" *ngFor="let language of languages.data">
+                    <div class="col-sm-10">
+                      <div class="accordion mt-3" id="accordionExample">
+                        <div class="card accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button
+                              type="button"
+                              class="accordion-button"
+                              data-bs-toggle="collapse"
+                              [attr.data-bs-target]="
+                                '#accordionOne' + language.value
+                              "
+                              aria-expanded="true"
+                              aria-controls="accordionOne"
+                            >
+                              {{ language.language }}
+                            </button>
+                          </h2>
+                          <div
+                            [id]="'accordionOne' + language.value"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#accordionExample"
+                            style=""
+                          >
+                            <div  class="accordion-body"  >
+                              <app-rating-languages [language]="language" ></app-rating-languages>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 d-flex justify-content-between mt-4">
+              <button
+                [disabled]="ratingForm.invalid"
+                class="btn btn-primary btn-next waves-effect waves-light"
+              >
+                <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0"
+                  >{{buttonText}}</span
+                >
+                <i class="ti ti-device-floppy"></i>
+              </button>
+             
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

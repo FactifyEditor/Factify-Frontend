@@ -1,0 +1,90 @@
+<aside  id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+      <a href="index.html" class="app-brand-link">
+        <span class="app-brand-logo ">
+          <img width="150" src="assets/logo.png">
+          
+        </span>
+      </a>
+
+      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+        <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
+        <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+      </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <ng-container *ngFor="let item of menuItems">
+            <li  routerLinkActive="active"  class="menu-item"  *ngIf="!item.subItems">
+                <a [routerLink]="item.link"  class="menu-link">
+                  <i class="{{ item.icon }}"></i>
+                  <div >{{item.label}}</div>
+                </a>
+              </li >
+              <li routerLinkActive="active" class="menu-item" *ngIf="item.subItems">
+               
+                <a  href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="{{ item.icon }}"></i>
+                  <div >{{item.label}}</div>
+                </a>
+                <ul class="menu-sub">
+                  <li routerLinkActive="active" class="menu-item" *ngFor="let subItem of item.subItems">
+                    <a *ngIf="subItem.subItems"  class="menu-link" [ngClass]="{'menu-toggle':subItem.subItems}">
+                      <div >{{subItem.label}}</div>
+                    </a>
+                    <a *ngIf="!subItem.subItems" [routerLink]="subItem.link" href="javascript:void(0);" class="menu-link">
+                      
+                      <div >{{subItem.label}}</div>
+                    </a>
+                    <ul routerLinkActive="active" class="menu-sub" *ngIf="item.subItems">
+                      <li routerLinkActive="active" class="menu-item" *ngFor="let subSubItem of subItem.subItems">
+                        <a [routerLink]="subSubItem.link" class="menu-link">
+                          <div >{{subSubItem.label}}</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+        </ng-container>
+    </ul>
+    <hr>
+    <div class="dropdown text-center pb-4" style="
+    margin-left: 20px;">
+        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <!-- <div class="avatar avatar-online">
+            <div class="avatar-wrapper">
+              <div class="avatar me-2">
+                <span class="avatar-initial rounded-circle bg-label-secondary">R</span>
+              </div>
+            </div>
+             
+          </div> -->
+          <div class="d-flex">
+            <div class="flex-shrink-0 me-3">
+              <div class="avatar avatar-online">
+                <span class="avatar-initial rounded-circle bg-label-secondary">R</span>
+
+              </div>
+            </div>
+            <div class="flex">
+              <span style="margin-top:10px" class="fw-semibold d-block">Ravi</span>
+              
+            </div>
+          </div>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-light text-small shadow" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+              <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0)" (click)="authService.doLogout()">Sign out</a></li>
+      </ul>
+        
+    
+
+    </div>  
+  </aside>

@@ -1,0 +1,119 @@
+import { Injectable } from '@angular/core';
+import {User,Role} from 'src/app/models'
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
+import { Router } from '@angular/router';
+
+import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+@Injectable({
+  providedIn: 'root',
+})
+
+export class AuthService {
+  private baseURL = environment.BASE_URL;
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
+  public loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  constructor(private http: HttpClient, public router: Router) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+ 
+
+  // Sign-up
+  signUp(user: User): Observable<any> {
+    let api = `${this.baseURL}/register-user`;
+    return this.http.post(api, user).pipe(catchError(this.handleError));
+  }
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
+  // Sign-in
+  signIn(user: User) {
+    return this.http
+      .post<any>(`${this.baseURL}/auth/login`, user)
+      .subscribe((res: any) => {
+        localStorage.setItem('accessToken', res.accessToken);
+        // this.getUserProfile(res._id).subscribe((res) => {
+        //   this.currentUser = res;
+        localStorage.setItem('currentUser', JSON.stringify(res));
+        this.currentUserSubject.next(user);
+        this.loggedIn.next(true);
+        window.location.href="/feed"
+        // this.router.navigateByUrl('/feed');
+
+        // });
+      });
+  }
+
+  getToken() {
+    return localStorage.getItem('accessToken');
+  }
+  // getRole() {
+  //   this.roleAs = localStorage.getItem('ROLE');
+  //   return this.roleAs;
+  // }
+
+  get isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('accessToken');
+    return authToken !== null ? true : false;
+  }
+
+  doLogout() {
+    let removeToken = localStorage.removeItem('accessToken');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    if (removeToken == null) {
+      this.loggedIn.next(false);
+
+      this.router.navigate(['auth/login']);
+    }
+  }
+  public isAuthenticated(): boolean {
+    return !!this.currentUserValue;
+  }
+  public isAdmin(): boolean {
+    return this.currentUserValue && this.currentUserValue.roles.includes(Role.Admin);
+  }
+  public isEditor(): boolean {
+    return this.currentUserValue && this.currentUserValue.roles.includes(Role.Editor);
+  }
+  public isFactChecker(): boolean {
+    return this.currentUserValue && this.currentUserValue.roles.includes(Role.FactChecker);
+  }
+  public getCurrentUserRoles(): any[] {
+    let currentUser= localStorage.getItem('currentUser');
+    return currentUser!=null?JSON.parse(currentUser)?.roles:[]
+  }
+
+  // User profile
+  getUserProfile(id: any): Observable<any> {
+    let api = `${this.baseURL}/user-profile/${id}`;
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res) => {
+        return res || {};
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  // Error
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      msg = error.error.message;
+    } else {
+      // server-side error
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(msg);
+  }
+}

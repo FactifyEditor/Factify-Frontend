@@ -1,0 +1,185 @@
+<div
+  id="accountDetailsValidation"
+  class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework"
+>
+ <div class="row" >
+    <div class="col-sm-3">
+      <label class="switch switch-success">
+        <input type="checkbox" [(ngModel)]="language.isEnabled" class="switch-input" [checked]="language.isEnabled" />
+        <span class="switch-toggle-slider">
+          <span class="switch-on">
+            <i class="ti ti-check"></i>
+          </span>
+          <span class="switch-off">
+            <i class="ti ti-x"></i>
+          </span>
+        </span>
+        <span class="switch-label">Enable</span>
+      </label>
+    </div>
+  </div>
+  <div class="mb-3 row  mt-20   " >
+    <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+      >Headline Claim Track</label
+    >
+    <div class="col-md-2">
+      <div class="image-upload">
+        <label style="cursor: pointer" for="file_uploadheadlineTrack">
+          <img src="" alt="" class="uploaded-image" />
+          <div class="h-100">
+            <div class="dplay-tbl">
+              <div class="dplay-tbl-cell">
+                <i class="ti ti-upload upload_icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <input
+             data-required="image"
+              type="file"
+              name="image_name"
+              id="file_uploadheadlineTrack"
+              class="image-input"
+              accept="audio/*"
+              (change)="uploadIntroFile($event,'headlineTrack')"
+              data-traget-resolution="image_resolution"
+              value=""
+          />
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="preview" *ngIf="headlinePreview && headlinePreview !== null" class="card" style="max-width:125px">
+        <audio controls>
+          <source [src]="headlinePreview" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 row  mt-20   " >
+    <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+      >Verification Track</label
+    >
+    <div class="col-md-2">
+      <div class="image-upload">
+        <label style="cursor: pointer" for="file_uploadverificationTrack">
+          <img src="" alt="" class="uploaded-image" />
+          <div class="h-100">
+            <div class="dplay-tbl">
+              <div class="dplay-tbl-cell">
+                <i class="ti ti-upload upload_icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <input
+             data-required="image"
+              type="file"
+              name="image_name"
+              id="file_uploadverificationTrack"
+              class="image-input"
+              accept="audio/*"
+              (change)="uploadIntroFile($event,'verificationTrack')"
+              data-traget-resolution="image_resolution"
+              value=""
+          />
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="preview" *ngIf="verificationPreview && verificationPreview !== null" class="card" style="max-width:125px">
+        <audio controls>
+          
+          <source [src]="verificationPreview" type="audio/mpeg">
+         
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row  mt-20   " >
+    <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+      >Intro Track</label
+    >
+    <div class="col-md-2">
+      <div class="image-upload">
+        <label style="cursor: pointer" for="file_uploadintroTrack">
+          <img src="" alt="" class="uploaded-image" />
+          <div class="h-100">
+            <div class="dplay-tbl">
+              <div class="dplay-tbl-cell">
+                <i class="ti ti-upload upload_icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <input
+             data-required="image"
+              type="file"
+              name="image_name"
+              id="file_uploadintroTrack"
+              class="image-input"
+              accept="audio/*"
+              (change)="uploadIntroFile($event,'introTrack')"
+              data-traget-resolution="image_resolution"
+              value=""
+          />
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="preview" *ngIf="introPreview && introPreview !== null" class="card" style="max-width:125px">
+        <audio controls>
+          
+          <source [src]="introPreview" type="audio/mpeg">
+         
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row  mt-20   " >
+    <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+      >Otro Track</label
+    >
+    <div class="col-md-2">
+      <div class="image-upload">
+        <label style="cursor: pointer" for="file_uploadoutroTrack">
+          <img src="" alt="" class="uploaded-image" />
+          <div class="h-100">
+            <div class="dplay-tbl">
+              <div class="dplay-tbl-cell">
+                <i class="ti ti-upload upload_icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <input
+             data-required="image"
+              type="file"
+              name="image_name"
+              id="file_uploadoutroTrack"
+              class="image-input"
+              accept="audio/*"
+              (change)="uploadIntroFile($event,'outroTrack')"
+              data-traget-resolution="image_resolution"
+              value=""
+          />
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="preview" *ngIf="outroPreview && outroPreview !== null" class="card" style="max-width:125px">
+        <audio controls>
+          
+          <source [src]="outroPreview" type="audio/mpeg">
+         
+        </audio>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div class="col-12 d-flex justify-content-between mt-4"></div>
+</div>

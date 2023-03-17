@@ -1,0 +1,16 @@
+<div class="row" *ngIf="videoTemplate$|async as templates">
+    <div class="col-lg-6" *ngFor="let template of templates.data">
+      <img
+        class="d-flex mx-auto my-4 rounded"
+        [src]="template.image" height="150px"
+        alt="Card image cap"
+      />
+      <button
+      (click)="onSelectTheme(template)"
+        class="btn btn-sm btn-primary text-center"
+        style="margin-left: 10px"
+      >
+     Select {{template.name}}
+      </button>
+    </div>
+  </div>

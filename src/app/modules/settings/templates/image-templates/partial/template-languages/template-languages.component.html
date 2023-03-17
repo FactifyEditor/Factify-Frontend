@@ -1,0 +1,59 @@
+<div
+  id="accountDetailsValidation"
+  class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework"
+>
+ <div class="row" >
+    <div class="col-sm-3">
+      <label class="switch switch-success">
+        <input type="checkbox" [(ngModel)]="language.isEnabled" class="switch-input" [checked]="language.isEnabled" />
+        <span class="switch-toggle-slider">
+          <span class="switch-on">
+            <i class="ti ti-check"></i>
+          </span>
+          <span class="switch-off">
+            <i class="ti ti-x"></i>
+          </span>
+        </span>
+        <span class="switch-label">Enable</span>
+      </label>
+    </div>
+  </div>
+  <div class="mb-3 row  mt-20   " >
+    <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+      >Image</label
+    >
+    <div class="col-md-2">
+      <div class="image-upload">
+        <label style="cursor: pointer" for="file_uploadheadlineTrack">
+          <img src="" alt="" class="uploaded-image" />
+          <div class="h-100">
+            <div class="dplay-tbl">
+              <div class="dplay-tbl-cell">
+                <i class="ti ti-upload upload_icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <input
+             data-required="image"
+              type="file"
+              name="image_name"
+              id="file_uploadheadlineTrack"
+              class="image-input"
+              accept="image/*"
+              (change)="uploadIntroFile($event)"
+              data-traget-resolution="image_resolution"
+              value=""
+          />
+        </label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="preview" *ngIf="preview && preview !== null" class="card" style="max-width:125px">
+        <img  class="card-img" [src]="preview"  alt="Card image cap">
+
+      </div>
+    </div>
+  </div>
+  <div class="col-12 d-flex justify-content-between mt-4"></div>
+</div>
