@@ -17,7 +17,7 @@ yarn-error.log
 .idea/
 /server
 .firebaserc
- firebase.json
+firebase.json
 .project
 .classpath
 .c9/
