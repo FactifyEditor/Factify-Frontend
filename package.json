@@ -27,7 +27,7 @@
     "datatables.net": "^1.13.1",
     "datatables.net-dt": "^1.13.1",
     "jquery": "^3.6.3",
-    "ng2-file-upload": "^3.0.0",
+    "ng2-file-upload": "^4.0.0",
     "ngx-bootstrap": "^10.2.0",
     "ngx-dropzone": "^3.1.0",
     "rxjs": "~7.8.0",
