@@ -56,7 +56,7 @@ export class MediaDetailComponent implements OnInit {
   }
   processImage(data){
    let feed=data.data;
-   feed.audioStatus=1;
+   feed.imageStatus=1;
     let allImageTemplates= this.templateService.getImageTemplates();
     let selectedTemplate:any = allImageTemplates.find(template=>template._id==feed.imageTemplate);
     let imageText= {

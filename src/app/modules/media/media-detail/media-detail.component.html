@@ -96,7 +96,24 @@
                         ></a
                       >
                       <ng-template #image_not_generated>
-                        <a
+                        <button *ngIf="feed.data.imageStatus==1"  class="btn btn-sm btn-primary me-3 waves-effect waves-light" type="button" >
+                          <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                          Processing...
+                        </button>
+                        <a *ngIf="feed.data.imageStatus==0" (click)="processImage(feed)"
+                        href="javascript:;"
+                        class="btn btn-sm btn-primary me-3"
+                        data-bs-target="#editUser"
+                        data-bs-toggle="modal"
+                      >
+                        <span
+                          ><i class="ti  me-0 me-sm-1 ti-xs"></i
+                          ><span class="d-none d-sm-inline-block"
+                            >Process Audio</span
+                          ></span
+                        ></a
+                      >
+                        <!-- <a
                         (click)="processImage(feed)"
                         href="javascript:void(0);"
                         class="btn btn-sm btn-primary me-3"
@@ -109,7 +126,7 @@
                             >Process Image</span
                           ></span
                         ></a
-                      >
+                      > -->
                       </ng-template>
                     </div>
                   </div>

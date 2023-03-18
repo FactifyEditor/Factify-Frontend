@@ -21,213 +21,26 @@ export class TemplateService {
     return this.http.post(`${this.baseURL}/template/audio`, data)
   }
   getImageTemplates(){
-    return [
+    return  [
       {
-          "_id": "6409925afdad7f21aae14806",
+          "_id": "641543d881cc1b48fdf3d591",
           "name": "Theme 1",
-          "html":`<html>
-          <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
-      <style>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <style>
-              .container {
-                position: relative;
-                text-align: center;
-                color: white;
-              }
-              
-              .bottom-left {
-                position: absolute;
-                bottom: 8px;
-                left: 16px;
-              }
-              
-              .top-left {
-                position: absolute;
-                width: 550px;
-                font-size: 1.7em;
-                color:white;
-                font-family: 'Nunito Sans';
-                text-align: left;
-                top: 125px;
-                left: 80px;
-              }
-              
-              .top-right {
-                position: absolute;
-                top: 8px;
-                right: 16px;
-              }
-              
-              .bottom-right {
-                position: absolute;
-                bottom: 8px;
-                right: 16px;
-              }
-              
-              .centered {
-                position: absolute;
-                top: 390px;
-                font-weight: bold;
-                left: 80px;
-                width: 550px;
-                font-size: 1.3em;
-                color:black;
-                font-family: 'Nunito Sans';
-                text-align: left;
-             
-              }
-              button {
-        position: absolute;
-        width: 200px;
-        font-weight: bold;
-        height: 100px;
-        border-radius: 40px;
-      }
-      .btn {
-        position: relative;
-        display: inline-block;
-        border: 0;
-        border-radius: 30px;
-        text-align: center;
-        white-space: nowrap;
-        cursor: pointer;
-        font-size: 14px;
-      }
-      .btn:hover {
-        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
-      }
-      .btn:active {
-        transform: translateY(1px);
-        box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);
-      }
-      .btn:focus {
-        outline: none;
-      }
-      .btn--basic {
-        background-color: #e3eacc;
-        color: #455a00;
-      }
-      .btn--ghost {
-        background-color: transparent;
-        border: 1px solid #739600;
-        color: #739600;
-      }
-      .btn--dark {
-        background-color: #455a00;
-        color: white;
-      }
-      .btn--action {
-        background-color: #17A597;
-        color: white;
-      }
-      .btn--danger {
-        background-color: #ff0000;
-        color: white;
-      }
-      .btn--link {
-        background-color: transparent;
-        color: #5786bd;
-      }
-      .btn--dropdown {
-        padding-right: 3em;
-      }
-      .btn--dropdown:before {
-        content: "";
-        right: 24px;
-        top: 22px;
-        width: 2px;
-        height: 6px;
-        background-color: rgba(0, 0, 0, 0.1);
-        position: absolute;
-        transform: rotate(-45deg);
-      }
-      .btn--dropdown:after {
-        content: "";
-        right: 20px;
-        top: 22px;
-        width: 2px;
-        height: 6px;
-        background-color: rgba(0, 0, 0, 0.1);
-        position: absolute;
-        transform: rotate(45deg);
-      }
-      .fact-btn{
-          position: absolute;
-          font-size: 1em;
-          height: 100px;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: center;
-          top: 70px;
-          left: 80px;
-          max-height: 30px;
-          max-width: 100px;
-      
-      }
-      .claim-btn{
-          position: absolute;
-          font-size: 1em;
-          height: 100px;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: center;
-          top: 350px;
-          left: 80px;
-          max-height: 30px;
-          max-width: 100px;
-      }
-      .rating{
-          position: absolute;
-          top: 50px;
-          left: 640px;
-          max-height: 50px;
-      }
-      .footer{
-          position: absolute;
-          top: 650px;
-          left: 80;
-          max-width:300px
-         
-      }
-      </style>
-        <body>
-          <div class="container">
-              <img class="rating"  src="{{ratingImage}}">
-              <img style="width:100%;" src="https://storage.googleapis.com/factify/cyCG8KeVI2ffqOib1678355725191.png">
-              <button class="btn fact-btn btn--action">C L A I M</button>
-              <div class="top-left">{{claim}}</div>
-              <button class="btn claim-btn btn--action">F A C T</button>
-              <div class="centered">{{fact}}</div>
-                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
-            </div>
-          <div>
-             
-          <div>
-        </body>  
-      </html>`,
           "description": "Theme 1",
-          "image": "https://storage.googleapis.com/factify/Zr3lXpbhG9GGP2OL1678348864053.png",
+          "image": "https://storage.googleapis.com/factify/aXYdkkiexfGWItLr1679115168095.png",
           "languages": [
               {
-                  "language": "English",
-                  "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/factify/jtGM83kBh6eeNRLd1678348873788.png",
+                  "language": "India English",
+                  "_id": "64146a4681cc1b48fdf3d561",
+                  "image": "https://storage.googleapis.com/factify/pX4SrGfSYbk02SmW1679115176166.png",
                   "isEnabled": true
               },
               {
                   "language": "Hindi",
-                  "_id": "63ff3a8981a522fd76f24fdd",
+                  "_id": "64146a6981cc1b48fdf3d564",
+                  "image": "https://storage.googleapis.com/factify/nblQPNXVE4QbUgaw1679115186218.png",
                   "isEnabled": true
               }
           ],
-          "status": 0,
-          "__v": 0
-      },
-      {
-          "_id": "6409928afdad7f21aae1480a",
-          "name": "Theme 2",
-          "description": "Theme 2",
           "html":`<html>
           <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
       <style>
@@ -420,27 +233,28 @@ export class TemplateService {
           <div>
         </body>  
       </html> `,
-          "image": "https://storage.googleapis.com/factify/jZSTxrJc0AZ3xnav1678348920234.png",
-          "languages": [
-              {
-                  "language": "English",
-                  "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/factify/vpV7vs0QWKbA4z5Q1678348927066.png",
-                  "isEnabled": true
-              },
-              {
-                  "language": "Hindi",
-                  "_id": "63ff3a8981a522fd76f24fdd",
-                  "isEnabled": true
-              }
-          ],
           "status": 0,
           "__v": 0
       },
       {
-          "_id": "640992bffdad7f21aae1480e",
-          "name": "Theme 3",
-          "description": "Them 3",
+          "_id": "6415443781cc1b48fdf3d596",
+          "name": "Theme 2",
+          "description": "Theme 2",
+          "image": "https://storage.googleapis.com/factify/BufHvjAdD4IlIb3x1679115290604.png",
+          "languages": [
+              {
+                  "language": "India English",
+                  "_id": "64146a4681cc1b48fdf3d561",
+                  "image": "https://storage.googleapis.com/factify/wrq27r3z0QPSSVic1679115308952.png",
+                  "isEnabled": true
+              },
+              {
+                  "language": "Hindi",
+                  "_id": "64146a6981cc1b48fdf3d564",
+                  "image": "https://storage.googleapis.com/factify/azW34JfXXScL66VB1679115316430.png",
+                  "isEnabled": true
+              }
+          ],
           "html":`<html>
           <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
       <style>
@@ -630,24 +444,214 @@ export class TemplateService {
           <div>
         </body>  
       </html> `,
-          "image": "https://storage.googleapis.com/factify/am1NRhOarNr0ECq21678348963385.png",
+          "status": 0,
+          "__v": 0
+      },
+      {
+          "_id": "6415446081cc1b48fdf3d59b",
+          "name": "Theme 3",
+          "description": "Theme 3",
+          "image": "https://storage.googleapis.com/factify/GOrFudiabK5yR1jV1679115339045.png",
           "languages": [
               {
-                  "language": "English",
-                  "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/factify/v01ArdZMii8TUaxg1678348970916.png",
+                  "language": "India English",
+                  "_id": "64146a4681cc1b48fdf3d561",
+                  "image": "https://storage.googleapis.com/factify/5A8lxn6HN9lheSKW1679115349676.png",
                   "isEnabled": true
               },
               {
                   "language": "Hindi",
-                  "_id": "63ff3a8981a522fd76f24fdd",
+                  "_id": "64146a6981cc1b48fdf3d564",
+                  "image": "https://storage.googleapis.com/factify/kPYsV070qGWwWuPr1679115357051.png",
                   "isEnabled": true
               }
           ],
+          "html":`<html>
+          <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+      <style>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+              .container {
+                position: relative;
+                text-align: center;
+                color: white;
+              }
+              
+              .bottom-left {
+                position: absolute;
+                bottom: 8px;
+                left: 16px;
+              }
+              
+              .top-left {
+                position: absolute;
+                width: 550px;
+                font-size: 1.7em;
+                color:white;
+                font-family: 'Nunito Sans';
+                text-align: left;
+                top: 125px;
+                left: 80px;
+              }
+              
+              .top-right {
+                position: absolute;
+                top: 8px;
+                right: 16px;
+              }
+              
+              .bottom-right {
+                position: absolute;
+                bottom: 8px;
+                right: 16px;
+              }
+              
+              .centered {
+                position: absolute;
+                top: 390px;
+                font-weight: bold;
+                left: 80px;
+                width: 550px;
+                font-size: 1.3em;
+                color:black;
+                font-family: 'Nunito Sans';
+                text-align: left;
+             
+              }
+              button {
+        position: absolute;
+        width: 200px;
+        font-weight: bold;
+        height: 100px;
+        border-radius: 40px;
+      }
+      .btn {
+        position: relative;
+        display: inline-block;
+        border: 0;
+        border-radius: 30px;
+        text-align: center;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn:hover {
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+      }
+      .btn:active {
+        transform: translateY(1px);
+        box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);
+      }
+      .btn:focus {
+        outline: none;
+      }
+      .btn--basic {
+        background-color: #e3eacc;
+        color: #455a00;
+      }
+      .btn--ghost {
+        background-color: transparent;
+        border: 1px solid #739600;
+        color: #739600;
+      }
+      .btn--dark {
+        background-color: #455a00;
+        color: white;
+      }
+      .btn--action {
+        background-color: #17A597;
+        color: white;
+      }
+      .btn--danger {
+        background-color: #ff0000;
+        color: white;
+      }
+      .btn--link {
+        background-color: transparent;
+        color: #5786bd;
+      }
+      .btn--dropdown {
+        padding-right: 3em;
+      }
+      .btn--dropdown:before {
+        content: "";
+        right: 24px;
+        top: 22px;
+        width: 2px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0.1);
+        position: absolute;
+        transform: rotate(-45deg);
+      }
+      .btn--dropdown:after {
+        content: "";
+        right: 20px;
+        top: 22px;
+        width: 2px;
+        height: 6px;
+        background-color: rgba(0, 0, 0, 0.1);
+        position: absolute;
+        transform: rotate(45deg);
+      }
+      .fact-btn{
+          position: absolute;
+          font-size: 1em;
+          height: 100px;
+          color: white;
+          font-family: 'Nunito Sans';
+          text-align: center;
+          top: 70px;
+          left: 80px;
+          max-height: 30px;
+          max-width: 100px;
+      
+      }
+      .claim-btn{
+          position: absolute;
+          font-size: 1em;
+          height: 100px;
+          color: white;
+          font-family: 'Nunito Sans';
+          text-align: center;
+          top: 350px;
+          left: 80px;
+          max-height: 30px;
+          max-width: 100px;
+      }
+      .rating{
+          position: absolute;
+          top: 50px;
+          left: 640px;
+          max-height: 50px;
+      }
+      .footer{
+          position: absolute;
+          top: 650px;
+          left: 80;
+          max-width:300px
+         
+      }
+      </style>
+        <body>
+          <div class="container">
+              <img class="rating"  src="{{ratingImage}}">
+              <img style="width:100%;" src="https://storage.googleapis.com/factify/cyCG8KeVI2ffqOib1678355725191.png">
+              <button class="btn fact-btn btn--action">C L A I M</button>
+              <div class="top-left">{{claim}}</div>
+              <button class="btn claim-btn btn--action">F A C T</button>
+              <div class="centered">{{fact}}</div>
+                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
+            </div>
+          <div>
+             
+          <div>
+        </body>  
+      </html>`,
           "status": 0,
           "__v": 0
       }
   ]
+
   }
 
   getTemplateJson(){
@@ -1199,26 +1203,33 @@ export class TemplateService {
               }
           ]
       },
-    {
-        type: 'AudioScene',
-        audioUrl:'',
-        cutFrom: 0 ,//cut-to will be 35 (duration+cutform)
-        startingTime: 0,
-        duration: 3.6
+      {
+        "type": "AudioScene",
+        "audioUrl": "",
+        "cutFrom": 0,
+        "startingTime": 0,
+        "duration": 3.6
     },
     {
-        type: 'AudioScene',
-        audioUrl:'',
-        cutFrom: 0 ,//cut-to will be 35 (duration+cutform)
-        startingTime: 3.6,
-        duration: 8
+        "type": "AudioScene",
+        "audioUrl": "",
+        "cutFrom": 0,
+        "startingTime": 3.6,
+        "duration": 8
     },
     {
-        type: 'AudioScene',
-        audioUrl:'',
-        cutFrom: 0 ,//cut-to will be 35 (duration+cutform)
-        startingTime: 11.6,
-        duration: 5
+        "type": "AudioScene",
+        "audioUrl": "",
+        "cutFrom": 0,
+        "startingTime": 11.6,
+        "duration": 8
+    },
+    {
+        "type": "AudioScene",
+        "audioUrl": "",
+        "cutFrom": 0,
+        "startingTime": 44.6,
+        "duration": 5
     }
   ],
     "metadata": {},

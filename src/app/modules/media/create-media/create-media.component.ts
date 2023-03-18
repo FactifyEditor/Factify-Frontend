@@ -110,7 +110,8 @@ ngOnInit() {
       this.imageTemplate=imageTemplates.data[0]
     })
     this.templateService.getAllVideoTemplate().subscribe(videoTemplates=>{
-      this.videoTemplate=videoTemplates.data[0]
+      this.videoTemplate=videoTemplates.data[0];
+      console.log(this.videoTemplate);
     })    
     this.form = this.fb.group({
       language: ['', Validators.required],
@@ -267,69 +268,15 @@ if(this.form.controls.ratingImage.value==''){
   this.toastService.show("please upload image  for rating", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
+console.log("test")
 if (this.form.invalid ||   isInValid  ) {
   return;
 }
+let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language);
+console.log(languageTracks)
 this.cd.detectChanges();
   console.log(JSON.stringify(this.form.value, null, 2));
-let clips=[
-  { duration: 8, layers: [
-    { type: 'image', path: `assets/${this.images.claim.name}` },
-    { type: 'news-title', text: 'Claim' },
-    { type: 'subtitle', text: form.value.claimVideoFrameText, backgroundColor: 'rgba(0,0,0,0.5)' }
-  ] },
-  { duration: 8, layers: [
-    { type: 'image', path: `assets/${this.images.verify1.name}` },
-    { type: 'news-title', text: 'Verification' },
-    { type: 'subtitle', text: form.value.verify1VideoFrameText, backgroundColor: 'rgba(0,0,0,0.5)' }
-  ] },
-  { duration: 8, layers: [
-    { type: 'image', path: `assets/${this.images.verify2.name}` },
-    { type: 'news-title', text: 'Verification' },
-    { type: 'subtitle', text: form.value.verify2VideoFrameText, backgroundColor: 'rgba(0,0,0,0.5)' }
-  ] },
-  { duration: 8, layers: [
-    
-    { type: 'image', path: `assets/${this.images.verify3.name}` },
-    { type: 'news-title', text: 'Verification' },
-    { type: 'subtitle', text: form.value.verify2VideoFrameText, backgroundColor: 'rgba(0,0,0,0.5)' }
-  ] },
-  { duration: 8, layers: [
-   
-    { type: 'image', path: `assets/${this.images.rating.name}` },
-    { type: 'news-title', text: 'Rating' },
-    { type: 'subtitle', text: form.value.ratingVideoFrameText, backgroundColor: 'rgba(0,0,0,0.5)' }
-  ] }
-];
 
-if(this.audios.claim.audioUrl){
-  clips[0].layers.unshift({ type: 'detached-audio', path: `assets/${this.audios.claim.name}`})
-}
-if(this.audios.verify1.audioUrl){
-  clips[1].layers.unshift({ type: 'detached-audio', path: `assets/${this.audios.verify1.name}`})
-}
-if(this.audios.verify2.audioUrl){
-  clips[2].layers.unshift({ type: 'detached-audio', path: `assets/${this.audios.verify2.name}`})
-}
-if(this.audios.verify3.audioUrl){
-  clips[3].layers.unshift({ type: 'detached-audio', path: `assets/${this.audios.verify3.name}`})
-}
-if(this.audios.verify3.audioUrl){
-  clips[4].layers.unshift({ type: 'detached-audio', path: `assets/${this.audios.rating.name}`})
-};
-let video:VideoModel={
-  outPath: 'assets/audio3.mp4',
-  width: 900,
-  height: 1600,
-  defaults: {
-    layer: { fontPath: 'assets/Patua_One/PatuaOne-Regular.ttf' },
-  },
-  clips,
-  audioNorm: { enable: true, gaussSize: 3, maxGain: 80 },
-  audioTracks: [
-    { path: 'assets/High [NCS Release] - JPB  (No Copyright Music)-R8ZRCXy5vhA.m4a', cutFrom: 18 },
-  ]
-}
 try {
   
 
@@ -349,7 +296,7 @@ this.videoTemplate.scenes[1].layers[2].src=this.images['claim'].imageUrl;
 
 // this.videoTemplate.scenes[7].layers[2].src=this.audios[''].audioUrl;
 
-let languageTracks=this.videoTemplate.languages.find(language=>language._id=this.form.value.language);
+
 //intro
 this.videoTemplate.scenes[7].audioUrl= languageTracks.introTrack;
 this.videoTemplate.scenes[7].name="intro";
@@ -505,7 +452,7 @@ this.mediaService.createMedia(_media).subscribe(
 
 });
 } catch (error) {
-  
+  console.log(error);
 }
 }
 get f(): { [key: string]: AbstractControl } {
