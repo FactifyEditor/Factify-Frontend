@@ -47,8 +47,10 @@ export class MediaDetailComponent implements OnInit {
     feed.audioStatus=1;
     let  media= feed.metaData.videoJson
     media.id=media._id;
-    this.mediaService.processAudio(feed).subscribe(data=>{
+    this.mediaService.processAudio(feed).subscribe((data:any)=>{
       console.log(data);
+      feed.audioStatus=2;
+      feed.audioUrl=data.data
     });
     // this.mediaService.updateMedia(feed,feed._id).subscribe(data=>{
     //   console.log(data)
@@ -71,7 +73,10 @@ export class MediaDetailComponent implements OnInit {
    
     imageText.ratingImage=rating.data.image;  
     console.log(feedData);
-    this.mediaService.processImage(feedData).subscribe();
+    this.mediaService.processImage(feedData).subscribe((data:any)=>{
+      feed.imageStatus=2;
+      feed.imageUrl=data.data
+    });
     })
    
   }
