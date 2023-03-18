@@ -24,7 +24,7 @@
     >
     <div class="col-md-2">
       <div class="image-upload">
-        <label style="cursor: pointer" for="file_uploadheadlineTrack">
+        <label style="cursor: pointer" for="file_uploadheadlineTrack{{language._id}}">
           <img src="" alt="" class="uploaded-image" />
           <div class="h-100">
             <div class="dplay-tbl">
@@ -38,7 +38,7 @@
              data-required="image"
               type="file"
               name="image_name"
-              id="file_uploadheadlineTrack"
+              id="file_uploadheadlineTrack{{language._id}}"
               class="image-input"
               accept="audio/*"
               (change)="uploadIntroFile($event,'headlineTrack')"
@@ -62,7 +62,7 @@
     >
     <div class="col-md-2">
       <div class="image-upload">
-        <label style="cursor: pointer" for="file_uploadverificationTrack">
+        <label style="cursor: pointer" for="file_uploadverificationTrack{{language._id}}">
           <img src="" alt="" class="uploaded-image" />
           <div class="h-100">
             <div class="dplay-tbl">
@@ -76,7 +76,7 @@
              data-required="image"
               type="file"
               name="image_name"
-              id="file_uploadverificationTrack"
+              id="file_uploadverificationTrack{{language._id}}"
               class="image-input"
               accept="audio/*"
               (change)="uploadIntroFile($event,'verificationTrack')"
@@ -103,7 +103,7 @@
     >
     <div class="col-md-2">
       <div class="image-upload">
-        <label style="cursor: pointer" for="file_uploadintroTrack">
+        <label style="cursor: pointer" for="file_uploadintroTrack{{language._id}}">
           <img src="" alt="" class="uploaded-image" />
           <div class="h-100">
             <div class="dplay-tbl">
@@ -117,7 +117,7 @@
              data-required="image"
               type="file"
               name="image_name"
-              id="file_uploadintroTrack"
+              id="file_uploadintroTrack{{language._id}}"
               class="image-input"
               accept="audio/*"
               (change)="uploadIntroFile($event,'introTrack')"
@@ -144,7 +144,7 @@
     >
     <div class="col-md-2">
       <div class="image-upload">
-        <label style="cursor: pointer" for="file_uploadoutroTrack">
+        <label style="cursor: pointer" for="file_uploadoutroTrack{{language._id}}">
           <img src="" alt="" class="uploaded-image" />
           <div class="h-100">
             <div class="dplay-tbl">
@@ -158,7 +158,7 @@
              data-required="image"
               type="file"
               name="image_name"
-              id="file_uploadoutroTrack"
+              id="file_uploadoutroTrack{{language._id}}"
               class="image-input"
               accept="audio/*"
               (change)="uploadIntroFile($event,'outroTrack')"

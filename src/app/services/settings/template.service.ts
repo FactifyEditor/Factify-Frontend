@@ -194,12 +194,12 @@ export class TemplateService {
         <body>
           <div class="container">
               <img class="rating"  src="{{ratingImage}}">
-              <img style="width:100%;" src="https://storage.googleapis.com/yug-external-files/cyCG8KeVI2ffqOib1678355725191.png">
+              <img style="width:100%;" src="https://storage.googleapis.com/factify/cyCG8KeVI2ffqOib1678355725191.png">
               <button class="btn fact-btn btn--action">C L A I M</button>
               <div class="top-left">{{claim}}</div>
               <button class="btn claim-btn btn--action">F A C T</button>
               <div class="centered">{{fact}}</div>
-                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/yug-external-files/tzpY8NepK0CqIhpu1678355909448.png">
+                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
             </div>
           <div>
              
@@ -207,12 +207,12 @@ export class TemplateService {
         </body>  
       </html>`,
           "description": "Theme 1",
-          "image": "https://storage.googleapis.com/yug-external-files/Zr3lXpbhG9GGP2OL1678348864053.png",
+          "image": "https://storage.googleapis.com/factify/Zr3lXpbhG9GGP2OL1678348864053.png",
           "languages": [
               {
                   "language": "English",
                   "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/yug-external-files/jtGM83kBh6eeNRLd1678348873788.png",
+                  "image": "https://storage.googleapis.com/factify/jtGM83kBh6eeNRLd1678348873788.png",
                   "isEnabled": true
               },
               {
@@ -407,25 +407,25 @@ export class TemplateService {
           <div class="container">
               <img class="fact_image"  src="{{factImage}}">
               <img class="rating "  src="{{ratingImage}}">
-              <img style="width:100%;" src="https://storage.googleapis.com/yug-external-files/z3rOWEpuCyocw2hX1678355786088.png">
+              <img style="width:100%;" src="https://storage.googleapis.com/factify/z3rOWEpuCyocw2hX1678355786088.png">
               <button class="btn fact-btn btn--action">C L A I M</button>
               <div class="top-left">{{claim}}</div>
               <button class="btn claim-btn btn--action">F A C T</button>
               
               <div class="centered">{{fact}}</div>
-                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/yug-external-files/tzpY8NepK0CqIhpu1678355909448.png">
+                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
             </div>
           <div>
              
           <div>
         </body>  
       </html> `,
-          "image": "https://storage.googleapis.com/yug-external-files/jZSTxrJc0AZ3xnav1678348920234.png",
+          "image": "https://storage.googleapis.com/factify/jZSTxrJc0AZ3xnav1678348920234.png",
           "languages": [
               {
                   "language": "English",
                   "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/yug-external-files/vpV7vs0QWKbA4z5Q1678348927066.png",
+                  "image": "https://storage.googleapis.com/factify/vpV7vs0QWKbA4z5Q1678348927066.png",
                   "isEnabled": true
               },
               {
@@ -618,24 +618,24 @@ export class TemplateService {
           <div class="container">
               <img class="fact_image"  src="{{factImage}}">
               <img class="rating "  src="{{ratingImage}}">
-              <img style="width:100%;" src="https://storage.googleapis.com/yug-external-files/ZeHZ58PzIsvOfJ801678355841739.png">
+              <img style="width:100%;" src="https://storage.googleapis.com/factify/ZeHZ58PzIsvOfJ801678355841739.png">
               <button class="btn fact-btn btn--action">C L A I M</button>
               <div class="top-left">{{claim}}</div>
               <button class="btn claim-btn btn--action">F A C T</button>
               <div class="centered">{{fact}}</div>
-                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/yug-external-files/tzpY8NepK0CqIhpu1678355909448.png">
+                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
             </div>
           <div>
              
           <div>
         </body>  
       </html> `,
-          "image": "https://storage.googleapis.com/yug-external-files/am1NRhOarNr0ECq21678348963385.png",
+          "image": "https://storage.googleapis.com/factify/am1NRhOarNr0ECq21678348963385.png",
           "languages": [
               {
                   "language": "English",
                   "_id": "63fd9aa2582bf2fb7de34dad",
-                  "image": "https://storage.googleapis.com/yug-external-files/v01ArdZMii8TUaxg1678348970916.png",
+                  "image": "https://storage.googleapis.com/factify/v01ArdZMii8TUaxg1678348970916.png",
                   "isEnabled": true
               },
               {
@@ -693,7 +693,7 @@ export class TemplateService {
                   "visible": true,
                   "shadow": null,
                   "preview": "blob:http://127.0.0.1:5173/55b18237-ea03-4df0-b4b9-30665a92843f",
-                  "src": "https://storage.googleapis.com/yug-external-files/jXuMlHkm1ivOsvFd1677045194334.mp4",
+                  "src": "https://storage.googleapis.com/factify/jXuMlHkm1ivOsvFd1677045194334.mp4",
                   "speedF A C Tor": 1
               }
           ]
@@ -785,7 +785,7 @@ export class TemplateService {
                 "skewY": 0,
                 "visible": true,
                 "shadow": null,
-                "src":"https://storage.googleapis.com/yug-external-files/yU1I2Krpi0HS5cBf1677665067868.jpg",
+                "src":"https://storage.googleapis.com/factify/yU1I2Krpi0HS5cBf1677665067868.jpg",
                 "cropX": 0,
                 "cropY": 0,
                 "metadata": {}
@@ -848,7 +848,7 @@ export class TemplateService {
                 "skewY": 0,
                 "visible": true,
                 "shadow": null,
-                "src":"https://storage.googleapis.com/yug-external-files/yU1I2Krpi0HS5cBf1677665067868.jpg",
+                "src":"https://storage.googleapis.com/factify/yU1I2Krpi0HS5cBf1677665067868.jpg",
                 "cropX": 0,
                 "cropY": 0,
                 "metadata": {}
@@ -973,7 +973,7 @@ export class TemplateService {
                 "skewY": 0,
                 "visible": true,
                 "shadow": null,
-                "src":"https://storage.googleapis.com/yug-external-files/yU1I2Krpi0HS5cBf1677665067868.jpg",
+                "src":"https://storage.googleapis.com/factify/yU1I2Krpi0HS5cBf1677665067868.jpg",
                 "cropX": 0,
                 "cropY": 0,
                 "metadata": {}
@@ -1067,7 +1067,7 @@ export class TemplateService {
                 "skewY": 0,
                 "visible": true,
                 "shadow": null,
-                "src":"https://storage.googleapis.com/yug-external-files/yU1I2Krpi0HS5cBf1677665067868.jpg",
+                "src":"https://storage.googleapis.com/factify/yU1I2Krpi0HS5cBf1677665067868.jpg",
                 "cropX": 0,
                 "cropY": 0,
                 "metadata": {}
@@ -1161,7 +1161,7 @@ export class TemplateService {
                 "skewY": 0,
                 "visible": true,
                 "shadow": null,
-                "src":"https://storage.googleapis.com/yug-external-files/yU1I2Krpi0HS5cBf1677665067868.jpg",
+                "src":"https://storage.googleapis.com/factify/yU1I2Krpi0HS5cBf1677665067868.jpg",
                 "cropX": 0,
                 "cropY": 0,
                 "metadata": {}
@@ -1194,7 +1194,7 @@ export class TemplateService {
                   "visible": true,
                   "shadow": null,
                   "preview": "blob:http://127.0.0.1:5173/d8daa380-21c0-4cc3-aad0-9700d06e221e",
-                  "src": "https://storage.googleapis.com/yug-external-files/17haKEbFjDd4pgTe1677045199751.mp4",
+                  "src": "https://storage.googleapis.com/factify/17haKEbFjDd4pgTe1677045199751.mp4",
                   "speedF A C Tor": 1
               }
           ]
