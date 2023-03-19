@@ -374,15 +374,15 @@ const verify3TtsText = this.mediaService.getAudioFromText({languageCode:"en-In",
 const ratingTtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.ratingTextToSpeechText });
 forkJoin([headlineTtsText, verify1TtsText,verify2TtsText,verify3TtsText,ratingTtsText]).pipe(take(1)).subscribe( result => {
 this.videoTemplate.scenes[11].audioUrl=result[0].data
-this.videoTemplate.scenes[11].duration=result[0].duration
+// this.videoTemplate.scenes[11].duration=result[0].duration
 this.videoTemplate.scenes[12].audioUrl=result[1].data
-this.videoTemplate.scenes[12].duration=result[1].duration
+// this.videoTemplate.scenes[12].duration=result[1].duration
 this.videoTemplate.scenes[13].audioUrl=result[2].data
-this.videoTemplate.scenes[13].duration=result[2].duration
+// this.videoTemplate.scenes[13].duration=result[2].duration
 this.videoTemplate.scenes[14].audioUrl=result[3].data
-this.videoTemplate.scenes[14].duration=result[3].duration
+// this.videoTemplate.scenes[14].duration=result[3].duration
 this.videoTemplate.scenes[15].audioUrl=result[4].data
-this.videoTemplate.scenes[15].duration=result[4].duration
+// this.videoTemplate.scenes[15].duration=result[4].duration
 
 let _media:MediaModel={
   rating:this.form.value.rating,

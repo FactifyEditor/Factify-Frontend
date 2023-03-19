@@ -23,20 +23,20 @@ export class TemplateService {
   getImageTemplates(){
     return  [
       {
-          "_id": "641543d881cc1b48fdf3d591",
+          "_id": "6416d78ea808d8d5975816ac",
           "name": "Theme 1",
           "description": "Theme 1",
           "image": "https://storage.googleapis.com/factify/aXYdkkiexfGWItLr1679115168095.png",
           "languages": [
               {
                   "language": "India English",
-                  "_id": "64146a4681cc1b48fdf3d561",
+                  "_id": "6416d6dee9f4e02d3c8b75b6",
                   "image": "https://storage.googleapis.com/factify/pX4SrGfSYbk02SmW1679115176166.png",
                   "isEnabled": true
               },
               {
                   "language": "Hindi",
-                  "_id": "64146a6981cc1b48fdf3d564",
+                  "_id": "6416d6f0e9f4e02d3c8b75b9",
                   "image": "https://storage.googleapis.com/factify/nblQPNXVE4QbUgaw1679115186218.png",
                   "isEnabled": true
               }
@@ -237,20 +237,20 @@ export class TemplateService {
           "__v": 0
       },
       {
-          "_id": "6415443781cc1b48fdf3d596",
+          "_id": "6416d7b6a808d8d5975816b0",
           "name": "Theme 2",
           "description": "Theme 2",
           "image": "https://storage.googleapis.com/factify/BufHvjAdD4IlIb3x1679115290604.png",
           "languages": [
               {
                   "language": "India English",
-                  "_id": "64146a4681cc1b48fdf3d561",
+                  "_id": "6416d6dee9f4e02d3c8b75b6",
                   "image": "https://storage.googleapis.com/factify/wrq27r3z0QPSSVic1679115308952.png",
                   "isEnabled": true
               },
               {
                   "language": "Hindi",
-                  "_id": "64146a6981cc1b48fdf3d564",
+                  "_id": "6416d6f0e9f4e02d3c8b75b9",
                   "image": "https://storage.googleapis.com/factify/azW34JfXXScL66VB1679115316430.png",
                   "isEnabled": true
               }
@@ -448,20 +448,20 @@ export class TemplateService {
           "__v": 0
       },
       {
-          "_id": "6415446081cc1b48fdf3d59b",
+          "_id": "6416d7e6a808d8d5975816b4",
           "name": "Theme 3",
           "description": "Theme 3",
           "image": "https://storage.googleapis.com/factify/GOrFudiabK5yR1jV1679115339045.png",
           "languages": [
               {
                   "language": "India English",
-                  "_id": "64146a4681cc1b48fdf3d561",
+                  "_id": "6416d6dee9f4e02d3c8b75b6",
                   "image": "https://storage.googleapis.com/factify/5A8lxn6HN9lheSKW1679115349676.png",
                   "isEnabled": true
               },
               {
                   "language": "Hindi",
-                  "_id": "64146a6981cc1b48fdf3d564",
+                  "_id": "6416d6f0e9f4e02d3c8b75b9",
                   "image": "https://storage.googleapis.com/factify/kPYsV070qGWwWuPr1679115357051.png",
                   "isEnabled": true
               }
@@ -672,7 +672,7 @@ export class TemplateService {
     "fps": 25,
     "scenes": [
       {
-          "duration": 3.6,
+          "duration": 4.6,
           "layers": [
               {
                   "id": "7UtxiAvAIU1dwktPfn24E",
@@ -691,19 +691,19 @@ export class TemplateService {
                   "scaleY": 1,
                   "type": "StaticVideo",
                   "flipX": false,
-                  "flipY": false,
+                  "flipY": false, 
                   "skewX": 0,
                   "skewY": 0,
                   "visible": true,
                   "shadow": null,
                   "preview": "blob:http://127.0.0.1:5173/55b18237-ea03-4df0-b4b9-30665a92843f",
                   "src": "https://storage.googleapis.com/factify/jXuMlHkm1ivOsvFd1677045194334.mp4",
-                  "speedF A C Tor": 1
+                  "speedFactor": 1
               }
           ]
       },
       {
-          "duration": 8,
+          "duration": 9,
           "layers": [
               {
                   "id": "background",
@@ -797,7 +797,7 @@ export class TemplateService {
           ]
       },
       {
-          "duration": 8,
+          "duration": 9,
           "layers": [
               {
                   "id": "background",
@@ -891,7 +891,7 @@ export class TemplateService {
           ]
       },
       {
-          "duration": 8,
+          "duration": 9,
           "layers": [
               {
                   "id": "background",
@@ -985,7 +985,7 @@ export class TemplateService {
           ]
       },
       {
-          "duration": 8,
+          "duration": 9,
           "layers": [
               {
                   "id": "background",
@@ -1079,7 +1079,7 @@ export class TemplateService {
           ]
       },
       {
-          "duration": 8,
+          "duration": 9,
           "layers": [
               {
                   "id": "background",
@@ -1173,7 +1173,7 @@ export class TemplateService {
           ]
       },
       {
-          "duration": 8,
+          "duration": 6,
           "layers": [
               {
                   "id": "ocGXRYzQHzR6KflWE-ZHM",
@@ -1199,7 +1199,7 @@ export class TemplateService {
                   "shadow": null,
                   "preview": "blob:http://127.0.0.1:5173/d8daa380-21c0-4cc3-aad0-9700d06e221e",
                   "src": "https://storage.googleapis.com/factify/17haKEbFjDd4pgTe1677045199751.mp4",
-                  "speedF A C Tor": 1
+                  "speedFactor": 1
               }
           ]
       },
