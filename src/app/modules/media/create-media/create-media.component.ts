@@ -190,7 +190,7 @@ textToSpeech(text){
   })
 }
 processVideo(form: FormGroup){
-
+console.log(this.form.value.language)
 this.submitted = true; 
 let isInValid:boolean=false;
 if(this.form.get('claimPerferTTS').value){
@@ -272,8 +272,9 @@ console.log("test")
 if (this.form.invalid ||   isInValid  ) {
   return;
 }
-let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language);
+let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language._id);
 console.log(languageTracks)
+
 this.cd.detectChanges();
   console.log(JSON.stringify(this.form.value, null, 2));
 
@@ -367,11 +368,11 @@ this.videoTemplate.scenes.push({
 //outro track
 this.imageTemplate.imageText=this.form.value.imageText;
 this.imageTemplate.factImage=this.images.imageTemplate.imageUrl;
-const headlineTtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.claimTextToSpeechText });
-const verify1TtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.verify1TextToSpeechText });
-const verify2TtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.verify2TextToSpeechText });
-const verify3TtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.verify3TextToSpeechText });
-const ratingTtsText = this.mediaService.getAudioFromText({languageCode:"en-In",ttsText:this.form.value.ratingTextToSpeechText });
+const headlineTtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.claimTextToSpeechText });
+const verify1TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify1TextToSpeechText });
+const verify2TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify2TextToSpeechText });
+const verify3TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify3TextToSpeechText });
+const ratingTtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.ratingTextToSpeechText });
 forkJoin([headlineTtsText, verify1TtsText,verify2TtsText,verify3TtsText,ratingTtsText]).pipe(take(1)).subscribe( result => {
 this.videoTemplate.scenes[11].audioUrl=result[0].data
 // this.videoTemplate.scenes[11].duration=result[0].duration
