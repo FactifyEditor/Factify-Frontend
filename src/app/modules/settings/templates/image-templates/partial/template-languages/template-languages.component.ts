@@ -17,7 +17,7 @@ export class TemplateLanguagesComponent implements OnInit {
   preview:string;
  
   ngOnInit(): void {
-
+    this.preview=this.language.image
   }
   uploadIntroFile(event) {
     const file = (event.target as HTMLInputElement).files[0];

@@ -12,7 +12,7 @@
     <div class="col-xl-12 col-lg-6 col-md-6 order-0 order-md-1">
       <!-- User Pills -->
       <div class="nav-align-top mb-4">
-        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+        <!-- <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
           <li class="nav-item">
             <button
               type="button"
@@ -65,7 +65,7 @@
               <i class="ti ti-detail ti-xs me-1"></i>Detail
             </button>
           </li>
-        </ul>
+        </ul> -->
         <div class="tab-content" *ngIf="media$|async as feed">
           <div
             class="tab-pane fade show active"
@@ -75,6 +75,10 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="card mb-4">
+                  <div class="card-title mb-0">
+                    <h5 class="mt-10 text-center">Image</h5>
+                    
+                  </div>
                   <div class="card-body">
                     <img
                       class="img-fluid d-flex mx-auto my-4 rounded"
@@ -134,6 +138,10 @@
               </div>
                   <div class="col-md-3">
                     <div class="card mb-4">
+                      <div class="card-title mb-4 ">
+                        <h5 class=" mt-10 text-center">Audio</h5>
+                        
+                      </div>
                       <div class="card-body">
                         <div
                           class="d-flex justify-content-center"
@@ -197,6 +205,10 @@
                 </div>
                   <div class="col-md-3">
                     <div class="card mb-4">
+                      <div class="card-title mb-4">
+                        <h5 class="mt-10 text-center">Video</h5>
+                        
+                      </div>
                       <div class="card-body">
                         <img
                           class="img-fluid d-flex mx-auto my-4 rounded"
@@ -248,9 +260,10 @@
                       <div class="col-md-3">
                         <div class="card mb-4">
                           <div class="card-body">
-                            <p class="mt-2 small text-uppercase text-muted">
-                              Details
-                            </p>
+                            <div class="card-title mb-0">
+                              <h5 class="mb-0 text-center">Detail</h5>
+                              <!-- <small class="text-muted">Weekly Earnings Overview</small> -->
+                            </div>
                             <div class="info-container">
                               <ul class="list-unstyled">
                                 <li class="mb-2">

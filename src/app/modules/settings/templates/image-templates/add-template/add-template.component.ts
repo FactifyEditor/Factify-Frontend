@@ -23,7 +23,7 @@ import { ToastService } from 'src/app/services/shared/toast.service';
   styleUrls: ['./add-template.component.css'],
 })
 export class AddTemplateComponent implements OnInit {
-  languages$: Observable<any>;
+  languages:any;
   percentDone: any = 0;
   hide = true;
   roles$: Observable<any>;
@@ -67,18 +67,30 @@ export class AddTemplateComponent implements OnInit {
     }
   }
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id != null) {
-      this.templateService.getImageTemplate(id).subscribe((template) => {
-        this.template = template.data;
-        this.initForm(this.template);
-      });
-      this.buttonText='Update';
-      this.headerText="Edit";
-    }
     this.initForm(this.template)
-    this.languages$ = this.languageService.getAllLanguages();
-  
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.languageService.getAllLanguages().subscribe(language=>{
+      this.languages=language.data;
+      if (id != null) {
+        this.templateService.getImageTemplate(id).subscribe((template) => {
+          this.template = template.data;
+         this.languages=this.languages.map(langulage => {
+          let lang= this.template.languages.find(l=>langulage._id==l._id);
+          if(lang!=null)
+          langulage= lang
+          return langulage
+          
+           
+         });
+         this.initForm(this.template);
+       });
+       this.buttonText='Update';
+       this.headerText="Edit";
+     }
+     this.initForm(this.template);
+     })
+    
    
   }
 
@@ -106,21 +118,40 @@ export class AddTemplateComponent implements OnInit {
       languages: languages,
     };
 
+   if(!!this.template._id){
     this.templateService
-      .addImageTemplate(_template)
-      .subscribe(
-        result => {
-          console.log(result);
-        },
-        error => {
-          console.log("error",error);
-          this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
-        },
-        () => {
-               this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
-                this._router.navigate(['/templates/images/list']);
-        
-        })
+    .updateImageTemplate(_template,this.template._id)
+    .subscribe(
+      result => {
+        console.log(result);
+      },
+      error => {
+        console.log("error",error);
+        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+      },
+      () => {
+             this.toastService.show('Template Updated', { classname: 'bg-success text-dark', delay: 10000 });
+              this._router.navigate(['/templates/images/list']);
+      
+      })
+   }
+   else{
+    this.templateService
+    .addImageTemplate(_template)
+    .subscribe(
+      result => {
+        console.log(result);
+      },
+      error => {
+        console.log("error",error);
+        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+      },
+      () => {
+             this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
+              this._router.navigate(['/templates/images/list']);
+      
+      })
+   }
       
   }
   uploadFile(file, type) {

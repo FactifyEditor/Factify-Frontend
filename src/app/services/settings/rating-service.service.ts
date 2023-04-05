@@ -20,8 +20,8 @@ export class RatingServiceService {
     return this.http.post(`${this.baseURL}/ratings`, data)
   }
 
-  updateUser(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/users/${id}`, data)
+  updateRating(data: any, id: string): Observable<any> {
+    return this.http.patch(`${this.baseURL}/ratings/${id}`, data)
   }
   getRating(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/ratings/${id}`)

@@ -11,7 +11,7 @@ export interface VideoTemplateOld {
 }
 
 export interface VideoTemplate {
-  id: string
+  _id?: string
   type: string
   description: string
   image: string

@@ -2,7 +2,7 @@
     <h4 class="fw-bold py-3 mb-4">    <a  class="">
 
       <i  class="ti ti-chevron-left" style="font-size: 2rem;margin-top: -5px;"></i>
-    </a> <span class="text-muted fw-light">Settings /Languages/</span> Add New</h4>
+    </a> <span class="text-muted fw-light">Settings /Languages/</span> {{headerText}}</h4>
       <div class="card">
         <div class="card-body">
 
@@ -35,7 +35,7 @@
       <div class="col-12 d-flex justify-content-between mt-4">
        
         <button [disabled]="languageForm.invalid" class="btn btn-primary btn-next waves-effect waves-light">
-          <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Save</span>
+          <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">{{buttonText}}</span>
           <i class="ti ti-arrow-right ti-xs"></i>
         </button>
       </div>

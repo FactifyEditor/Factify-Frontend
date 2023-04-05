@@ -115,7 +115,7 @@ ngOnInit() {
     })    
     this.form = this.fb.group({
       language: ['', Validators.required],
-      link:     ['', Validators.required],
+      link:     ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       rating: ['', Validators.required],
       audio: ['1', Validators.required],
       videoTheme: ["1",Validators.required],
@@ -124,31 +124,31 @@ ngOnInit() {
       claimTextToSpeechText: ['',],
       claimImage: ['', Validators.required],
       claimVoice: [''],
-      claimPerferTTS:[false],
+      claimPerferTTS:[true],
       claimTime:[8, Validators.required],
       verify1VideoFrameText: ['', Validators.required],
       verify1TextToSpeechText: [''],
       verify1Image: ['', Validators.required],
       verify1Voice: [''],
-      verify1PerferTTS:[false],
+      verify1PerferTTS:[true],
       verify1Time:[8, Validators.required],
       verify2VideoFrameText: ['', Validators.required],
       verify2TextToSpeechText: [''],
       verify2Image: ['', Validators.required],
       verify2Voice: [''],
-      verify2PerferTTS:[false],
+      verify2PerferTTS:[true],
       verify2Time:[8, Validators.required],
       verify3VideoFrameText: ['', Validators.required],
       verify3TextToSpeechText: [''],
       verify3Image: ['', Validators.required],
       verify3Voice: [''],
-      verify3PerferTTS:[false],
+      verify3PerferTTS:[true],
       verify3Time:[8, Validators.required],
       ratingVideoFrameText: ['', Validators.required],
       ratingTextToSpeechText: [''],
       ratingImage: ['', Validators.required],
       ratingVoice: [''],
-      ratingPerferTTS:[false],
+      ratingPerferTTS:[true],
       ratingTime:[8, Validators.required],
       imageText:['', Validators.required],
       image:['', Validators.required],
@@ -442,6 +442,7 @@ this.mediaService.createMedia(_media).subscribe(
   error => {
     console.log("error",error);
     this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+    this.processingVideo=false;
     // this.notificationService.showError(error.error.error)
   },
   () => {
@@ -454,6 +455,7 @@ this.mediaService.createMedia(_media).subscribe(
 });
 } catch (error) {
   console.log(error);
+  this.processingVideo=false;
 }
 }
 get f(): { [key: string]: AbstractControl } {

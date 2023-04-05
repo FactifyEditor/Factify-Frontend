@@ -6,13 +6,13 @@
     <div class="card-body">
       <div
         id="accountDetailsValidation"
-        *ngIf="languages$ | async as languages"
+       
         class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework"
       >
         <form
           class="example-form"
           [formGroup]="templateForm"
-          (ngSubmit)="submitForm(languages.data)"
+          (ngSubmit)="submitForm(languages)"
         >
           <div class="row g-3">
             <div class="col-sm-12 fv-plugins-icon-container">
@@ -200,7 +200,7 @@
                   <h6 class="mb-0">Languages</h6>
                 </div>
                 <div >
-                  <div class="mb-3 row" *ngFor="let language of languages.data">
+                  <div class="mb-3 row" *ngFor="let language of languages">
                     <div class="col-sm-10">
                       <div class="accordion mt-3" id="accordionExample">
                         <div class="card accordion-item">

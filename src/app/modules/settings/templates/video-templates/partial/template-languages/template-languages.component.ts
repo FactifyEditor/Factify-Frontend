@@ -29,7 +29,14 @@ export class TemplateLanguagesComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
   ngOnInit(): void {
-
+      this.introPreview = this.language["introTrack"];
+      this.language.introTrack=this.language["introTrack"];
+      this.outroPreview = this.language["outroTrack"];
+      this.language.outroTrack=this.language["outroTrack"];
+      this.verificationPreview = this.language["verificationTrack"];
+      this.language.verificationTrack=this.language["verificationTrack"];
+      this.headlinePreview = this.language["headlineTrack"]
+      this.language.headlineTrack=this.language["headlineTrack"];
   }
   uploadIntroFile(event,type) {
     const file = (event.target as HTMLInputElement).files[0];

@@ -24,7 +24,7 @@ import { ToastService } from 'src/app/services/shared/toast.service';
   styleUrls: ['./add-template.component.css'],
 })
 export class AddTemplateComponent implements OnInit {
-  languages$: Observable<any>;
+  languages: any;
   percentDone: any = 0;
   hide = true;
   roles$: Observable<any>;
@@ -76,19 +76,30 @@ export class AddTemplateComponent implements OnInit {
     role: [{ type: 'required', message: 'Role is required' }],
   };
   ngOnInit() {
+     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.template=this.templateService.getTemplateJson();
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id != null) {
-      this.templateService.getVideoTemplate(id).subscribe((template) => {
-        this.template = template.data;
-        this.initForm(this.template);
-      });
-      this.buttonText='Update';
-      this.headerText="Edit";
-    }
     this.initForm(this.template)
-    this.languages$ = this.languageService.getAllLanguages();
-   
+    this.languageService.getAllLanguages().subscribe(language=>{
+      this.languages=language.data;
+      if (id != null) {
+        this.templateService.getVideoTemplate(id).subscribe((template) => {
+          this.template = template.data;
+         this.languages=this.languages.map(langulage => {
+          let lang= this.template.languages.find(l=>langulage._id==l._id);
+          if(lang!=null)
+          langulage= lang
+          return langulage
+          
+           
+         });
+         this.initForm(this.template);
+       });
+       this.buttonText='Update';
+       this.headerText="Edit";
+     }
+     this.initForm(this.template);
+     })
+  
   }
 
   uploadImageFile(event) {
@@ -146,8 +157,10 @@ export class AddTemplateComponent implements OnInit {
     this.template.description= this.templateForm.value.description,
     this.template.languages= languages,
     _template= this.template;
+    
+    if(!!this.template._id)
     this.templateService
-      .addVideoTemplate(_template).subscribe(
+      .updateVideoTemplate(_template,this.template._id).subscribe(
         result => {
           // Handle result
           console.log(result);
@@ -161,10 +174,32 @@ export class AddTemplateComponent implements OnInit {
           
         },
         () => {
-               this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
+               this.toastService.show(' Template Updated', { classname: 'bg-success text-dark', delay: 10000 });
                 this._router.navigate(['/templates/videos-audio/list']);
         
         })
+        else{
+          this.templateService
+          .addVideoTemplate(_template).subscribe(
+            result => {
+              // Handle result
+              console.log(result);
+              
+            },
+            error => {
+              console.log("error",error);
+              this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+    
+              // this.notificationService.showError(error.error.error)
+              
+            },
+            () => {
+                   this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
+                    this._router.navigate(['/templates/videos-audio/list']);
+            
+            })
+        }
+    
       
     
   }

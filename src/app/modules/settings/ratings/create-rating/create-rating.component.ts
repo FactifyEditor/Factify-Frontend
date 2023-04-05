@@ -23,7 +23,7 @@ import { ToastService } from 'src/app/services/shared/toast.service';
   styleUrls: ['./create-rating.component.css'],
 })
 export class CreateRatingComponent implements OnInit {
-  languages$: Observable<any>;
+  languages: any;
   percentDone: any = 0;
   roles$: Observable<any>;
   ratingForm: FormGroup;
@@ -67,16 +67,28 @@ export class CreateRatingComponent implements OnInit {
   }
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id != null) {
+    this.languageService.getAllLanguages().subscribe(language=>{
+     this.languages=language.data;
+     if (id != null) {
       this.ratingService.getRating(id).subscribe((rating) => {
         this.rating = rating.data;
+        this.languages=this.languages.map(langulage => {
+         let lang= this.rating.languages.find(l=>langulage._id==l._id);
+         if(lang!=null)
+         langulage= lang
+         return langulage
+         
+          
+        });
         this.initForm(this.rating);
       });
       this.buttonText='Update';
       this.headerText="Edit";
     }
     this.initForm(this.rating);
-    this.languages$ = this.languageService.getAllLanguages(); 
+    })
+  
+   
 
     
   }
@@ -105,6 +117,24 @@ export class CreateRatingComponent implements OnInit {
       languages: languages,
     };
 
+   if(!!this.rating._id){
+    this.ratingService.updateRating(_rating,this.rating._id)
+    .subscribe(
+      result => {
+        // Handle result
+        console.log(result);
+        
+      },
+      error => {
+        console.log("error",error);
+        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+      },
+      () => {
+             this.toastService.show('Rating Updated', { classname: 'bg-success text-dark', delay: 10000 });
+        this._router.navigate(['/ratings/list']);
+      })
+   }
+   else{
     this.ratingService.addRating(_rating)
     .subscribe(
       result => {
@@ -120,6 +150,7 @@ export class CreateRatingComponent implements OnInit {
              this.toastService.show('New Rating Added', { classname: 'bg-success text-dark', delay: 10000 });
         this._router.navigate(['/ratings/list']);
       })
+   }
       
     
   }

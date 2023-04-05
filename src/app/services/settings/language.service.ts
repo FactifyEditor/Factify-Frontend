@@ -20,7 +20,7 @@ export class LanguageService {
   }
 
   updateLanguage(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/language/${id}`, data)
+    return this.http.put(`${this.baseURL}/language/${id}`, data)
   }
   getLanguage(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/language/${id}`)

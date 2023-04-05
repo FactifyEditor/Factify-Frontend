@@ -22,6 +22,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: AddLanguageComponent,
+      },
+      {
+        path:':id',
+        component:AddLanguageComponent
       }
       
     ],
