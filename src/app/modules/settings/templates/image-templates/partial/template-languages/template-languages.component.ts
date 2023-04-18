@@ -35,7 +35,7 @@ export class TemplateLanguagesComponent implements OnInit {
     var formData: any = new FormData();
     formData.append("image", file);
     this.sharedService
-      .addVideoTemplate(formData)
+      .uploadFile(formData)
       .subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Sent:

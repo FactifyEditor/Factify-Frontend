@@ -28,6 +28,43 @@
           </div>
       </div>
     </div>
+    <div class="mb-3 row  mt-20   " >
+      <label for="html5-text-input" class="  mt-20 col-md-2 col-form-label"
+        >Upload Font</label
+      >
+      <div class="col-md-2">
+        <div class="image-upload">
+          <label style="cursor: pointer" for="file_upload">
+            <img src="" alt="" class="uploaded-image" />
+            <div class="h-100">
+              <div class="dplay-tbl">
+                <div class="dplay-tbl-cell">
+                  <i class="ti ti-upload upload_icon"></i>
+                </div>
+              </div>
+            </div>
+  
+            <input
+               data-required="image"
+                type="file"
+                name="image_name"
+                id="file_upload"
+                class="image-input"
+                accept="font/*"
+                (change)="uploadFont($event)"
+                data-traget-resolution="image_resolution"
+                value=""
+            />
+          </label>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="preview" *ngIf="preview && preview !== null" class="card" style="max-width:125px">
+          <img  class="card-img" [src]="preview"  alt="Card image cap">
+  
+        </div>
+      </div>
+    </div>
       
       
       

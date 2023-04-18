@@ -285,12 +285,16 @@ this.processingVideo=true;
 
 this.videoTemplate.scenes[1].layers[1].text=this.form.value.claimVideoFrameText;
 this.videoTemplate.scenes[1].layers[2].src=this.images['claim'].imageUrl;
+this.videoTemplate.scenes[2].layers[2].fontURL=this.form.value.language.fontUrl;
 this.videoTemplate.scenes[2].layers[2].text=this.form.value.verify1VideoFrameText;
 this.videoTemplate.scenes[2].layers[1].src=this.images['verify1'].imageUrl;
+this.videoTemplate.scenes[3].layers[1].fontURL=this.form.value.language.fontUrl;
 this.videoTemplate.scenes[3].layers[1].text=this.form.value.verify2VideoFrameText;
 this.videoTemplate.scenes[3].layers[2].src=this.images['verify2'].imageUrl;
+this.videoTemplate.scenes[4].layers[1].fontURL=this.form.value.language.fontUrl;
 this.videoTemplate.scenes[4].layers[1].text=this.form.value.verify3VideoFrameText;
 this.videoTemplate.scenes[4].layers[2].src=this.images['verify3'].imageUrl;
+this.videoTemplate.scenes[5].layers[1].fontURL=this.form.value.language.fontUrl;
 this.videoTemplate.scenes[5].layers[1].text=this.form.value.ratingVideoFrameText;
 this.videoTemplate.scenes[5].layers[2].src=this.images['rating'].imageUrl;
 this.videoTemplate.scenes[1].layers[2].src=this.images['claim'].imageUrl;
@@ -531,7 +535,7 @@ uploadFile(file, type,uploadType) {
   var formData: any = new FormData();
   formData.append(type, file);
   this.sharedService
-    .addVideoTemplate(formData)
+    .uploadFile(formData)
     .subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:

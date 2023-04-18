@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Role, User, Language } from 'src/app/models';
 // import { NotificationService } from 'src/app/services/notification.service';
 import { LanguageService } from 'src/app/services/settings/language.service';
+import { SharedService } from 'src/app/services/shared/shared.service';
 import { ToastService } from 'src/app/services/shared/toast.service';
 @Component({
   selector: 'app-add-language',
@@ -21,13 +23,16 @@ export class AddLanguageComponent implements OnInit {
   buttonText: string = "Save"
   headerText: string = "Create"
   langulage: Language;
+  preview:string
+  percentDone: number;
   constructor(
     private fb: FormBuilder,
     private languageService: LanguageService,
     // private notificationService:NotificationService,
     private _router: Router,
     private toastService: ToastService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private sharedService:SharedService
   ) { }
 
   validation_messages = {
@@ -131,5 +136,44 @@ export class AddLanguageComponent implements OnInit {
     console.log(value);
   }
   get f() { return this.languageForm.controls; }
+
+  uploadFont(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+  
+    }
+    reader.readAsDataURL(file);
+    this.uploadFile(file)
+  }
+
+  uploadFile(file) {
+    var formData: any = new FormData();
+    formData.append("image", file);
+    this.sharedService
+      .uploadFile(formData)
+      .subscribe((event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            console.log('Request has been made!');
+            break;
+          case HttpEventType.ResponseHeader:
+            console.log('Response header has been received!');
+            break;
+          case HttpEventType.UploadProgress:
+            this.percentDone = Math.round((event.loaded / event.total) * 100);
+            console.log(`Uploaded! ${this.percentDone}%`);
+            break;
+          case HttpEventType.Response:
+            console.log('User successfully created!', event.body);
+            this.percentDone = 0;
+            this.langulage.font=event.body.data[0].url;
+            this.preview=this.langulage.font
+          // this.router.navigate(['users-list'])
+        }
+      });
+  }
 }
 

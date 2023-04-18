@@ -73,7 +73,7 @@ export class SharedService {
   
     return this.getFormattedDate(date); // 10. January 2017. at 10:20
   }
-  addVideoTemplate(formData:any): Observable<any> {
+  uploadFile(formData:any): Observable<any> {
     // var formData: any = new FormData();
     // formData.append('name', name);
     // formData.append('avatar', profileImage);
