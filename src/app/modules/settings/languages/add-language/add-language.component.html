@@ -1,8 +1,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">    <a  class="">
-
-      <i  class="ti ti-chevron-left" style="font-size: 2rem;margin-top: -5px;"></i>
-    </a> <span class="text-muted fw-light">Settings /Languages/</span> {{headerText}}</h4>
+    <h4 class="fw-bold py-3 mb-4">   
+      <a routerLink="/feed/list"  ><i  class="ti ti-chevron-left" style="font-size: 2rem;"></i>
+        <span class="text-muted fw-light">Settings /Languages/</span></a> {{headerText}}</h4>
       <div class="card">
         <div class="card-body">
 
@@ -59,8 +58,9 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div class="preview" *ngIf="preview && preview !== null" class="card" style="max-width:125px">
-          <img  class="card-img" [src]="preview"  alt="Card image cap">
+        <div class="preview" *ngIf="fontFileName && fontFileName !== null"  style="max-width:125px">
+          <!-- <img  class="card-img" [src]="preview"  alt="Card image cap"> -->
+          <i class="ti ti-file upload_icon">{{fontFileName}}</i> 
   
         </div>
       </div>

@@ -56,13 +56,16 @@ export class AddLanguageComponent implements OnInit {
 
     ]
   };
+  fontFileName: string;
   ngOnInit() {
-
+    this.langulage=new Language()
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.initForm(this.langulage)
     if (id != null) {
       this.languageService.getLanguage(id).subscribe((langulage) => {
         this.langulage = langulage.data;
+        if(this.langulage.font)
+        this.fontFileName=this.getFileNameFromUrl(this.langulage.font)
         this.initForm(this.langulage);
         this.buttonText = 'Update';
         this.headerText = "Edit";
@@ -91,6 +94,7 @@ export class AddLanguageComponent implements OnInit {
       let _language: any = {
         language: this.languageForm.value.language,
         value: this.languageForm.value.value,
+        font:this.langulage.font
       }
      if(!!this.langulage._id)
      this.languageService.updateLanguage(_language,this.langulage._id).subscribe(
@@ -148,7 +152,10 @@ export class AddLanguageComponent implements OnInit {
     reader.readAsDataURL(file);
     this.uploadFile(file)
   }
-
+  private getFileNameFromUrl(url: string): string {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+  }
   uploadFile(file) {
     var formData: any = new FormData();
     formData.append("image", file);
@@ -171,6 +178,7 @@ export class AddLanguageComponent implements OnInit {
             this.percentDone = 0;
             this.langulage.font=event.body.data[0].url;
             this.preview=this.langulage.font
+            this.fontFileName=this.getFileNameFromUrl(this.langulage.font)
           // this.router.navigate(['users-list'])
         }
       });

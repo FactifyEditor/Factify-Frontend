@@ -24,7 +24,7 @@ table.dataTable > tbody > tr > th.select-checkbox:after {
 table.dataTable > tbody > tr > td.select-checkbox:before,
 table.dataTable > tbody > tr > th.select-checkbox:before {
   content: " ";
-  margin-top: -5px;
+  
   margin-left: -6px;
   border: 1px solid black;
   border-radius: 3px;
