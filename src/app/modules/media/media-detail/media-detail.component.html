@@ -104,7 +104,7 @@
                           <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
                           Processing...
                         </button>
-                        <a *ngIf="feed.data.imageStatus==0" (click)="processImage(feed)"
+                        <a *ngIf="feed.data.imageStatus==0" id="processImageButton" #processImageButton (click)="processImage(feed)"
                         href="javascript:;"
                         class="btn btn-sm btn-primary me-3"
                         data-bs-target="#editUser"
