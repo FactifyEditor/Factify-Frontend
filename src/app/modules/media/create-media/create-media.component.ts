@@ -429,6 +429,7 @@ this.videoTemplate.scenes[15].audioUrl=result[4].data
 
 let _media:MediaModel={
   rating:this.form.value.rating,
+  link:this.form.value.link,
   language:selectedLanguage,
   imageTemplate:this.imageTemplate._id,
   videoTemplate:this.videoTemplate._id,
