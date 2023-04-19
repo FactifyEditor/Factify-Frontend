@@ -169,31 +169,31 @@ initForm(media?:any){
     claimTextToSpeechText: [feed?.claim?.TTSText,],
     claimImage: ['',  media?._id?'':Validators.required],
     claimVoice: [""],
-    claimPerferTTS:[feed?.claim?.perferTTS],
+    claimPerferTTS:[feed?.claim?.perferTTS ||true],
     claimTime:[feed?.claim?.time || 8, Validators.required],
     verify1VideoFrameText: [feed?.verification1?.frameText, Validators.required],
     verify1TextToSpeechText: [feed?.verification1?.TTSText],
     verify1Image: ['', media?._id?'':Validators.required],
     verify1Voice: [''],
-    verify1PerferTTS:[feed?.verification1?.perferTTS],
+    verify1PerferTTS:[feed?.verification1?.perferTTS ||true],
     verify1Time:[8, Validators.required],
     verify2VideoFrameText: [feed?.verification2?.frameText, Validators.required],
     verify2TextToSpeechText: [feed?.verification2?.TTSText],
     verify2Image: ['',  media?._id?'':Validators.required],
     verify2Voice: [''],
-    verify2PerferTTS:[feed?.verification2?.perferTTS],
+    verify2PerferTTS:[feed?.verification2?.perferTTS ||true],
     verify2Time:[feed?.verification2?.time || 8, Validators.required],
     verify3VideoFrameText: [feed?.verification2?.frameText, Validators.required],
     verify3TextToSpeechText: [feed?.verification2?.TTSText],
     verify3Image: ['',  media?._id?'':Validators.required],
     verify3Voice: [''],
-    verify3PerferTTS:[feed?.verification3?.perferTTS],
+    verify3PerferTTS:[feed?.verification3?.perferTTS ||true],
     verify3Time:[feed?.verification3?.time || 8, Validators.required],
     ratingVideoFrameText: [feed?.rating?.frameText, Validators.required],
     ratingTextToSpeechText: [feed?.rating?.TTSText],
     ratingImage: ['',  media?._id?'':Validators.required],
     ratingVoice: [''],
-    ratingPerferTTS:[feed?.rating?.perferTTS],
+    ratingPerferTTS:[feed?.rating?.perferTTS ||true],
     ratingTime:[feed?.rating?.time || 8, Validators.required],
     imageText:[feed?.rating?.frameText, Validators.required],
     image:['',  media?._id?'':Validators.required],
@@ -281,28 +281,29 @@ if(this.form.get('ratingPerferTTS').value){
     isInValid=true;
   }
 }
-if(this.form.controls.image.value=="" && this.images.imageTemplate.imageUrl==undefined){
+console.log(this.images)
+if(this.images.imageTemplate.imageUrl==undefined){
   this.toastService.show("please upload image  for image", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
 
-if(this.form.controls.claimImage.value=="" && this.images.claim==undefined){
+if(this.images.claim.imageUrl==undefined){
   this.toastService.show("please upload image  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify1Image.value=="" && this.images.verify1==undefined){
+if(this.images.verify1.imageUrl==undefined){
   this.toastService.show("please upload image  for verification ", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify2Image.value==""  && this.images.verify2==undefined){
+if(this.images.verify2.imageUrl==undefined){
   this.toastService.show("please upload image  for verification 2", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify3Image.value=="" && this.images.verify3==undefined){
+if( this.images.verify3==undefined){
   this.toastService.show("please upload image  for verification 3", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.ratingImage.value=='' && this.images.rating==undefined){
+if( this.images.rating.imageUrl==undefined){
   this.toastService.show("please upload image  for rating", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
