@@ -192,7 +192,6 @@ ngOnInit(){
 ngAfterViewInit(){
   $('.dt-scrollableTable').on('change', '.tblChk', function () {
     if ($('.tblChk:checked').length == $('.tblChk').length) {
-      
     } else {
       var d1:any = document.getElementById('est');
       var d2:any = document.getElementById('bulk_action');
