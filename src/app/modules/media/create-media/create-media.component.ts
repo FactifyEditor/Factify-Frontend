@@ -27,16 +27,17 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./create-media.component.css']
 })
 export class CreateMediaComponent implements OnInit {
-
+  language:any;
   private baseUrl = environment.BASE_URL;
   processingVideo=false;
   ratings$:Observable<any>;
-  languages$:Observable<any>;
+  languages:any=[];
   imageTemplate:any;
   videoTemplate:any;
   selectedLanguage = undefined;
   selectedRating = undefined;
   submitted:boolean=false;
+  feed:any;
   images={
     claim:{imageUrl:undefined,audioUrl:undefined,name:''},
     verify1:{imageUrl:undefined,audioUrl:undefined,name:''},
@@ -103,8 +104,10 @@ constructor(private http: HttpClient,
   }
 }
 ngOnInit() {
-
-    this.languages$= this.languageService.getAllLanguages();
+   
+    this.languageService.getAllLanguages().subscribe(language=>{
+      this.languages=language.data
+    })
     this.ratings$= this.ratingService.getAllRatings();
     this.templateService.getAllImageTemplate().subscribe(imageTemplates=>{
       this.imageTemplate=imageTemplates.data[0]
@@ -113,51 +116,7 @@ ngOnInit() {
       this.videoTemplate=videoTemplates.data[0];
       console.log(this.videoTemplate);
     })    
-    this.form = this.fb.group({
-      language: ['', Validators.required],
-      link:     ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-      rating: ['', Validators.required],
-      audio: ['1', Validators.required],
-      videoTheme: ["1",Validators.required],
-      imageTheme: ["1",Validators.required],
-      claimVideoFrameText: ['', Validators.required],
-      claimTextToSpeechText: ['',],
-      claimImage: ['', Validators.required],
-      claimVoice: [''],
-      claimPerferTTS:[true],
-      claimTime:[8, Validators.required],
-      verify1VideoFrameText: ['', Validators.required],
-      verify1TextToSpeechText: [''],
-      verify1Image: ['', Validators.required],
-      verify1Voice: [''],
-      verify1PerferTTS:[true],
-      verify1Time:[8, Validators.required],
-      verify2VideoFrameText: ['', Validators.required],
-      verify2TextToSpeechText: [''],
-      verify2Image: ['', Validators.required],
-      verify2Voice: [''],
-      verify2PerferTTS:[true],
-      verify2Time:[8, Validators.required],
-      verify3VideoFrameText: ['', Validators.required],
-      verify3TextToSpeechText: [''],
-      verify3Image: ['', Validators.required],
-      verify3Voice: [''],
-      verify3PerferTTS:[true],
-      verify3Time:[8, Validators.required],
-      ratingVideoFrameText: ['', Validators.required],
-      ratingTextToSpeechText: [''],
-      ratingImage: ['', Validators.required],
-      ratingVoice: [''],
-      ratingPerferTTS:[true],
-      ratingTime:[8, Validators.required],
-      imageText:['', Validators.required],
-      image:['', Validators.required],
-      claimTimeSetting:[false],
-      verify1TimeSetting:[false],
-      verify2TimeSetting:[false],
-      verify3TimeSetting:[false],
-      ratingTimeSetting:[false]
-    });
+   
     this.uploader.onAfterAddingFile = (file) => {
       file.file.name = "new name";
       //save in variable
@@ -167,6 +126,84 @@ ngOnInit() {
     this.uploader.onCompleteItem = (item: any, status: any) => {
       console.log('Uploaded File Details:', item);
     };
+
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.initForm()
+    if (id != null) {
+      this.mediaService.getMedia(id).subscribe((media) => {
+        // console.log(media.data)
+        this.feed=media.data
+        this.initForm(this.feed);
+        this.images['claim'].imageUrl= media.data.metaData.claim.claimImage;
+        this.images['verify1'].imageUrl= media.data.metaData.verification1.verificationImage;
+        this.images['verify2'].imageUrl= media.data.metaData.verification2.verificationImage;
+        this.images['verify3'].imageUrl= media.data.metaData.verification3.verificationImage;
+        this.images['rating'].imageUrl= media.data.metaData.rating.ratingImage;
+        this.imageTemplate.factImage= media.data.metaData.imageJson.factImage;
+        this.images.imageTemplate.imageUrl= media.data.metaData.imageJson.factImage;
+        // this.langulage = langulage.data;
+        // if(this.langulage.font)
+        // this.fontFileName=this.getFileNameFromUrl(this.langulage.font)
+        // this.initForm(this.langulage);
+        // this.buttonText = 'Update';
+        // this.headerText = "Edit";
+      });
+    }
+    else{
+      this.initForm()
+    }
+}
+initForm(media?:any){
+  let feed= media?.metaData;
+  console.log(media?.language);
+  // this.language
+  //set language objet to form language
+  this.form = this.fb.group({
+    language: [media?.language._id, Validators.required],
+    link:     [media?.link||"", [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+    rating: [media?.rating, Validators.required],
+    audio: ['1', Validators.required],
+    videoTheme: [media?.imageTemplate||"1",Validators.required],
+    imageTheme: [media?.videoTemplate||"1",Validators.required],
+    claimVideoFrameText: [feed?.claim?.frameText, Validators.required],
+    claimTextToSpeechText: [feed?.claim?.TTSText,],
+    claimImage: ['',  media?._id?'':Validators.required],
+    claimVoice: [""],
+    claimPerferTTS:[feed?.claim?.perferTTS],
+    claimTime:[feed?.claim?.time, Validators.required],
+    verify1VideoFrameText: [feed?.verification1?.frameText, Validators.required],
+    verify1TextToSpeechText: [feed?.verification1?.TTSText],
+    verify1Image: ['', media?._id?'':Validators.required],
+    verify1Voice: [''],
+    verify1PerferTTS:[feed?.verification1?.perferTTS],
+    verify1Time:[8, Validators.required],
+    verify2VideoFrameText: [feed?.verification2?.frameText, Validators.required],
+    verify2TextToSpeechText: [feed?.verification2?.TTSText],
+    verify2Image: ['',  media?._id?'':Validators.required],
+    verify2Voice: [''],
+    verify2PerferTTS:[feed?.verification2?.perferTTS],
+    verify2Time:[feed?.verification2?.time, Validators.required],
+    verify3VideoFrameText: [feed?.verification2?.frameText, Validators.required],
+    verify3TextToSpeechText: [feed?.verification2?.TTSText],
+    verify3Image: ['',  media?._id?'':Validators.required],
+    verify3Voice: [''],
+    verify3PerferTTS:[feed?.verification3?.perferTTS],
+    verify3Time:[feed?.verification3?.time, Validators.required],
+    ratingVideoFrameText: [feed?.rating?.frameText, Validators.required],
+    ratingTextToSpeechText: [feed?.rating?.TTSText],
+    ratingImage: ['',  media?._id?'':Validators.required],
+    ratingVoice: [''],
+    ratingPerferTTS:[feed?.rating?.perferTTS],
+    ratingTime:[feed?.rating?.time, Validators.required],
+    imageText:[feed?.rating?.frameText, Validators.required],
+    image:['',  media?._id?'':Validators.required],
+    claimTimeSetting:[false],
+    verify1TimeSetting:[false],
+    verify2TimeSetting:[false],
+    verify3TimeSetting:[false],
+    ratingTimeSetting:[false]
+  });
+
 }
 OnSelectThemeImageEvent(event:any){
 this.imageTemplate=event;
@@ -190,7 +227,8 @@ textToSpeech(text){
   })
 }
 processVideo(form: FormGroup){
-console.log(this.form.value.language)
+// console.log(this.form.value.language);
+let selectedLanguage=this.languages.find(x=>x._id==this.form.value.language);
 this.submitted = true; 
 let isInValid:boolean=false;
 if(this.form.get('claimPerferTTS').value){
@@ -243,28 +281,28 @@ if(this.form.get('ratingPerferTTS').value){
     isInValid=true;
   }
 }
-if(this.form.controls.image.value==""){
+if(this.form.controls.image.value=="" && this.images.imageTemplate.imageUrl==undefined){
   this.toastService.show("please upload image  for image", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
 
-if(this.form.controls.claimImage.value==""){
+if(this.form.controls.claimImage.value=="" && this.images.claim==undefined){
   this.toastService.show("please upload image  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify1Image.value==""){
+if(this.form.controls.verify1Image.value=="" && this.images.verify1==undefined){
   this.toastService.show("please upload image  for verification ", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify2Image.value==""){
+if(this.form.controls.verify2Image.value==""  && this.images.verify2==undefined){
   this.toastService.show("please upload image  for verification 2", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.verify3Image.value==""){
+if(this.form.controls.verify3Image.value=="" && this.images.verify3==undefined){
   this.toastService.show("please upload image  for verification 3", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.form.controls.ratingImage.value==''){
+if(this.form.controls.ratingImage.value=='' && this.images.rating==undefined){
   this.toastService.show("please upload image  for rating", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
@@ -272,7 +310,7 @@ console.log("test")
 if (this.form.invalid ||   isInValid  ) {
   return;
 }
-let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language._id);
+let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language);
 console.log(languageTracks)
 
 this.cd.detectChanges();
@@ -285,16 +323,16 @@ this.processingVideo=true;
 
 this.videoTemplate.scenes[1].layers[1].text=this.form.value.claimVideoFrameText;
 this.videoTemplate.scenes[1].layers[2].src=this.images['claim'].imageUrl;
-this.videoTemplate.scenes[2].layers[2].fontURL=this.form.value.language.font;
+this.videoTemplate.scenes[2].layers[2].fontURL=selectedLanguage.font;
 this.videoTemplate.scenes[2].layers[2].text=this.form.value.verify1VideoFrameText;
 this.videoTemplate.scenes[2].layers[1].src=this.images['verify1'].imageUrl;
-this.videoTemplate.scenes[3].layers[1].fontURL=this.form.value.language.font;
+this.videoTemplate.scenes[3].layers[1].fontURL=selectedLanguage.font;
 this.videoTemplate.scenes[3].layers[1].text=this.form.value.verify2VideoFrameText;
 this.videoTemplate.scenes[3].layers[2].src=this.images['verify2'].imageUrl;
-this.videoTemplate.scenes[4].layers[1].fontURL=this.form.value.language.font;
+this.videoTemplate.scenes[4].layers[1].fontURL=selectedLanguage.font;
 this.videoTemplate.scenes[4].layers[1].text=this.form.value.verify3VideoFrameText;
 this.videoTemplate.scenes[4].layers[2].src=this.images['verify3'].imageUrl;
-this.videoTemplate.scenes[5].layers[1].fontURL=this.form.value.language.font;
+this.videoTemplate.scenes[5].layers[1].fontURL=selectedLanguage.font;
 this.videoTemplate.scenes[5].layers[1].text=this.form.value.ratingVideoFrameText;
 this.videoTemplate.scenes[5].layers[2].src=this.images['rating'].imageUrl;
 this.videoTemplate.scenes[1].layers[2].src=this.images['claim'].imageUrl;
@@ -372,11 +410,11 @@ this.videoTemplate.scenes.push({
 //outro track
 this.imageTemplate.imageText=this.form.value.imageText;
 this.imageTemplate.factImage=this.images.imageTemplate.imageUrl;
-const headlineTtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.claimTextToSpeechText });
-const verify1TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify1TextToSpeechText });
-const verify2TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify2TextToSpeechText });
-const verify3TtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.verify3TextToSpeechText });
-const ratingTtsText = this.mediaService.getAudioFromText({languageCode:this.form.value.language.value,ttsText:this.form.value.ratingTextToSpeechText });
+const headlineTtsText = this.mediaService.getAudioFromText({languageCode:selectedLanguage.value,ttsText:this.form.value.claimTextToSpeechText });
+const verify1TtsText = this.mediaService.getAudioFromText({languageCode:selectedLanguage.value,ttsText:this.form.value.verify1TextToSpeechText });
+const verify2TtsText = this.mediaService.getAudioFromText({languageCode:selectedLanguage.value,ttsText:this.form.value.verify2TextToSpeechText });
+const verify3TtsText = this.mediaService.getAudioFromText({languageCode:selectedLanguage.value,ttsText:this.form.value.verify3TextToSpeechText });
+const ratingTtsText = this.mediaService.getAudioFromText({languageCode:selectedLanguage.value,ttsText:this.form.value.ratingTextToSpeechText });
 forkJoin([headlineTtsText, verify1TtsText,verify2TtsText,verify3TtsText,ratingTtsText]).pipe(take(1)).subscribe( result => {
 this.videoTemplate.scenes[11].audioUrl=result[0].data
 // this.videoTemplate.scenes[11].duration=result[0].duration
@@ -391,7 +429,7 @@ this.videoTemplate.scenes[15].audioUrl=result[4].data
 
 let _media:MediaModel={
   rating:this.form.value.rating,
-  language:this.form.value.language,
+  language:selectedLanguage,
   imageTemplate:this.imageTemplate._id,
   videoTemplate:this.videoTemplate._id,
   metaData:{
@@ -439,22 +477,44 @@ let _media:MediaModel={
     imageJson:this.imageTemplate
   }
 }
-this.mediaService.createMedia(_media).subscribe(
-  result => {
-    console.log(result);
-  },
-  error => {
-    console.log("error",error);
-    this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
-    this.processingVideo=false;
-    // this.notificationService.showError(error.error.error)
-  },
-  () => {
-    this.processingVideo=false;
-         this.toastService.show('New Feed Added', { classname: 'bg-success text-dark', delay: 10000 });
-          this._router.navigate(['/feed//list']);
-  
-  })
+if(this.feed){
+  _media["_id"]=this.feed._id;
+  this.mediaService.updateMedia(_media,_media["_id"]).subscribe(
+    result => {
+      console.log(result);
+    },
+    error => {
+      console.log("error",error);
+      this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+      this.processingVideo=false;
+      // this.notificationService.showError(error.error.error)
+    },
+    () => {
+      this.processingVideo=false;
+           this.toastService.show('New Feed Updated', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/feed/list']);
+    
+    })
+}
+else{
+  this.mediaService.createMedia(_media).subscribe(
+    result => {
+      console.log(result);
+    },
+    error => {
+      console.log("error",error);
+      this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+      this.processingVideo=false;
+      // this.notificationService.showError(error.error.error)
+    },
+    () => {
+      this.processingVideo=false;
+           this.toastService.show('New Feed Added', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/feed/list']);
+    
+    })
+}
+
 
 });
 } catch (error) {

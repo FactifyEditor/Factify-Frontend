@@ -156,7 +156,7 @@ ngOnInit(){
           `<div class="d-inline-block">
           <a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>
           <div class="dropdown-menu dropdown-menu-end m-0">
-          <a   routerlink="/feed/${$id}" ng-reflect-router-link="/feed/${$id}" href="/feed/${$id}"  class="dropdown-item">Details</a>
+          <a   routerlink="/feed/${$id}/detail" ng-reflect-router-link="/feed/${$id}/detail" href="/feed/${$id}/detail"  class="dropdown-item">Details</a>
           <a href="javascript:;" class="dropdown-item">Archive</a>
           <div class="dropdown-divider"></div>
           <a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>

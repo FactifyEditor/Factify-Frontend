@@ -26,6 +26,10 @@ const routes:Routes=[{
   },
   {
     path:':id',
+    component:CreateMediaComponent
+  },
+  {
+    path:':id/detail',
     component:MediaDetailComponent
   }]
 }

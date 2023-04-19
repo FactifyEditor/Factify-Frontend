@@ -17,18 +17,19 @@
               <div class="col-md-4 mb-4" ƒ>
                 <div class="position-relative">
                   <select
+                    
                     formControlName="language"
-                   
                     class="select2 form-select select2-hidden-accessible"
                    
                     [ngClass]="{ 'is-invalid': submitted && f['language'].errors }"
-                    *ngIf="languages$ | async as languages"
+                 
                   >
+                  <!-- *ngIf="languages$ | async as languages" -->
                 
                   <option value="">Select Language</option>
                     <option
-                      *ngFor="let language of languages.data"
-                      [ngValue]="language"
+                      *ngFor="let language of languages"
+                      [ngValue]="language._id" 
                     >
                       {{ language.language }}
                     </option>

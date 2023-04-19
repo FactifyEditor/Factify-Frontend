@@ -28,12 +28,16 @@ export class MediaService {
   }
 
   updateMedia(data: any, id: string): Observable<any> {
+    console.log(data);
+    console.log(id);
     return this.http.put(`${this.baseURL}/media/${id}`, data);
   }
   getMedia(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/media/${id}`);
   }
   getAudioFromText(tts:any):Observable<any>{
+    console.log(tts);
+  
     return this.http.post(`${this.baseURL}/media/ttsToAudio`,tts)
   }
 
