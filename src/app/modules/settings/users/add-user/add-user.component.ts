@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Role, User } from 'src/app/models';
 // import { NotificationService } from 'src/app/services/notification.service';
@@ -18,13 +18,18 @@ export class AddUserComponent implements OnInit {
   roles$: Observable<any>
   registerForm: FormGroup;
   submitted = false;
+  user:User;
+  buttonText:String='Save';
+  headerText:String='Add';
 
   constructor(
     private fb: FormBuilder,
     private userService:UserService,
     // private notificationService:NotificationService,
     private _router: Router,
-    private toastService:ToastService
+
+    private toastService: ToastService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   validation_messages = {
@@ -50,16 +55,36 @@ export class AddUserComponent implements OnInit {
   };
   ngOnInit() {
     this.roles$=this.userService.getRoles();
+
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.initForm(this.user)
+    if (id != null) {
+      this.userService.getUser(id).subscribe((user) => {
+        this.user = user.data;
+       console.log(this.user)
+        this.initForm(this.user);
+        this.buttonText = 'Update';
+        this.headerText = "Edit";
+      });
+    }
+    else{
+      this.initForm(this.user)
+    }
+
+    
+  }
+
+  initForm(user:any){
+    
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required]],
-      roles: ['', [Validators.required]]
+      firstName: [user?.firstName ||'', Validators.required],
+      lastName: [user?.lastName ||'', Validators.required],
+      email: [user?.email ||'', [Validators.required, Validators.email]],
+      mobile: [user?.phone ||'', [Validators.required]],
+      roles: [user?.roles?.[0] ||'', [Validators.required]]
     }
     );
   }
-
   get registerFormControl() {
     return this.registerForm.controls;
   }

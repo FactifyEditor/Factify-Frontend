@@ -495,7 +495,7 @@ if(this.feed){
            this.toastService.show('New Feed Updated', { classname: 'bg-success text-dark', delay: 10000 });
             this._router.navigate(['/feed/list']);
     
-    })
+  })
 }
 else{
   this.mediaService.createMedia(_media).subscribe(
