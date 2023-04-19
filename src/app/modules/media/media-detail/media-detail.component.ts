@@ -31,8 +31,12 @@ export class MediaDetailComponent implements OnInit {
       this.media$.subscribe(data => {
         let media = data.data;
         if (media.imageStatus == 0) {
+          setTimeout(() => {
           this.processImageButton.nativeElement.click();
+          }, 1000);
+
         }
+        
           // this.processingImage=true;
           
           // this.processImage(data)
