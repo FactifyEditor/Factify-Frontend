@@ -19,6 +19,7 @@ export const MENU: MenuItem[] = [
   {
     id: 3,
     label: 'Draft',
+    link: '/feed/draft',
     icon:"menu-icon tf-icons ti ti-notes",
     roles:['ROLE_ADMIN','ROLE_EDITOR','ROLE_FACTCHECKER']
 

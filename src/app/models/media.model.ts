@@ -6,4 +6,5 @@ export class MediaModel {
   imageTemplate: string;
   videoTemplate:string;
   metaData:  any;
+  draft?: boolean;
 }

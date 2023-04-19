@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,13 +14,13 @@ export class MediaService {
   getAllMedias(): Observable<any> {
     return this.http.get(`${this.baseURL}/media`);
   }
-  processVideo(data){
+  processVideo(data) {
     return this.http.post(`${this.baseURL}/media/render-video`, data);
   }
-  processImage(data){
+  processImage(data) {
     return this.http.post(`${this.baseURL}/media/render-image`, data);
   }
-  processAudio(data){
+  processAudio(data) {
     return this.http.post(`${this.baseURL}/media/render-audio`, data);
   }
   createMedia(data: any): Observable<any> {
@@ -35,10 +35,10 @@ export class MediaService {
   getMedia(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/media/${id}`);
   }
-  getAudioFromText(tts:any):Observable<any>{
-    console.log(tts);
-  
-    return this.http.post(`${this.baseURL}/media/ttsToAudio`,tts)
+  getAudioFromText(tts: any): Observable<any> {
+    if (!tts.ttsText)
+      return of({ data: [""] })
+    return this.http.post(`${this.baseURL}/media/ttsToAudio`, tts)
   }
 
   deleteMedia(id: string): Observable<any> {
