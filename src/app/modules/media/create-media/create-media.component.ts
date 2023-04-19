@@ -159,9 +159,9 @@ initForm(media?:any){
   // this.language
   //set language objet to form language
   this.form = this.fb.group({
-    language: [media?.language._id, Validators.required],
+    language: [media?.language._id ||"", Validators.required],
     link:     [media?.link||"", [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-    rating: [media?.rating, Validators.required],
+    rating: [media?.rating ||"", Validators.required],
     audio: ['1', Validators.required],
     videoTheme: [media?.imageTemplate||"1",Validators.required],
     imageTheme: [media?.videoTemplate||"1",Validators.required],
