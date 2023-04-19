@@ -7,7 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {SharedModule} from 'src/app/modules/shared/shared.module';
 import { CreateMediaComponent } from './create-media/create-media.component';
 import { ImageTemplateListComponent } from './partials/image-template-list/image-template-list.component';
-import { VideoTemplateListComponent } from './partials/video-template-list/video-template-list.component'
+import { VideoTemplateListComponent } from './partials/video-template-list/video-template-list.component';
+import { DraftsComponent } from './drafts/drafts.component'
 const routes:Routes=[{
   path: "",
   component:MediaComponent,
@@ -19,6 +20,10 @@ const routes:Routes=[{
   {
     path:'list',
     component:MediaListComponent
+  },
+  {
+    path:'draft',
+    component:DraftsComponent
   },
   {
     path:'create',
@@ -43,7 +48,8 @@ const routes:Routes=[{
     MediaListComponent,
     CreateMediaComponent,
     ImageTemplateListComponent,
-    VideoTemplateListComponent
+    VideoTemplateListComponent,
+    DraftsComponent
   ],
   imports: [
     CommonModule,

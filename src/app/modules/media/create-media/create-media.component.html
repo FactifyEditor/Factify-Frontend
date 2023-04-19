@@ -935,18 +935,25 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 d-flex justify-content-between">
+      <div class="col-12  justify-content-between">
         <button *ngIf="!processingVideo" class="btn btn-primary btn-next waves-effect waves-light">
           <i class="ti ti-device-floppy"></i>
           <span class="align-middle d-sm-inline-block d-none me-sm-1"
             >Save</span
           >
         </button>
+        <a (click)="processVideo(form,true)" style="margin-left:10px ;" *ngIf="!processingVideo" class="btn btn-primary  waves-effect waves-light">
+          <i class="ti ti-device-floppy"></i>
+          <span class="align-middle d-sm-inline-block d-none me-sm-1"
+            >Save As Draft</span
+          >
+        </a>
         <button *ngIf="processingVideo"  class="btn btn-primary btn-next waves-effect waves-light" type="button" >
           <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
           Processing...
         </button>
       </div>
+     
     </div>
   </form>
   <div

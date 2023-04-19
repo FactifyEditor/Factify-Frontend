@@ -226,9 +226,10 @@ textToSpeech(text){
       console.error("An error occurred :", e) 
   })
 }
-processVideo(form: FormGroup){
+processVideo(form: FormGroup,draft:boolean=false){
 // console.log(this.form.value.language);
 let selectedLanguage=this.languages.find(x=>x._id==this.form.value.language);
+if(!draft)
 this.submitted = true; 
 let isInValid:boolean=false;
 if(this.form.get('claimPerferTTS').value){
@@ -236,7 +237,7 @@ if(this.form.get('claimPerferTTS').value){
     this.form.controls.claimTextToSpeechText.updateValueAndValidity();             
 } else {                
     // add validation 
-    if(this.form.controls.claimVoice.value=='' && this.form.get('claimPerferTTS').value==''){
+    if(!draft && ( this.form.controls.claimVoice.value=='' && this.form.get('claimPerferTTS').value=='')){
       this.toastService.show("please upload audio  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
       isInValid=true
     }
@@ -247,7 +248,7 @@ if(this.form.get('verify1PerferTTS').value){
 
 } else {                
   // add validation  
-  if(this.form.get('verify1PerferTTS').value=="" && this.form.controls.verify1Voice.value=='' ){
+  if(!draft && (this.form.get('verify1PerferTTS').value=="" && this.form.controls.verify1Voice.value=='' )){
     this.toastService.show("please upload verification 1 audio", { classname: 'bg-danger text-dark', delay: 10000 });
     isInValid=true;
   }
@@ -258,7 +259,7 @@ if(this.form.get('verify2PerferTTS').value){
   this.form.get('verify2TextToSpeechText').addValidators(Validators.required); 
   this.form.controls.verify2TextToSpeechText.updateValueAndValidity();             
 } else {                 
-  if(this.form.get('verify2PerferTTS').value=="" && this.form.controls.verify2Voice.value==''){
+  if(!draft && (this.form.get('verify2PerferTTS').value=="" && this.form.controls.verify2Voice.value=='')){
     this.toastService.show("please upload verification 2 audio", { classname: 'bg-danger text-dark', delay: 10000 });
     isInValid=true;
   }
@@ -267,7 +268,7 @@ if(this.form.get('verify3PerferTTS').value){
   this.form.get('verify3TextToSpeechText').addValidators(Validators.required);    
   this.form.controls.verify3TextToSpeechText.updateValueAndValidity();             
 } else {                
-  if(this.form.get('verify3PerferTTS').value=="" && this.form.controls.verify1Voice.value==''){
+  if(!draft && (this.form.get('verify3PerferTTS').value=="" && this.form.controls.verify1Voice.value=='')){
     this.toastService.show("please upload verification 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
     isInValid=true;
   }
@@ -276,39 +277,39 @@ if(this.form.get('ratingPerferTTS').value){
   this.form.get('ratingTextToSpeechText').addValidators(Validators.required);  
   this.form.controls.ratingTextToSpeechText.updateValueAndValidity();             
 } else {                
-  if(this.form.get('ratingPerferTTS').value=="" &&  this.form.controls.ratingVoice.value==''){
+  if( !draft && (this.form.get('ratingPerferTTS').value=="" &&  this.form.controls.ratingVoice.value=='')){
     this.toastService.show("please upload rating 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
     isInValid=true;
   }
 }
 console.log(this.images)
-if(this.images.imageTemplate.imageUrl==undefined){
+if(!draft && this.images.imageTemplate.imageUrl==undefined){
   this.toastService.show("please upload image  for image", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
 
-if(this.images.claim.imageUrl==undefined){
+if(!draft && this.images.claim.imageUrl==undefined){
   this.toastService.show("please upload image  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.images.verify1.imageUrl==undefined){
+if(!draft && this.images.verify1.imageUrl==undefined){
   this.toastService.show("please upload image  for verification ", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if(this.images.verify2.imageUrl==undefined){
+if(!draft && this.images.verify2.imageUrl==undefined){
   this.toastService.show("please upload image  for verification 2", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if( this.images.verify3==undefined){
+if(!draft && this.images.verify3==undefined){
   this.toastService.show("please upload image  for verification 3", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
-if( this.images.rating.imageUrl==undefined){
+if(!draft && this.images.rating.imageUrl==undefined){
   this.toastService.show("please upload image  for rating", { classname: 'bg-danger text-dark', delay: 10000 });
   isInValid=true
 }
 console.log("test")
-if (this.form.invalid ||   isInValid  ) {
+if (!draft && (this.form.invalid ||   isInValid  )) {
   return;
 }
 let languageTracks=this.videoTemplate.languages.find(language=>language._id==this.form.value.language);
@@ -479,6 +480,8 @@ let _media:MediaModel={
     imageJson:this.imageTemplate
   }
 }
+if(draft)
+_media.draft=true;
 if(this.feed){
   _media["_id"]=this.feed._id;
   this.mediaService.updateMedia(_media,_media["_id"]).subscribe(
