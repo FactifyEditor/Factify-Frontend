@@ -174,11 +174,11 @@ export class CreateMediaComponent implements OnInit {
       ratingTime: [feed?.rating?.time || 8, Validators.required],
       imageText: [feed?.rating?.frameText, Validators.required],
       image: ['', media?._id ? '' : Validators.required],
-      claimTimeSetting: [false],
-      verify1TimeSetting: [false],
-      verify2TimeSetting: [false],
-      verify3TimeSetting: [false],
-      ratingTimeSetting: [false]
+      claimTimeSetting: [feed?.claim?.claimTimeSetting ||false],
+      verify1TimeSetting: [feed?.verification1?.timeSetting ||false],
+      verify2TimeSetting: [feed?.verification2?.timeSetting ||false],
+      verify3TimeSetting: [feed?.verification3?.timeSetting ||false],
+      ratingTimeSetting: [feed?.rating?.timeSetting ||false]
     });
 
   }
@@ -465,6 +465,8 @@ export class CreateMediaComponent implements OnInit {
               claimVoice: this.audios['claim'].audioUrl,
               perferTTS: this.form.value.claimPerferTTS,
               time: this.form.value.claimTime,
+              claimTimeSetting:this.form.value.claimTimeSetting,
+
             },
             verification1: {
               frameText: this.form.value.verify1VideoFrameText,
@@ -473,6 +475,7 @@ export class CreateMediaComponent implements OnInit {
               verificationVoice: this.audios['verify1'].audioUrl,
               perferTTS: this.form.value.verify1PerferTTS,
               time: this.form.value.verify1Time,
+              timeSetting:this.form.value.verify1TimeSetting
             },
             verification2: {
               frameText: this.form.value.verify2VideoFrameText,
@@ -481,6 +484,7 @@ export class CreateMediaComponent implements OnInit {
               verificationVoice: this.audios['verify2'].audioUrl,
               perferTTS: this.form.value.verify2PerferTTS,
               time: this.form.value.verify2Time,
+              timeSetting:this.form.value.verify2TimeSetting
             },
             verification3: {
               frameText: this.form.value.verify3VideoFrameText,
@@ -489,6 +493,7 @@ export class CreateMediaComponent implements OnInit {
               verificationVoice: this.audios['verify3'].audioUrl,
               perferTTS: this.form.value.verify3PerferTTS,
               time: this.form.value.verify3Time,
+              timeSetting:this.form.value.verify3TimeSetting
             },
             rating: {
               frameText: this.form.value.ratingVideoFrameText,
@@ -497,6 +502,7 @@ export class CreateMediaComponent implements OnInit {
               ratingVoice: this.audios['rating'].audioUrl,
               perferTTS: this.form.value.ratingPerferTTS,
               time: this.form.value.ratingTime,
+              timeSetting:this.form.value.ratingTimeSetting
             },
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate

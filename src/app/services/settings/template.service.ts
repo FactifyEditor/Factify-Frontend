@@ -770,7 +770,7 @@ export class TemplateService {
               "lineHeight": 1.16,
               "text": "Does this video show assult on Muslim Voters during #GujratElections",
               "textAlign": "center",
-              "fontURL": "https://fonts.gstatic.com/s/nunito/v20/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf"
+              "fontURL": "https://storage.googleapis.com/factify/TiUQH2iVCoaPStG21681806262600.ttf"
             },
             {
               "id": "vDYbggIfrecMa0wn6qUV6",
@@ -891,7 +891,7 @@ export class TemplateService {
               "lineHeight": 1.16,
               "text": "#GujratElections:viral video alleges Muslim voters not allowed to vote & asulted  by the police",
               "textAlign": "center",
-              "fontURL": "https://fonts.gstatic.com/s/nunito/v20/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf"
+              "fontURL": "https://storage.googleapis.com/factify/TiUQH2iVCoaPStG21681806262600.ttf"
             }
           ]
         },
@@ -958,7 +958,7 @@ export class TemplateService {
               "lineHeight": 1.16,
               "text": "Keyword search indecated similar insident took place in UP Rampur",
               "textAlign": "center",
-              "fontURL": "https://fonts.gstatic.com/s/nunito/v20/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf"
+              "fontURL": "https://storage.googleapis.com/factify/TiUQH2iVCoaPStG21681806262600.ttf"
             },
             {
               "id": "vDYbggIfrecMa0wn6qUV6",
@@ -1052,7 +1052,7 @@ export class TemplateService {
               "lineHeight": 1.16,
               "text": "Smajwadi party twitted similar video of Rampur insident on dec 5th",
               "textAlign": "center",
-              "fontURL": "https://fonts.gstatic.com/s/nunito/v20/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf"
+              "fontURL": "https://storage.googleapis.com/factify/TiUQH2iVCoaPStG21681806262600.ttf"
             },
             {
               "id": "vDYbggIfrecMa0wn6qUV6",
@@ -1146,7 +1146,7 @@ export class TemplateService {
               "lineHeight": 1.16,
               "text": "C L A I M is false As the video of muslim alleging Abuse by police is from up not from gujrat",
               "textAlign": "center",
-              "fontURL": "https://fonts.gstatic.com/s/nunito/v20/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM9jo7eTWk.ttf"
+              "fontURL": "https://storage.googleapis.com/factify/TiUQH2iVCoaPStG21681806262600.ttf"
             },
             {
               "id": "vDYbggIfrecMa0wn6qUV6",

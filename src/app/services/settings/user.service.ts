@@ -22,7 +22,7 @@ export class UserService {
   }
 
   updateUser(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/users/${id}`, data)
+    return this.http.put(`${this.baseURL}/users/${id}`, data)
   }
   getUser(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/users/${id}`)
@@ -31,8 +31,8 @@ export class UserService {
   deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.baseURL}/users/${id}`)
   }
-  getRoles():Observable<any>{
-    return this.http.get(`${this.baseURL}/roles`).pipe(map((response:any)=>{
+  getRoles(): Observable<any> {
+    return this.http.get(`${this.baseURL}/roles`).pipe(map((response: any) => {
       return response.data;
     }))
 

@@ -21,7 +21,7 @@ export class RatingServiceService {
   }
 
   updateRating(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/ratings/${id}`, data)
+    return this.http.put(`${this.baseURL}/ratings/${id}`, data)
   }
   getRating(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/ratings/${id}`)
@@ -30,6 +30,7 @@ export class RatingServiceService {
   deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.baseURL}/users/${id}`)
   }
+  
   getRoles():Observable<any>{
     return this.http.get(`${this.baseURL}/roles`).pipe(map((response:any)=>{
       return response.data;
