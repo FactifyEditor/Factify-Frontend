@@ -190,13 +190,20 @@ ngOnInit(){
 }
 
 ngAfterViewInit(){
+  // show alert if checkbox is unchecked
+ 
+
+  var that:any = this;
   $('.dt-scrollableTable').on('change', '.tblChk', function () {
+   
+   
     if ($('.tblChk:checked').length == $('.tblChk').length) {
       
     } else {
+     
       var d1:any = document.getElementById('est');
       var d2:any = document.getElementById('bulk_action');
-      if(d2==null)
+      if(d2==null && $('.tblChk:checked').length>1)
       d1.insertAdjacentHTML('beforeend', `
       <div ID="bulk_action" class="dropdown" style="margin-top:17px">
   <button class="btn btn-secondary create-new btn-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -208,6 +215,10 @@ Bulk Action
   </ul>
 </div>
     `);
+    if($('.tblChk:checked').length<2){
+     // remove d2 button from ui
+     d2.remove();
+    }
   }
 })
 }
