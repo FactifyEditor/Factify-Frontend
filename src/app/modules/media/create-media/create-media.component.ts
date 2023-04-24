@@ -53,7 +53,21 @@ export class CreateMediaComponent implements OnInit {
     verify2: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
     verify3: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
     verify4: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
-    rating: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 }
+    rating: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+
+    claimAudio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify1Audio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify2Audio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify3Audio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify4Audio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    ratingAudio: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+
+    claimTTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify1TTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify2TTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify3TTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    verify4TTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 },
+    ratingTTS: { imageUrl: undefined, audioUrl: undefined, name: '', duration: 0 }
   }
   public uploader: FileUploader = new FileUploader({
     url: URL,
@@ -174,11 +188,11 @@ export class CreateMediaComponent implements OnInit {
       ratingTime: [feed?.rating?.time || 8, Validators.required],
       imageText: [feed?.rating?.frameText, Validators.required],
       image: ['', media?._id ? '' : Validators.required],
-      claimTimeSetting: [feed?.claim?.claimTimeSetting ||false],
-      verify1TimeSetting: [feed?.verification1?.timeSetting ||false],
-      verify2TimeSetting: [feed?.verification2?.timeSetting ||false],
-      verify3TimeSetting: [feed?.verification3?.timeSetting ||false],
-      ratingTimeSetting: [feed?.rating?.timeSetting ||false]
+      claimTimeSetting: [feed?.claim?.claimTimeSetting || false],
+      verify1TimeSetting: [feed?.verification1?.timeSetting || false],
+      verify2TimeSetting: [feed?.verification2?.timeSetting || false],
+      verify3TimeSetting: [feed?.verification3?.timeSetting || false],
+      ratingTimeSetting: [feed?.rating?.timeSetting || false]
     });
 
   }
@@ -214,7 +228,7 @@ export class CreateMediaComponent implements OnInit {
       this.form.controls.claimTextToSpeechText.updateValueAndValidity();
     } else {
       // add validation 
-      if (!draft && (this.form.controls.claimVoice.value == '' && this.form.get('claimPerferTTS').value == '')) {
+      if (!draft && (this.audios.claimAudio.audioUrl == undefined && this.form.get('claimPerferTTS').value == false)) {
         this.toastService.show("please upload audio  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true
       }
@@ -225,7 +239,7 @@ export class CreateMediaComponent implements OnInit {
 
     } else {
       // add validation  
-      if (!draft && (this.form.get('verify1PerferTTS').value == "" && this.form.controls.verify1Voice.value == '')) {
+      if (!draft && (this.form.get('verify1PerferTTS').value == false && this.audios.verify1Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 1 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
@@ -236,7 +250,7 @@ export class CreateMediaComponent implements OnInit {
       this.form.get('verify2TextToSpeechText').addValidators(Validators.required);
       this.form.controls.verify2TextToSpeechText.updateValueAndValidity();
     } else {
-      if (!draft && (this.form.get('verify2PerferTTS').value == "" && this.form.controls.verify2Voice.value == '')) {
+      if (!draft && (this.form.get('verify2PerferTTS').value == false && this.audios.verify2Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 2 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
@@ -245,7 +259,7 @@ export class CreateMediaComponent implements OnInit {
       this.form.get('verify3TextToSpeechText').addValidators(Validators.required);
       this.form.controls.verify3TextToSpeechText.updateValueAndValidity();
     } else {
-      if (!draft && (this.form.get('verify3PerferTTS').value == "" && this.form.controls.verify1Voice.value == '')) {
+      if (!draft && (this.form.get('verify3PerferTTS').value == false && this.audios.verify3Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
@@ -254,12 +268,12 @@ export class CreateMediaComponent implements OnInit {
       this.form.get('ratingTextToSpeechText').addValidators(Validators.required);
       this.form.controls.ratingTextToSpeechText.updateValueAndValidity();
     } else {
-      if (!draft && (this.form.get('ratingPerferTTS').value == "" && this.form.controls.ratingVoice.value == '')) {
+      if (!draft && (this.form.get('ratingPerferTTS').value == false && this.audios.ratingAudio.audioUrl == undefined)) {
         this.toastService.show("please upload rating 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
     }
-    console.log(this.images)
+
     if (!draft && this.images.imageTemplate.imageUrl == undefined) {
       this.toastService.show("please upload image  for image", { classname: 'bg-danger text-dark', delay: 10000 });
       isInValid = true
@@ -285,7 +299,7 @@ export class CreateMediaComponent implements OnInit {
       this.toastService.show("please upload image  for rating", { classname: 'bg-danger text-dark', delay: 10000 });
       isInValid = true
     }
-    console.log("test")
+    // console.log("test")
     if (!draft && (this.form.invalid || isInValid)) {
       return;
     }
@@ -296,10 +310,7 @@ export class CreateMediaComponent implements OnInit {
     console.log(JSON.stringify(this.form.value, null, 2));
 
     try {
-
-
       this.processingVideo = true;
-
       this.videoTemplate.scenes[1].layers[1].text = this.form.value.claimVideoFrameText;
       this.videoTemplate.scenes[1].layers[2].src = this.images['claim'].imageUrl;
       this.videoTemplate.scenes[2].layers[2].fontURL = selectedLanguage.font;
@@ -323,70 +334,129 @@ export class CreateMediaComponent implements OnInit {
       this.videoTemplate.scenes[8].startingTime = 3.6
       this.videoTemplate.scenes[8].duration = this.form.value.claimTime || 8
       this.videoTemplate.scenes[8].name = "headlineTrack";
-      let claimTime = this.form.value.claimTime || 8;
-      
-      let verificationStartTime = claimTime+ this.form.value.verify1Time || 8;
-      let verification2StartTime= verificationStartTime+ this.form.value.verify2Time || 8;
-      let verification3StartTime= verification2StartTime+  this.form.value.verify3Time || 8;
-      let ratingStartTime = verification3StartTime+  this.form.value.ratingTime || 8;
-      
+      let claimTime = this.form.value.claimTimeSetting ? this.audios.claimAudio.duration : this.form.value.claimTime || 8;
+
+      let verificationStartTime = claimTime + (this.form.value.verify1TimeSetting ? this.audios.verify1Audio.duration : this.form.value.verify1Time || 8);
+      // let verification2StartTime = verificationStartTime + this.form.value.verify2Time || 8;
+      let verification2StartTime = verificationStartTime + (this.form.value.verify2TimeSetting ? this.audios.verify2Audio.duration : this.form.value.verify2Time || 8);
+      // let verification3StartTime = verification2StartTime + this.form.value.verify3Time || 8;
+      let verification3StartTime = verification2StartTime + (this.form.value.verify3TimeSetting ? this.audios.verify3Audio.duration : this.form.value.verify3Time || 8);
+      // let ratingStartTime = verification3StartTime + this.form.value.ratingTime || 8;
+      let ratingStartTime = verification3StartTime + (this.form.value.ratingTimeSetting ? this.audios.ratingAudio.duration : this.form.value.ratingTime || 8);
       //headline claim audio
       if (!this.videoTemplate.scenes[11])
         this.videoTemplate.scenes.push({
           type: "AudioScene",
-          audioUrl: this.audios['claim'].audioUrl,
+          audioUrl: this.form.value.claimPerferTTS ? this.audios.claim.audioUrl : this.audios.claimAudio.audioUrl,
           cutFrom: 0,
           startingTime: 3.6,
-          duration: this.form.value.claimTime || 8,
+          duration: this.form.value.claimTimeSetting ? this.audios.claimAudio.duration : this.form.value.claimTime || 8,
           name: "headlineAudio"
         })
+      else {
+        this.videoTemplate.scenes[11] = {
+
+          type: "AudioScene",
+          audioUrl: this.form.value.claimPerferTTS ? this.audios.claim.audioUrl : this.audios.claimAudio.audioUrl,
+          cutFrom: 0,
+          startingTime: 3.6,
+          duration: this.form.value.claimTimeSetting ? this.audios.claimAudio.duration : this.form.value.claimTime || 8,
+          name: "headlineAudio"
+
+        }
+      }
       //verification1 audio
       if (!this.videoTemplate.scenes[12])
         this.videoTemplate.scenes.push({
           type: "AudioScene",
-          audioUrl: this.audios['verify1'].audioUrl,
+          audioUrl: this.form.value.verify1PerferTTS ? this.audios.verify1.audioUrl : this.audios.verify1Audio.audioUrl,
           cutFrom: 0,
           startingTime: verificationStartTime,
-          duration: this.form.value.verify1Time || 8,
+          duration: this.form.value.verify1TimeSetting ? this.audios.verify1Audio.duration : this.form.value.verify1Time || 8,
           name: "verify1"
         })
+      else {
+        this.videoTemplate.scenes[12] = {
+          type: "AudioScene",
+          audioUrl: this.form.value.verify1PerferTTS ? this.audios.verify1.audioUrl : this.audios.verify1Audio.audioUrl,
+          cutFrom: 0,
+          startingTime: verificationStartTime,
+          duration: this.form.value.verify1TimeSetting ? this.audios.verify1Audio.duration : this.form.value.verify1Time || 8,
+          name: "verify1"
+        }
+      }
       //verification 2 audio
-      
+
       if (!this.videoTemplate.scenes[13])
         this.videoTemplate.scenes.push({
           type: "AudioScene",
-          audioUrl: this.audios['verify2'].audioUrl,
+          audioUrl: this.form.value.verify2PerferTTS ? this.audios.verify2.audioUrl : this.audios.verify2Audio.audioUrl,
           cutFrom: 0,
           startingTime: verification2StartTime,
-          duration: this.form.value.verify2Time || 8,
+          // duration: this.form.value.verify2Time || 8,
+          duration: this.form.value.verify2TimeSetting ? this.audios.verify2Audio.duration : this.form.value.verify2Time || 8,
           name: "verify2"
         })
+      else {
+        this.videoTemplate.scenes[13] = {
+          type: "AudioScene",
+          audioUrl: this.form.value.verify2PerferTTS ? this.audios.verify2.audioUrl : this.audios.verify2Audio.audioUrl,
+          cutFrom: 0,
+          startingTime: verification2StartTime,
+          // duration: this.form.value.verify2Time || 8,
+          duration: this.form.value.verify2TimeSetting ? this.audios.verify2Audio.duration : this.form.value.verify2Time || 8,
+          name: "verify2"
+        }
+      }
       //verification 3 audio
       if (!this.videoTemplate.scenes[14])
         this.videoTemplate.scenes.push({
           type: "AudioScene",
-          audioUrl: this.audios['verify3'].audioUrl,
+          audioUrl: this.form.value.verify3PerferTTS ? this.audios.verify3.audioUrl : this.audios.verify3Audio.audioUrl,
           cutFrom: 0,
           startingTime: verification3StartTime,
-          duration: this.form.value.verify3Time,
+          // duration: this.form.value.verify3Time || 8,
+          duration: this.form.value.verify3TimeSetting ? this.audios.verify3Audio.duration : this.form.value.verify3Time || 8,
           name: "verify3"
         })
+      else {
+        this.videoTemplate.scenes[14] = {
+          type: "AudioScene",
+          audioUrl: this.form.value.verify3PerferTTS ? this.audios.verify3.audioUrl : this.audios.verify3Audio.audioUrl,
+          cutFrom: 0,
+          startingTime: verification3StartTime,
+          // duration: this.form.value.verify3Time || 8,
+          duration: this.form.value.verify3TimeSetting ? this.audios.verify3Audio.duration : this.form.value.verify3Time || 8,
+          name: "verify3"
+        }
+      }
       //rating audio
-     
       if (!this.videoTemplate.scenes[15])
         this.videoTemplate.scenes.push({
           type: "AudioScene",
-          audioUrl: this.audios['rating'].audioUrl,
+          audioUrl: this.form.value.ratingPerferTTS ? this.audios.verify2.audioUrl : this.audios['verify2Audio'].audioUrl,
           cutFrom: 0,
           startingTime: ratingStartTime,
-          duration: this.form.value.ratingTime || 8,
+          // duration: this.form.value.ratingTime || 8,
+          duration: this.form.value.ratingTimeSetting ? this.audios.ratingAudio.duration : this.form.value.ratingTime || 8,
           name: "rating"
         })
-        this.videoTemplate.scenes[1].duration = (this.form.value.claimTime || 8)+1
-        this.videoTemplate.scenes[2].duration = (this.form.value.verify1Time || 8)+1
-        this.videoTemplate.scenes[3].duration = (this.form.value.verify2Time || 8)+1
-        this.videoTemplate.scenes[4].duration = (this.form.value.verify3Time || 8)+1
-        this.videoTemplate.scenes[5].duration = (this.form.value.verify4Time || 8)+1
+      else {
+        this.videoTemplate.scenes[15] = {
+          type: "AudioScene",
+          audioUrl: this.form.value.ratingPerferTTS ? this.audios.verify2.audioUrl : this.audios['verify2Audio'].audioUrl,
+          cutFrom: 0,
+          startingTime: ratingStartTime,
+          // duration: this.form.value.ratingTime || 8,
+          duration: this.form.value.ratingTimeSetting ? this.audios.ratingAudio.duration : this.form.value.ratingTime || 8,
+          name: "rating"
+        }
+      }
+      this.videoTemplate.scenes[1].duration = (this.form.value.claimTime || 8) + 1
+      this.videoTemplate.scenes[2].duration = (this.form.value.verify1Time || 8) + 1
+      this.videoTemplate.scenes[3].duration = (this.form.value.verify2Time || 8) + 1
+      this.videoTemplate.scenes[4].duration = (this.form.value.verify3Time || 8) + 1
+      this.videoTemplate.scenes[5].duration = (this.form.value.verify4Time || 8) + 1
       //outro track
       this.imageTemplate.imageText = this.form.value.imageText;
       this.imageTemplate.factImage = this.images.imageTemplate.imageUrl;
@@ -396,62 +466,59 @@ export class CreateMediaComponent implements OnInit {
       const verify3TtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.verify3TextToSpeechText });
       const ratingTtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.ratingTextToSpeechText });
       forkJoin([headlineTtsText, verify1TtsText, verify2TtsText, verify3TtsText, ratingTtsText]).pipe(take(1)).subscribe(result => {
-       
-        this.videoTemplate.scenes[11].audioUrl = result[0].data
-        if (this.form.value.claimTimeSetting) {
+        if (this.form.value.claimTimeSetting && this.form.value.claimPerferTTS) {
+          this.videoTemplate.scenes[11].audioUrl = result[0].data
+
           // this.videoTemplate.scenes[8].duration = result[0].duration;
           this.videoTemplate.scenes[11].duration = result[0].duration;
           //headline claim video
-          this.videoTemplate.scenes[1].duration = result[0].duration+1
+          this.videoTemplate.scenes[1].duration = result[0].duration + 1
           verificationStartTime = 3.6 + this.videoTemplate.scenes[11].duration;
           //this.videoTemplate.scenes[9]leadline[8]verification9 outro 10
           //this.videoTemplate.scenesleadline[8]verification9 outro 10
         }
-        this.videoTemplate.scenes[12].audioUrl = result[1].data
-        if (this.form.value.verify1TimeSetting) {
+        if (this.form.value.verify1TimeSetting && this.form.value.verify1PerferTTS) {
           //verification 1
-          this.videoTemplate.scenes[2].duration = result[1].duration+1
+          this.videoTemplate.scenes[12].audioUrl = result[1].data
+          this.videoTemplate.scenes[2].duration = result[1].duration + 1
           this.videoTemplate.scenes[12].duration = result[1].duration
           this.videoTemplate.scenes[12].startingTime = verificationStartTime
           verification2StartTime = verificationStartTime + this.videoTemplate.scenes[12].duration
         }
-        this.videoTemplate.scenes[13].audioUrl = result[2].data
-        if (this.form.value.verify2TimeSetting) {
+        if (this.form.value.verify2TimeSetting && this.form.value.verify2PerferTTS) {
           //verification 2
-          this.videoTemplate.scenes[3].duration = result[2].duration+1
+          this.videoTemplate.scenes[13].audioUrl = result[2].data
+          this.videoTemplate.scenes[3].duration = result[2].duration + 1
           this.videoTemplate.scenes[13].duration = result[2].duration
           this.videoTemplate.scenes[13].startingTime = verification2StartTime;
           verification3StartTime = verification2StartTime + this.videoTemplate.scenes[13].duration
         }
-        this.videoTemplate.scenes[14].audioUrl = result[3].data
-        if (this.form.value.verify3TimeSetting) {
+        if (this.form.value.verify3TimeSetting && this.form.value.verify3PerferTTS) {
           //verification 3
-          this.videoTemplate.scenes[4].duration = result[3].duration+1
+          this.videoTemplate.scenes[14].audioUrl = result[3].data
+          this.videoTemplate.scenes[4].duration = result[3].duration + 1
           this.videoTemplate.scenes[14].duration = result[3].duration;
           this.videoTemplate.scenes[14].startingTime = verification3StartTime;
           ratingStartTime = verification3StartTime + this.videoTemplate.scenes[14].duration
         }
-        this.videoTemplate.scenes[15].audioUrl = result[4].data
-        if (this.form.value.ratingTimeSetting) {
-           //Rating
-           this.videoTemplate.scenes[5].duration = result[4].duration+1
+        if (this.form.value.ratingTimeSetting && this.form.value.ratingPerferTTS) {
+          //Rating
+          this.videoTemplate.scenes[15].audioUrl = result[4].data
+          this.videoTemplate.scenes[5].duration = result[4].duration + 1
           this.videoTemplate.scenes[15].duration = result[4].duration;
           this.videoTemplate.scenes[15].startingTime = ratingStartTime;
-
         }
         //verification background track
-      let varficationBackgroundDuration = this.videoTemplate.scenes[12].duration+this.videoTemplate.scenes[13].duration+this.videoTemplate.scenes[14].duration+this.videoTemplate.scenes[15].duration
-      
-      this.videoTemplate.scenes[9].audioUrl = languageTracks.verificationTrack;
-      this.videoTemplate.scenes[9].startingTime = verificationStartTime
-      this.videoTemplate.scenes[9].duration = varficationBackgroundDuration
-      this.videoTemplate.scenes[9].name = "verificationTrack";
-      //outro background track
-      this.videoTemplate.scenes[10].audioUrl = languageTracks.outroTrack;
-      this.videoTemplate.scenes[10].startingTime = verificationStartTime + varficationBackgroundDuration
-      this.videoTemplate.scenes[10].name = "outroTrack";
-        
-      let _media: MediaModel = {
+        let varficationBackgroundDuration = this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
+        this.videoTemplate.scenes[9].audioUrl = languageTracks.verificationTrack;
+        this.videoTemplate.scenes[9].startingTime = verificationStartTime
+        this.videoTemplate.scenes[9].duration = varficationBackgroundDuration
+        this.videoTemplate.scenes[9].name = "verificationTrack";
+        //outro background track
+        this.videoTemplate.scenes[10].audioUrl = languageTracks.outroTrack;
+        this.videoTemplate.scenes[10].startingTime = verificationStartTime + varficationBackgroundDuration
+        this.videoTemplate.scenes[10].name = "outroTrack";
+        let _media: MediaModel = {
           rating: this.form.value.rating,
           link: this.form.value.link,
           language: selectedLanguage,
@@ -462,47 +529,47 @@ export class CreateMediaComponent implements OnInit {
               frameText: this.form.value.claimVideoFrameText,
               TTSText: this.form.value.claimTextToSpeechText,
               claimImage: this.images['claim'].imageUrl,
-              claimVoice: this.audios['claim'].audioUrl,
+              claimVoice: this.audios['claimAudio'].audioUrl || "",
               perferTTS: this.form.value.claimPerferTTS,
               time: this.form.value.claimTime,
-              claimTimeSetting:this.form.value.claimTimeSetting,
+              claimTimeSetting: this.form.value.claimTimeSetting,
 
             },
             verification1: {
               frameText: this.form.value.verify1VideoFrameText,
               TTSText: this.form.value.verify1TextToSpeechText,
               verificationImage: this.images['verify1'].imageUrl,
-              verificationVoice: this.audios['verify1'].audioUrl,
+              verificationVoice: this.audios['verify1Audio'].audioUrl || "",
               perferTTS: this.form.value.verify1PerferTTS,
               time: this.form.value.verify1Time,
-              timeSetting:this.form.value.verify1TimeSetting
+              timeSetting: this.form.value.verify1TimeSetting
             },
             verification2: {
               frameText: this.form.value.verify2VideoFrameText,
               TTSText: this.form.value.verify2TextToSpeechText,
               verificationImage: this.images['verify2'].imageUrl,
-              verificationVoice: this.audios['verify2'].audioUrl,
+              verificationVoice: this.audios['verify2Audio'].audioUrl || "",
               perferTTS: this.form.value.verify2PerferTTS,
               time: this.form.value.verify2Time,
-              timeSetting:this.form.value.verify2TimeSetting
+              timeSetting: this.form.value.verify2TimeSetting
             },
             verification3: {
               frameText: this.form.value.verify3VideoFrameText,
               TTSText: this.form.value.verify3TextToSpeechText,
               verificationImage: this.images['verify3'].imageUrl,
-              verificationVoice: this.audios['verify3'].audioUrl,
+              verificationVoice: this.audios['verify3Audio'].audioUrl || "",
               perferTTS: this.form.value.verify3PerferTTS,
               time: this.form.value.verify3Time,
-              timeSetting:this.form.value.verify3TimeSetting
+              timeSetting: this.form.value.verify3TimeSetting
             },
             rating: {
               frameText: this.form.value.ratingVideoFrameText,
               TTSText: this.form.value.ratingTextToSpeechText,
               ratingImage: this.images['rating'].imageUrl,
-              ratingVoice: this.audios['rating'].audioUrl,
+              ratingVoice: this.audios['rating'].audioUrl || "",
               perferTTS: this.form.value.ratingPerferTTS,
               time: this.form.value.ratingTime,
-              timeSetting:this.form.value.ratingTimeSetting
+              timeSetting: this.form.value.ratingTimeSetting
             },
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate
@@ -530,6 +597,7 @@ export class CreateMediaComponent implements OnInit {
             })
         }
         else {
+
           this.mediaService.createMedia(_media).subscribe(
             result => {
               console.log(result);
@@ -588,7 +656,6 @@ export class CreateMediaComponent implements OnInit {
     let file: any = (event.target as HTMLInputElement).files[0];
     console.log(file.duration);
     let name = `${type}_${new Date().getTime()}_${file.name}`;
-
     this.audios[type] = {};
     var self = this;
     var reader = new FileReader();
@@ -597,10 +664,8 @@ export class CreateMediaComponent implements OnInit {
       media.onloadedmetadata = function () {
         console.log(media.duration);
         self.audios[type].duration = media.duration // this would give duration of the video/audio file
-
       };
       this.audios[type].audioUrl = event.target.result;
-
     }
     reader.readAsDataURL(file);
     this.audios[type].file = file;
@@ -634,8 +699,10 @@ export class CreateMediaComponent implements OnInit {
             // this.percentDone = false;
             if (uploadType == 'images')
               this[uploadType][type].imageUrl = event.body.data[0].url;
-            else
+            else {
               this[uploadType][type].audioUrl = event.body.data[0].url;
+              console.log(this[uploadType][type].audioUrl)
+            }
         }
       });
   }

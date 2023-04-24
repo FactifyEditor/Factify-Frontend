@@ -245,7 +245,7 @@
                               id="file_upload_claim_audio"
                               class="image-input"
                               accept="audio/*"
-                              (change)="uploadAudio($event,'claim')"
+                              (change)="uploadAudio($event,'claimAudio')"
                               data-traget-resolution="image_resolution"
                               value=""
                             />
@@ -253,8 +253,8 @@
                         </div>
                         
                       </div>
-                      <audio *ngIf="audios.claim.audioUrl" controls>
-                        <source [src]="audios.claim.audioUrl" type="audio/mpeg">
+                      <audio *ngIf="audios.claimAudio.audioUrl" controls>
+                        <source [src]="audios.claimAudio.audioUrl" type="audio/mpeg">
                         Your browser does not support the audio element.
                        </audio>
 
@@ -387,14 +387,14 @@
                               class="image-input"
                               formControlName="verify1Voice"
                               accept="audio/*"
-                              (change)="uploadAudio($event,'verify1')"
+                              (change)="uploadAudio($event,'verify1Audio')"
                               data-traget-resolution="image_resolution"
                               value=""
                             />
                           </label>
                         </div>
-                        <audio *ngIf="audios.verify1.audioUrl" controls >
-                          <source [src]="audios.verify1.audioUrl" type="audio/mpeg">
+                        <audio *ngIf="audios.verify1Audio.audioUrl" controls >
+                          <source [src]="audios.verify1Audio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
                          </audio>
                       </div>
@@ -526,14 +526,14 @@
                               class="image-input"
                               formControlName="verify2Voice"
                               accept="audio/*"
-                              (change)="uploadAudio($event,'verify2')"
+                              (change)="uploadAudio($event,'verify2Audio')"
                               data-traget-resolution="image_resolution"
                               value=""
                             />
                           </label>
                         </div>
-                         <audio *ngIf="audios.verify2.audioUrl" controls >
-                          <source [src]="audios.verify2.audioUrl" type="audio/mpeg">
+                         <audio *ngIf="audios.verify2Audio.audioUrl" controls >
+                          <source [src]="audios.verify2Audio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
                          </audio>
                       </div>
@@ -666,15 +666,15 @@
                               class="image-input"
                               formControlName="verify3Voice"
                               accept="audio/*"
-                              (change)="uploadAudio($event,'verify3')"
+                              (change)="uploadAudio($event,'verify3Audio')"
                               data-traget-resolution="image_resolution"
                               value=""
                             />
                           </label>
                         </div>
                       </div>
-                      <audio *ngIf="audios.verify3.audioUrl" controls >
-                        <source [src]="audios.verify3.audioUrl" type="audio/mpeg">
+                      <audio *ngIf="audios.verify3Audio.audioUrl" controls >
+                        <source [src]="audios.verify3Audio.audioUrl" type="audio/mpeg">
                         Your browser does not support the audio element.
                        </audio>
                     </div>
@@ -809,14 +809,14 @@
                               class="image-input"
                               formControlName="ratingVoice"
                               accept="audio/*"
-                              (change)="uploadAudio($event,'rating')"
+                              (change)="uploadAudio($event,'ratingAudio')"
                               data-traget-resolution="image_resolution"
                               value=""
                             />
                           </label>
                         </div>
-                        <audio *ngIf="audios.rating.audioUrl" controls >
-                          <source [src]="audios.rating.audioUrl" type="audio/mpeg">
+                        <audio *ngIf="audios.ratingAudio.audioUrl" controls >
+                          <source [src]="audios.ratingAudio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
                          </audio>
                       </div>
