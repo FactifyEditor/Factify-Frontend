@@ -33,37 +33,39 @@ export class AddTemplateComponent implements OnInit {
   preview: string;
   introPreview: string;
   outroPreview: string;
-  buttonText:string='Add';
-  headerText:String ="Add";
+  buttonText: string = 'Add';
+  headerText: String = "Add";
 
-  template:VideoTemplate;
+  template: VideoTemplate;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private templateService: TemplateService,
     private languageService: LanguageService,
-    private sharedService:SharedService,
+    private sharedService: SharedService,
     // private notificationService:NotificationService,
     private _router: Router,
     private activatedRoute: ActivatedRoute,
-    private toastService:ToastService
-  ) {}
-  initForm(template){
+    private toastService: ToastService
+  ) { }
+  initForm(template) {
     this.templateForm = this.fb.group({
       name: [template.name, Validators.required],
       description: [template.description, Validators.required],
       jsonTemplate: [JSON.stringify(template), [Validators.required]],
-      image: ['', [Validators.required]],
-      introVideo: ['', [Validators.required]],
-      outroVideo: ['', [Validators.required]],
+      // if tamplate.id then dont use validation 
+      image: ['',template?._id?null:[Validators.required]],
+    
+      introVideo: ['',template?._id?null:[Validators.required]],
+      outroVideo: ['',template?._id?null:[Validators.required]],
     });
     if (template?.image) {
       this.preview = template.image;
     }
-    if(template._id){
+    if (template._id) {
       this.introPreview = template.scenes[0].layers[0].src;
       this.outroPreview = template.scenes[6].layers[0].src;
-     }
+    }
   }
   validation_messages = {
     firstName: [{ type: 'required', message: 'First Name is required' }],
@@ -76,30 +78,30 @@ export class AddTemplateComponent implements OnInit {
     role: [{ type: 'required', message: 'Role is required' }],
   };
   ngOnInit() {
-     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.template=this.templateService.getTemplateJson();
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.template = this.templateService.getTemplateJson();
     this.initForm(this.template)
-    this.languageService.getAllLanguages().subscribe(language=>{
-      this.languages=language.data;
+    this.languageService.getAllLanguages().subscribe(language => {
+      this.languages = language.data;
       if (id != null) {
         this.templateService.getVideoTemplate(id).subscribe((template) => {
           this.template = template.data;
-         this.languages=this.languages.map(langulage => {
-          let lang= this.template.languages.find(l=>langulage._id==l._id);
-          if(lang!=null)
-          langulage= lang
-          return langulage
-          
-           
-         });
-         this.initForm(this.template);
-       });
-       this.buttonText='Update';
-       this.headerText="Edit";
-     }
-     this.initForm(this.template);
-     })
-  
+          this.languages = this.languages.map(langulage => {
+            let lang = this.template.languages.find(l => langulage._id == l._id);
+            if (lang != null)
+              langulage = lang
+            return langulage
+
+
+          });
+          this.initForm(this.template);
+        });
+        this.buttonText = 'Update';
+        this.headerText = "Edit";
+      }
+      this.initForm(this.template);
+    })
+
   }
 
   uploadImageFile(event) {
@@ -115,7 +117,7 @@ export class AddTemplateComponent implements OnInit {
       this.preview = reader.result as string;
     };
     reader.readAsDataURL(file);
-    this.uploadFile(file,'image')
+    this.uploadFile(file, 'image')
   }
   uploadIntroFile(event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -129,7 +131,7 @@ export class AddTemplateComponent implements OnInit {
       this.introPreview = reader.result as string;
     };
     reader.readAsDataURL(file);
-    this.uploadFile(file,'introVideo')
+    this.uploadFile(file, 'introVideo')
   }
   uploadOutroFile(event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -143,7 +145,7 @@ export class AddTemplateComponent implements OnInit {
       this.outroPreview = reader.result as string;
     };
     reader.readAsDataURL(file);
-    this.uploadFile(file,'outroVideo')
+    this.uploadFile(file, 'outroVideo')
   }
 
   get templateFormControl() {
@@ -151,57 +153,57 @@ export class AddTemplateComponent implements OnInit {
   }
 
   submitForm(languages) {
-    let _template:any ;
+    let _template: any;
     console.log(languages);
-    this.template.name=this.templateForm.value.name,
-    this.template.description= this.templateForm.value.description,
-    this.template.languages= languages,
-    _template= this.template;
-    
-    if(!!this.template._id)
-    this.templateService
-      .updateVideoTemplate(_template,this.template._id).subscribe(
-        result => {
-          // Handle result
-          console.log(result);
-          
-        },
-        error => {
-          console.log("error",error);
-          this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+    this.template.name = this.templateForm.value.name,
+      this.template.description = this.templateForm.value.description,
+      this.template.languages = languages,
+      _template = this.template;
 
-          // this.notificationService.showError(error.error.error)
-          
-        },
-        () => {
-               this.toastService.show(' Template Updated', { classname: 'bg-success text-dark', delay: 10000 });
-                this._router.navigate(['/templates/videos-audio/list']);
-        
-        })
-        else{
-          this.templateService
-          .addVideoTemplate(_template).subscribe(
-            result => {
-              // Handle result
-              console.log(result);
-              
-            },
-            error => {
-              console.log("error",error);
-              this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
-    
-              // this.notificationService.showError(error.error.error)
-              
-            },
-            () => {
-                   this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
-                    this._router.navigate(['/templates/videos-audio/list']);
-            
-            })
-        }
-    
-      
-    
+    if (!!this.template._id)
+      this.templateService
+        .updateVideoTemplate(_template, this.template._id).subscribe(
+          result => {
+            // Handle result
+            console.log(result);
+
+          },
+          error => {
+            console.log("error", error);
+            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+
+            // this.notificationService.showError(error.error.error)
+
+          },
+          () => {
+            this.toastService.show(' Template Updated', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/templates/videos-audio/list']);
+
+          })
+    else {
+      this.templateService
+        .addVideoTemplate(_template).subscribe(
+          result => {
+            // Handle result
+            console.log(result);
+
+          },
+          error => {
+            console.log("error", error);
+            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+
+            // this.notificationService.showError(error.error.error)
+
+          },
+          () => {
+            this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/templates/videos-audio/list']);
+
+          })
+    }
+
+
+
   }
   uploadFile(file, type) {
     var formData: any = new FormData();
@@ -225,13 +227,13 @@ export class AddTemplateComponent implements OnInit {
 
             this.percentDone = false;
             this.template[type] = event.body.data[0].url;
-            if (type == 'introVideo'){
+            if (type == 'introVideo') {
               this.introPreview = this.template[type];
-              this.template.scenes[0].layers[0].src=this.template[type];
-            } 
+              this.template.scenes[0].layers[0].src = this.template[type];
+            }
             if (type == 'outroVideo') {
               this.outroPreview = this.template[type];
-              this.template.scenes[6].layers[0].src=this.template[type];
+              this.template.scenes[6].layers[0].src = this.template[type];
             }
             if (type == 'image')
               this.preview = this.template[type];

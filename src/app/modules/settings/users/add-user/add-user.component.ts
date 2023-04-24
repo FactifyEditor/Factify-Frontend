@@ -18,13 +18,13 @@ export class AddUserComponent implements OnInit {
   roles$: Observable<any>
   registerForm: FormGroup;
   submitted = false;
-  user:User;
-  buttonText:String='Save';
-  headerText:String='Add';
+  user: User;
+  buttonText: String = 'Save';
+  headerText: String = 'Add';
 
   constructor(
     private fb: FormBuilder,
-    private userService:UserService,
+    private userService: UserService,
     // private notificationService:NotificationService,
     private _router: Router,
 
@@ -46,42 +46,42 @@ export class AddUserComponent implements OnInit {
     ],
     'mobile': [
       { type: 'required', message: 'Mobile password is required' },
-     
+
     ],
     'role': [
       { type: 'required', message: 'Role is required' },
-     
+
     ]
   };
   ngOnInit() {
-    this.roles$=this.userService.getRoles();
+    this.roles$ = this.userService.getRoles();
 
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.initForm(this.user)
     if (id != null) {
       this.userService.getUser(id).subscribe((user) => {
         this.user = user.data;
-       console.log(this.user)
+        console.log(this.user)
         this.initForm(this.user);
         this.buttonText = 'Update';
         this.headerText = "Edit";
       });
     }
-    else{
+    else {
       this.initForm(this.user)
     }
 
-    
+
   }
 
-  initForm(user:any){
-    
+  initForm(user: any) {
+
     this.registerForm = this.fb.group({
-      firstName: [user?.firstName ||'', Validators.required],
-      lastName: [user?.lastName ||'', Validators.required],
-      email: [user?.email ||'', [Validators.required, Validators.email]],
-      mobile: [user?.phone ||'', [Validators.required]],
-      roles: [user?.roles?.[0] ||'', [Validators.required]]
+      firstName: [user?.firstName || '', Validators.required],
+      lastName: [user?.lastName || '', Validators.required],
+      email: [user?.email || '', [Validators.required, Validators.email]],
+      mobile: [user?.phone || '', [Validators.required]],
+      roles: [user?.roles?.[0] || '', [Validators.required]]
     }
     );
   }
@@ -91,40 +91,56 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-   console.log(this.registerForm.value)
     if (this.registerForm.valid) {
-      let _user:User={
-        firstName:this.registerForm.value.firstName,
-        lastName:this.registerForm.value.lastName,
-        email:this.registerForm.value.email,
-        phone:this.registerForm.value.mobile,
-        roles:[this.registerForm.value.roles],
-        
+      let _user: User = {
+        firstName: this.registerForm.value.firstName,
+        lastName: this.registerForm.value.lastName,
+        email: this.registerForm.value.email,
+        phone: this.registerForm.value.mobile,
+        roles: [this.registerForm.value.roles],
+
       }
-      
-      this.userService.addUser(_user).subscribe(
-        result => {
-          // Handle result
-          console.log(result);
-          
-        },
-        error => {
-          console.log("error",error);
-          this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
-        },
-        () => {
-               this.toastService.show('New User Added', { classname: 'bg-success text-dark', delay: 10000 });
-               this._router.navigate(['/users/list'])
-        
-        })
+      if (this.user._id) {
+        this.userService.updateUser(_user, this.user._id).subscribe(
+          result => {
+            // Handle result
+            console.log(result);
+
+          },
+          error => {
+            console.log("error", error);
+            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+          },
+          () => {
+            this.toastService.show(' User Upload', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/users/list'])
+
+          })
       }
-      }
-  
-  onSubmitAccountDetails(value:any) {
+      else
+        this.userService.addUser(_user).subscribe(
+          result => {
+            // Handle result
+            console.log(result);
+
+          },
+          error => {
+            console.log("error", error);
+            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+          },
+          () => {
+            this.toastService.show('New User Added', { classname: 'bg-success text-dark', delay: 10000 });
+            this._router.navigate(['/users/list'])
+
+          })
+    }
+  }
+
+  onSubmitAccountDetails(value: any) {
     console.log(value);
   }
 
-  onSubmitUserDetails(value:any) {
+  onSubmitUserDetails(value: any) {
     console.log(value);
   }
   get f() { return this.registerForm.controls; }

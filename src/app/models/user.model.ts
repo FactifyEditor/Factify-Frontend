@@ -2,7 +2,7 @@
 import {Role} from './index'
 
 export class User {
-    id?: string;
+    _id?: string;
     password?: string;
     firstName: string;
     lastName: string;

@@ -1274,7 +1274,7 @@ export class TemplateService {
   }
 
   updateVideoTemplate(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/template/video/${id}`, data)
+    return this.http.put(`${this.baseURL}/template/video/${id}`, data)
   }
   getVideoTemplate(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/template/video/${id}`)
@@ -1294,7 +1294,7 @@ export class TemplateService {
   }
 
   updateImageTemplate(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseURL}/template/image/${id}`, data)
+    return this.http.put(`${this.baseURL}/template/image/${id}`, data)
   }
   getImageTemplate(id: string): Observable<any> {
     return this.http.get(`${this.baseURL}/template/image/${id}`)

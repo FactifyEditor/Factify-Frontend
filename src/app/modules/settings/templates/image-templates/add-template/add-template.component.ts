@@ -60,7 +60,7 @@ export class AddTemplateComponent implements OnInit {
     this.templateForm = this.fb.group({
       name: [template.name, Validators.required],
       description: [template.description, Validators.required],
-      image: ['', [Validators.required]],
+      image: ['', template?._id?null:[Validators.required]],
     });
     if (template?.image) {
       this.preview = template.image;
