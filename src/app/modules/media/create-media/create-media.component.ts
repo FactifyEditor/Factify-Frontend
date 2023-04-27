@@ -322,9 +322,9 @@ export class CreateMediaComponent implements OnInit {
       this.videoTemplate.scenes[1].layers[3].src = this.images['claim'].imageUrl;
       this.videoTemplate.scenes[1].layers[2].fontURL = selectedLanguage.font;
       // verification1
-      this.videoTemplate.scenes[2].layers[2].fontURL = selectedLanguage.font;
-      this.videoTemplate.scenes[2].layers[2].text = this.form.value.verify1VideoFrameText;
-      this.videoTemplate.scenes[2].layers[3].src = this.images['verify1'].imageUrl;
+      this.videoTemplate.scenes[2].layers[3].fontURL = selectedLanguage.font;
+      this.videoTemplate.scenes[2].layers[3].text = this.form.value.verify1VideoFrameText;
+      this.videoTemplate.scenes[2].layers[2].src = this.images['verify1'].imageUrl;
         // verification2
       this.videoTemplate.scenes[3].layers[2].fontURL = selectedLanguage.font;
       this.videoTemplate.scenes[3].layers[2].text = this.form.value.verify2VideoFrameText;
