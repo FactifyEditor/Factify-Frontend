@@ -199,6 +199,7 @@ export class CreateMediaComponent implements OnInit {
       verify3TimeSetting: [feed?.verification3?.timeSetting || false],
       ratingTimeSetting: [feed?.rating?.timeSetting || false]
     });
+    // if(media.)
 
   }
   OnSelectThemeImageEvent(event: any) {
@@ -316,21 +317,27 @@ export class CreateMediaComponent implements OnInit {
 
     try {
       this.processingVideo = true;
-      this.videoTemplate.scenes[1].layers[1].text = this.form.value.claimVideoFrameText;
-      this.videoTemplate.scenes[1].layers[2].src = this.images['claim'].imageUrl;
+      // claim
+      this.videoTemplate.scenes[1].layers[2].text = this.form.value.claimVideoFrameText;
+      this.videoTemplate.scenes[1].layers[3].src = this.images['claim'].imageUrl;
+      this.videoTemplate.scenes[1].layers[2].fontURL = selectedLanguage.font;
+      // verification1
       this.videoTemplate.scenes[2].layers[2].fontURL = selectedLanguage.font;
       this.videoTemplate.scenes[2].layers[2].text = this.form.value.verify1VideoFrameText;
-      this.videoTemplate.scenes[2].layers[1].src = this.images['verify1'].imageUrl;
-      this.videoTemplate.scenes[3].layers[1].fontURL = selectedLanguage.font;
-      this.videoTemplate.scenes[3].layers[1].text = this.form.value.verify2VideoFrameText;
-      this.videoTemplate.scenes[3].layers[2].src = this.images['verify2'].imageUrl;
-      this.videoTemplate.scenes[4].layers[1].fontURL = selectedLanguage.font;
-      this.videoTemplate.scenes[4].layers[1].text = this.form.value.verify3VideoFrameText;
-      this.videoTemplate.scenes[4].layers[2].src = this.images['verify3'].imageUrl;
-      this.videoTemplate.scenes[5].layers[1].fontURL = selectedLanguage.font;
-      this.videoTemplate.scenes[5].layers[1].text = this.form.value.ratingVideoFrameText;
-      this.videoTemplate.scenes[5].layers[2].src = this.images['rating'].imageUrl;
-      this.videoTemplate.scenes[1].layers[2].src = this.images['claim'].imageUrl;
+      this.videoTemplate.scenes[2].layers[3].src = this.images['verify1'].imageUrl;
+        // verification2
+      this.videoTemplate.scenes[3].layers[2].fontURL = selectedLanguage.font;
+      this.videoTemplate.scenes[3].layers[2].text = this.form.value.verify2VideoFrameText;
+      this.videoTemplate.scenes[3].layers[3].src = this.images['verify2'].imageUrl;
+        // verification3
+      this.videoTemplate.scenes[4].layers[2].fontURL = selectedLanguage.font;
+      this.videoTemplate.scenes[4].layers[2].text = this.form.value.verify3VideoFrameText;
+      this.videoTemplate.scenes[4].layers[3].src = this.images['verify3'].imageUrl;
+        // verification4
+      this.videoTemplate.scenes[5].layers[2].fontURL = selectedLanguage.font;
+      this.videoTemplate.scenes[5].layers[2].text = this.form.value.ratingVideoFrameText;
+      this.videoTemplate.scenes[5].layers[3].src = this.images['rating'].imageUrl;
+
       //intro background track
       this.videoTemplate.scenes[7].audioUrl = languageTracks.introTrack;
       this.videoTemplate.scenes[7].name = "intro";
@@ -475,7 +482,6 @@ export class CreateMediaComponent implements OnInit {
           // this.form.value.claimTimeSetting &&
           this.videoTemplate.scenes[11].audioUrl = result[0].data
           // this.videoTemplate.scenes[8].duration = result[0].duration;
-
           this.videoTemplate.scenes[11].duration = (this.form.value.claimTimeSetting ? result[0].duration : this.form.value.claimTime || 8)
           //headline claim video
           this.videoTemplate.scenes[1].duration = (this.form.value.claimTimeSetting ? result[0].duration : this.form.value.claimTime || 8) + 1
@@ -494,8 +500,6 @@ export class CreateMediaComponent implements OnInit {
           // verification2StartTime = verificationStartTime + this.videoTemplate.scenes[12].duration
         }
         if (this.form.value.verify2PerferTTS) {
-          //verification 2
-          // this.form.value.verify2TimeSetting &&
           this.videoTemplate.scenes[13].audioUrl = result[2].data
           this.videoTemplate.scenes[3].duration = (this.form.value.verify2TimeSetting ? result[2].duration : this.form.value.verify2Time || 8) + 1
           this.videoTemplate.scenes[13].duration = (this.form.value.verify2TimeSetting ? result[2].duration : this.form.value.verify2Time || 8)
@@ -504,7 +508,6 @@ export class CreateMediaComponent implements OnInit {
           verification3StartTime = verification2StartTime + (this.form.value.verify2TimeSetting ? this.videoTemplate.scenes[13].duration : this.form.value.verify2Time || 8);
         }
         if (this.form.value.verify3PerferTTS) {
-
           this.videoTemplate.scenes[14].audioUrl = result[3].data
           this.videoTemplate.scenes[4].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8) + 1
           this.videoTemplate.scenes[14].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8)
@@ -518,8 +521,6 @@ export class CreateMediaComponent implements OnInit {
           this.videoTemplate.scenes[5].duration = (this.form.value.ratingTimeSetting ? result[4].duration : this.form.value.ratingTime || 8) + 1
           this.videoTemplate.scenes[15].duration = (this.form.value.ratingTimeSetting ? result[4].duration : this.form.value.ratingTime || 8)
           this.videoTemplate.scenes[15].startingTime = ratingStartTime;
-
-
         }
         //verification background track
         let varficationBackgroundDuration = this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
