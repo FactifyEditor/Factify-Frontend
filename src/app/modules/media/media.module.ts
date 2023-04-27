@@ -10,6 +10,7 @@ import { ImageTemplateListComponent } from './partials/image-template-list/image
 import { VideoTemplateListComponent } from './partials/video-template-list/video-template-list.component';
 import { DraftsComponent } from './drafts/drafts.component'
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 const routes:Routes=[{
   path: "",
   component:MediaComponent,
@@ -56,7 +57,8 @@ const routes:Routes=[{
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
-    ImageCropperModule
+    ImageCropperModule,
+    Ng2ImgMaxModule
   ]
 })
 export class MediaModule { }

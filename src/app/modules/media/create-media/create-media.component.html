@@ -756,8 +756,13 @@
           
           <form id="addNewCCForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="return false" novalidate="novalidate">
             <div class="col-12 fv-plugins-icon-container">
-              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" format="png"
-              [cropperMinWidth]="720" [cropperMaxHeight]="720" [cropperMaxWidth]="720" [cropperMinHeight]="720"
+              <image-cropper [imageChangedEvent]="imageChangedEvent" 
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1"
+              [resizeToWidth]="720"
+              [resizeToHeight]="720"
+              format="png"
+             
               (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
               (loadImageFailed)="loadImageFailed()"></image-cropper>
             </div>
