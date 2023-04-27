@@ -9,6 +9,7 @@ import { CreateMediaComponent } from './create-media/create-media.component';
 import { ImageTemplateListComponent } from './partials/image-template-list/image-template-list.component';
 import { VideoTemplateListComponent } from './partials/video-template-list/video-template-list.component';
 import { DraftsComponent } from './drafts/drafts.component'
+import { ImageCropperModule } from 'ngx-image-cropper';
 const routes:Routes=[{
   path: "",
   component:MediaComponent,
@@ -54,7 +55,8 @@ const routes:Routes=[{
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ImageCropperModule
   ]
 })
 export class MediaModule { }

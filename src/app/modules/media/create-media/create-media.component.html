@@ -1,12 +1,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4">
-    <a routerLink="/feed/list"
-      ><i
-        class="ti ti-chevron-left"
-        style="font-size: 2rem;"
-      ></i
-    >
-    <span class="text-muted fw-light">Feed /</span></a> Create
+    <a routerLink="/feed/list"><i class="ti ti-chevron-left" style="font-size: 2rem;"></i>
+      <span class="text-muted fw-light">Feed /</span></a> Create
   </h4>
   <form [formGroup]="form" (ngSubmit)="processVideo(form)">
     <div class="row">
@@ -16,21 +11,12 @@
             <div class="row">
               <div class="col-md-4 mb-4" ƒ>
                 <div class="position-relative">
-                  <select
-                    
-                    formControlName="language"
-                    class="select2 form-select select2-hidden-accessible"
-                   
-                    [ngClass]="{ 'is-invalid': submitted && f['language'].errors }"
-                 
-                  >
-                  <!-- *ngIf="languages$ | async as languages" -->
-                
-                  <option value="">Select Language</option>
-                    <option
-                      *ngFor="let language of languages"
-                      [ngValue]="language._id" 
-                    >
+                  <select formControlName="language" class="select2 form-select select2-hidden-accessible"
+                    [ngClass]="{ 'is-invalid': submitted && f['language'].errors }">
+                    <!-- *ngIf="languages$ | async as languages" -->
+
+                    <option value="">Select Language</option>
+                    <option *ngFor="let language of languages" [ngValue]="language._id">
                       {{ language.language }}
                     </option>
                   </select>
@@ -38,29 +24,15 @@
               </div>
               <!-- Multiple -->
               <div class="col-md-4 mb-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Link"
-                  formControlName="link"
-                  [ngClass]="{ 'is-invalid': submitted && f['link'].errors }"
-                />
+                <input type="text" class="form-control" placeholder="Link" formControlName="link"
+                  [ngClass]="{ 'is-invalid': submitted && f['link'].errors }" />
               </div>
               <div class="col-md-4 mb-4">
-                <select
-                
-                  class="select2 form-select select2-hidden-accessible"
-                  formControlName="rating"
-                  [ngClass]="{ 'is-invalid': submitted && f['rating'].errors }"
+                <select class="select2 form-select select2-hidden-accessible" formControlName="rating"
+                  [ngClass]="{ 'is-invalid': submitted && f['rating'].errors }" *ngIf="ratings$ | async as ratings">
+                  <option value="">Select Rating</option>
 
-                  *ngIf="ratings$ | async as ratings"
-                >
-                <option value="">Select Rating</option>
-               
-                  <option
-                    *ngFor="let rating of ratings.data"
-                    [ngValue]="rating._id"
-                  >
+                  <option *ngFor="let rating of ratings.data" [ngValue]="rating._id">
                     {{ rating.rating }}
                   </option>
                 </select>
@@ -86,20 +58,12 @@
                   <td class="text-center border_right" style="width: 35%">
                     <div class="row padding_bottom">
                       <div class="col-lg-12">
-                        <img *ngIf="imageTemplate"
-                        style="max-height:150px"
-                          class="img-fluid d-flex mx-auto my-4 rounded"
-                          [src]="imageTemplate.image"
-                          alt="Card image cap"
-                        />
+                        <img *ngIf="imageTemplate" style="max-height:150px"
+                          class="img-fluid d-flex mx-auto my-4 rounded" [src]="imageTemplate.image"
+                          alt="Card image cap" />
                         <!-- <button class="btn btn-sm btn-primary padding_left">Change</button> -->
-                        <button
-                          class="btn btn-sm btn-primary padding_left"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasScroll"
-                          aria-controls="offcanvasScroll"
-                        >
+                        <button class="btn btn-sm btn-primary padding_left" type="button" data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasScroll" aria-controls="offcanvasScroll">
                           Change
                         </button>
                       </div>
@@ -114,20 +78,11 @@
                   <td class="text-center border_right" style="width: 35%">
                     <div class="row padding_bottom">
                       <div class="col-lg-12">
-                        <img
-                          style="max-height:150px"
-                          *ngIf="videoTemplate"
-                          class="img-fluid d-flex mx-auto my-4 rounded"
-                          [src]="videoTemplate.image"
-                          alt="Card image cap"
-                        />
-                        <button
-                        type="button"
-                          class="btn btn-sm btn-primary padding_left"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasScrollVideoTemplate"
-                          aria-controls="offcanvasScrollVideoTemplate"
-                        >
+                        <img style="max-height:150px" *ngIf="videoTemplate"
+                          class="img-fluid d-flex mx-auto my-4 rounded" [src]="videoTemplate.image"
+                          alt="Card image cap" />
+                        <button type="button" class="btn btn-sm btn-primary padding_left" data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasScrollVideoTemplate" aria-controls="offcanvasScrollVideoTemplate">
                           Change
                         </button>
                       </div>
@@ -161,33 +116,22 @@
                 <tr class="table-default">
                   <td>Headline/ Claim</td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="claimVideoFrameText"
-                      [ngClass]="{ 'is-invalid': submitted && f['claimVideoFrameText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="claimVideoFrameText"
+                      [ngClass]="{ 'is-invalid': submitted && f['claimVideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="claimTextToSpeechText"
-                      [ngClass]="{ 'is-invalid': submitted && f['claimTextToSpeechText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="claimTextToSpeechText"
+                      [ngClass]="{ 'is-invalid': submitted && f['claimTextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
                     <div class="row">
                       <div class="col-lg-6 mt-10">
-                        <img *ngIf="images.claim.imageUrl"
-                        [src]="images.claim.imageUrl"
-                        class="img-thumbnail"
-                        alt="..."
-                        />
+                        <img *ngIf="images.claim.imageUrl" [src]="images.claim.imageUrl" class="img-thumbnail"
+                          alt="..." />
                       </div>
                       <div class="col-lg-6 mt-10">
                         <div class="image-upload text-center mb_30">
-           
+
                           <label style="cursor: pointer" for="file_upload_claim_image">
                             <img src="" alt="" class="uploaded-image" />
                             <div class="h-100">
@@ -197,37 +141,24 @@
                                 </div>
                               </div>
                             </div>
-    
-                            <input
-                              data-required="image"
-                              type="file"
-                              formControlName="claimImage"
-                              name="image_name"
-                              id="file_upload_claim_image"
-                              accept="image/*"
-                              (change)="uploadImage($event, 'claim')"
-                              class="image-input"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                              
-                            />
+
+                            <input data-required="image" type="file" formControlName="claimImage" name="image_name"
+                              id="file_upload_claim_image" accept="image/*" (change)="uploadImage($event, 'claim')"
+                              class="image-input" data-traget-resolution="image_resolution" value="" />
                           </label>
                         </div>
-                        
+
                       </div>
                     </div>
-           
-                   
+
+
                   </td>
                   <td>
                     <div class="row">
-                    
+
                       <div class="col-md-12">
                         <div class="image-upload text-center">
-                          <label
-                            style="cursor: pointer"
-                            for="file_upload_claim_audio"
-                          >
+                          <label style="cursor: pointer" for="file_upload_claim_audio">
                             <img src="" alt="" class="uploaded-image" />
                             <div class="h-100">
                               <div class="dplay-tbl">
@@ -236,35 +167,28 @@
                                 </div>
                               </div>
                             </div>
-    
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              formControlName="claimVoice"
-                              id="file_upload_claim_audio"
-                              class="image-input"
-                              accept="audio/*"
-                              (change)="uploadAudio($event,'claimAudio')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+
+                            <input data-required="image" type="file" name="image_name" formControlName="claimVoice"
+                              id="file_upload_claim_audio" class="image-input" accept="audio/*"
+                              (change)="uploadAudio($event,'claimAudio')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
-                        
+
                       </div>
                       <audio *ngIf="audios.claimAudio.audioUrl" controls>
                         <source [src]="audios.claimAudio.audioUrl" type="audio/mpeg">
                         Your browser does not support the audio element.
-                       </audio>
+                      </audio>
 
                     </div>
-                  
-                    
+
+
                   </td>
                   <td>
                     <label class="switch switch-success">
-                      <input formControlName="claimPerferTTS" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="claimPerferTTS" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -277,9 +201,10 @@
                   </td>
                   <td style="white-space:inherit;">
                     <label class="switch switch-success">
-                     
+
                       <span class="switch-label">fix</span>
-                      <input formControlName="claimTimeSetting" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="claimTimeSetting" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -293,43 +218,26 @@
                     </label>
                   </td>
                   <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      formControlName="claimTime"
-                      [ngClass]="{ 'is-invalid': submitted && f['claimTime'].errors }"
-                      
-                      placeholder="secs"
-                      style="width: 60px"
-                    />
+                    <input type="number" class="form-control" formControlName="claimTime"
+                      [ngClass]="{ 'is-invalid': submitted && f['claimTime'].errors }" placeholder="secs"
+                      style="width: 60px" />
                   </td>
                 </tr>
                 <tr class="table-default">
                   <td>Verification Source 1</td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="verify1VideoFrameText"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify1VideoFrameText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="verify1VideoFrameText"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify1VideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="verify1TextToSpeechText"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify1TextToSpeechText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="verify1TextToSpeechText"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify1TextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
                     <div class="row">
                       <div class="col-md-6 mt-10">
-                        <img *ngIf="images.verify1.imageUrl"
-                        [src]="images.verify1.imageUrl"
-                        class="img-thumbnail"
-                        alt="..."
-                        />
+                        <img *ngIf="images.verify1.imageUrl" [src]="images.verify1.imageUrl" class="img-thumbnail"
+                          alt="..." />
                       </div>
                       <div class="col-md-6">
                         <div class="image-upload text-center mb_30">
@@ -343,30 +251,21 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              formControlName="verify1Image"
-
-                              id="file_upload_image_verify1"
-                              class="image-input"
-                              accept="image/*"
-                              (change)="uploadImage($event,'verify1')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" formControlName="verify1Image"
+                              id="file_upload_image_verify1" class="image-input" accept="image/*"
+                              (change)="uploadImage($event,'verify1')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
                       </div>
 
                     </div>
-                   
-                  
+
+
                   </td>
                   <td>
                     <div class="row">
-                     
+
                       <div class="col-md-12">
                         <div class="image-upload text-center">
                           <label style="cursor: pointer" for="file_upload_audio_verify1">
@@ -378,31 +277,24 @@
                                 </div>
                               </div>
                             </div>
-    
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_audio_verify1"
-                              class="image-input"
-                              formControlName="verify1Voice"
-                              accept="audio/*"
-                              (change)="uploadAudio($event,'verify1Audio')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+
+                            <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify1"
+                              class="image-input" formControlName="verify1Voice" accept="audio/*"
+                              (change)="uploadAudio($event,'verify1Audio')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
-                        <audio *ngIf="audios.verify1Audio.audioUrl" controls >
+                        <audio *ngIf="audios.verify1Audio.audioUrl" controls>
                           <source [src]="audios.verify1Audio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
-                         </audio>
+                        </audio>
                       </div>
                     </div>
                   </td>
                   <td>
                     <label class="switch switch-success">
-                      <input formControlName="verify1PerferTTS" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="verify1PerferTTS" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -415,9 +307,10 @@
                   </td>
                   <td style="white-space:inherit;">
                     <label class="switch switch-success">
-                     
+
                       <span class="switch-label">fix</span>
-                      <input formControlName="verify1TimeSetting" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="verify1TimeSetting" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -431,45 +324,27 @@
                     </label>
                   </td>
                   <td>
-                    <input
-                    formControlName="verify1Time"
-                      type="number"
-                      class="form-control"
-                      placeholder="secs"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify1Time'].errors }"
-
-                      style="width: 60px"
-                    />
+                    <input formControlName="verify1Time" type="number" class="form-control" placeholder="secs"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify1Time'].errors }" style="width: 60px" />
                   </td>
                 </tr>
                 <tr class="table-default">
                   <td>Verification Source 2</td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      
+                    <textarea class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['verify2VideoFrameText'].errors }"
-
-                      formControlName="verify2VideoFrameText"
-                    ></textarea>
+                      formControlName="verify2VideoFrameText"></textarea>
                   </td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      
+                    <textarea class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['verify2TextToSpeechText'].errors }"
-
-                      formControlName="verify2TextToSpeechText"
-                    ></textarea>
+                      formControlName="verify2TextToSpeechText"></textarea>
                   </td>
                   <td>
-                    <div class ="row">
+                    <div class="row">
                       <div class="col-md-6 mt-10">
-                        <img *ngIf="images.verify2.imageUrl"
-                        [src]="images.verify2.imageUrl"
-                        class="img-thumbnail"
-                        alt="..."
-                        />
+                        <img *ngIf="images.verify2.imageUrl" [src]="images.verify2.imageUrl" class="img-thumbnail"
+                          alt="..." />
                       </div>
                       <div class="col-md-6">
                         <div class="image-upload text-center mb_30">
@@ -482,30 +357,22 @@
                                 </div>
                               </div>
                             </div>
-    
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_image_verify2"
-                              class="image-input"
-                              formControlName="verify2Image"
-                              accept="image/*"
-                              (change)="uploadImage($event,'verify2')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+
+                            <input data-required="image" type="file" name="image_name" id="file_upload_image_verify2"
+                              class="image-input" formControlName="verify2Image" accept="image/*"
+                              (change)="uploadImage($event,'verify2')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
                       </div>
 
                     </div>
-            
-                  
+
+
                   </td>
                   <td>
                     <div class="row">
-                      
+
                       <div class="col-md-12">
                         <div class="image-upload text-center">
                           <label style="cursor: pointer" for="file_upload_audio_verify2">
@@ -518,32 +385,25 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_audio_verify2"
-                              class="image-input"
-                              formControlName="verify2Voice"
-                              accept="audio/*"
-                              (change)="uploadAudio($event,'verify2Audio')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify2"
+                              class="image-input" formControlName="verify2Voice" accept="audio/*"
+                              (change)="uploadAudio($event,'verify2Audio')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
-                         <audio *ngIf="audios.verify2Audio.audioUrl" controls >
+                        <audio *ngIf="audios.verify2Audio.audioUrl" controls>
                           <source [src]="audios.verify2Audio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
-                         </audio>
+                        </audio>
                       </div>
                     </div>
-                 
-                   
+
+
                   </td>
                   <td>
                     <label class="switch switch-success">
-                      <input type="checkbox" (change)="onCheckChange($event)" formControlName="verify2PerferTTS" class="switch-input"  />
+                      <input type="checkbox" (change)="onCheckChange($event)" formControlName="verify2PerferTTS"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -556,9 +416,10 @@
                   </td>
                   <td style="white-space:inherit;">
                     <label class="switch switch-success">
-                     
+
                       <span class="switch-label">fix</span>
-                      <input formControlName="verify2TimeSetting" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="verify2TimeSetting" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -572,43 +433,27 @@
                     </label>
                   </td>
                   <td>
-                    <input
-                    formControlName="verify2Time"
-                      type="number"
-                      class="form-control"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify2Time'].errors }"
-
-                      placeholder="secs"
-                      style="width: 60px"
-                    />
+                    <input formControlName="verify2Time" type="number" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify2Time'].errors }" placeholder="secs"
+                      style="width: 60px" />
                   </td>
                 </tr>
                 <tr class="table-default">
                   <td>Verification Source 3</td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="verify3VideoFrameText"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify3VideoFrameText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="verify3VideoFrameText"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify3VideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea
-                      class="form-control"
+                    <textarea class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['verify3TextToSpeechText'].errors }"
-
-                      formControlName="verify3TextToSpeechText"
-                    ></textarea>
+                      formControlName="verify3TextToSpeechText"></textarea>
                   </td>
                   <td>
                     <div class="row">
                       <div class="col-md-6 mt-10">
-                        <img *ngIf="images.verify3.imageUrl"
-                        [src]="images.verify3.imageUrl"
-                        class="img-thumbnail"
-                        alt="..."
-                        />
+                        <img *ngIf="images.verify3.imageUrl" [src]="images.verify3.imageUrl" class="img-thumbnail"
+                          alt="..." />
                       </div>
                       <div class="col-md-6">
                         <div class="image-upload text-center mb_30">
@@ -622,30 +467,22 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_image_verify3"
-                              class="image-input"
-                              formControlName="verify3Image"
-                              accept="image/*"
-                              (change)="uploadImage($event,'verify3')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" id="file_upload_image_verify3"
+                              class="image-input" formControlName="verify3Image" accept="image/*"
+                              (change)="uploadImage($event,'verify3')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
                       </div>
 
 
                     </div>
-                   
-                  
+
+
                   </td>
                   <td>
                     <div class="row">
-                     
+
                       <div class="col-md-12">
                         <div class="image-upload text-center">
                           <label style="cursor: pointer" for="file_upload_audio_verify3">
@@ -658,36 +495,25 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_audio_verify3"
-                              class="image-input"
-                              formControlName="verify3Voice"
-                              accept="audio/*"
-                              (change)="uploadAudio($event,'verify3Audio')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify3"
+                              class="image-input" formControlName="verify3Voice" accept="audio/*"
+                              (change)="uploadAudio($event,'verify3Audio')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
                       </div>
-                      <audio *ngIf="audios.verify3Audio.audioUrl" controls >
+                      <audio *ngIf="audios.verify3Audio.audioUrl" controls>
                         <source [src]="audios.verify3Audio.audioUrl" type="audio/mpeg">
                         Your browser does not support the audio element.
-                       </audio>
+                      </audio>
                     </div>
-                   
-                 
+
+
                   </td>
                   <td>
                     <label class="switch switch-success">
-                      <input 
-                      formControlName="verify3PerferTTS" (change)="onCheckChange($event)" type="checkbox" 
-                      [ngClass]="{ 'is-invalid': submitted && f['verify3PerferTTS'].errors }"
-                      
-                      class="switch-input"  />
+                      <input formControlName="verify3PerferTTS" (change)="onCheckChange($event)" type="checkbox"
+                        [ngClass]="{ 'is-invalid': submitted && f['verify3PerferTTS'].errors }" class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -700,9 +526,10 @@
                   </td>
                   <td style="white-space:inherit;">
                     <label class="switch switch-success">
-                     
+
                       <span class="switch-label">fix</span>
-                      <input formControlName="verify3TimeSetting" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="verify3TimeSetting" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -716,43 +543,26 @@
                     </label>
                   </td>
                   <td>
-                    <input
-                    formControlName="verify2Time"
-                      type="number"
-                      [ngClass]="{ 'is-invalid': submitted && f['verify2Time'].errors }"
-
-                      class="form-control"
-                      placeholder="secs"
-                      style="width: 60px"
-                    />
+                    <input formControlName="verify2Time" type="number"
+                      [ngClass]="{ 'is-invalid': submitted && f['verify2Time'].errors }" class="form-control"
+                      placeholder="secs" style="width: 60px" />
                   </td>
                 </tr>
                 <tr class="table-default">
                   <td>Rating</td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="ratingVideoFrameText"
-                      [ngClass]="{ 'is-invalid': submitted && f['ratingVideoFrameText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="ratingVideoFrameText"
+                      [ngClass]="{ 'is-invalid': submitted && f['ratingVideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea
-                      class="form-control"
-                      formControlName="ratingTextToSpeechText"
-                      [ngClass]="{ 'is-invalid': submitted && f['ratingTextToSpeechText'].errors }"
-
-                    ></textarea>
+                    <textarea class="form-control" formControlName="ratingTextToSpeechText"
+                      [ngClass]="{ 'is-invalid': submitted && f['ratingTextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
                     <div class="row">
                       <div class="col-md-6 mt-10">
-                        <img *ngIf="images.rating.imageUrl"
-                        [src]="images.rating.imageUrl"
-                        class="img-thumbnail"
-                        alt="..."
-                        />
+                        <img *ngIf="images.rating.imageUrl" [src]="images.rating.imageUrl" class="img-thumbnail"
+                          alt="..." />
                       </div>
                       <div class="col-md-6">
                         <div class="image-upload text-center mb_30">
@@ -766,29 +576,21 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_image_rating"
-                              class="image-input"
-                              formControlName="ratingImage"
-                              accept="image/*"
-                              (change)="uploadImage($event,'rating')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" id="file_upload_image_rating"
+                              class="image-input" formControlName="ratingImage" accept="image/*"
+                              (change)="uploadImage($event,'rating')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
                       </div>
 
                     </div>
-                  
-                  
+
+
                   </td>
                   <td>
                     <div class="row">
-                      
+
                       <div class="col-md-12">
                         <div class="image-upload text-center">
                           <label style="cursor: pointer" for="file_upload_audio_rating">
@@ -801,33 +603,26 @@
                               </div>
                             </div>
                             <!--upload-content-->
-                            <input
-                              data-required="image"
-                              type="file"
-                              name="image_name"
-                              id="file_upload_audio_rating"
-                              class="image-input"
-                              formControlName="ratingVoice"
-                              accept="audio/*"
-                              (change)="uploadAudio($event,'ratingAudio')"
-                              data-traget-resolution="image_resolution"
-                              value=""
-                            />
+                            <input data-required="image" type="file" name="image_name" id="file_upload_audio_rating"
+                              class="image-input" formControlName="ratingVoice" accept="audio/*"
+                              (change)="uploadAudio($event,'ratingAudio')" data-traget-resolution="image_resolution"
+                              value="" />
                           </label>
                         </div>
-                        <audio *ngIf="audios.ratingAudio.audioUrl" controls >
+                        <audio *ngIf="audios.ratingAudio.audioUrl" controls>
                           <source [src]="audios.ratingAudio.audioUrl" type="audio/mpeg">
                           Your browser does not support the audio element.
-                         </audio>
+                        </audio>
                       </div>
 
                     </div>
-                 
-                 
+
+
                   </td>
                   <td>
                     <label class="switch switch-success">
-                      <input formControlName="ratingPerferTTS" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="ratingPerferTTS" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -840,9 +635,10 @@
                   </td>
                   <td style="white-space:inherit;">
                     <label class="switch switch-success">
-                     
+
                       <span class="switch-label">fix</span>
-                      <input formControlName="ratingTimeSetting" type="checkbox" (change)="onCheckChange($event)" class="switch-input"  />
+                      <input formControlName="ratingTimeSetting" type="checkbox" (change)="onCheckChange($event)"
+                        class="switch-input" />
                       <span class="switch-toggle-slider">
                         <span class="switch-on">
                           <i class="ti ti-check"></i>
@@ -856,15 +652,8 @@
                     </label>
                   </td>
                   <td>
-                    <input
-                      formControlName="ratingTime"
-                      type="number"
-                      class="form-control"
-                      placeholder="secs"
-                      style="width: 60px"
-                      [ngClass]="{ 'is-invalid': submitted && f['ratingTime'].errors }"
-
-                    />
+                    <input formControlName="ratingTime" type="number" class="form-control" placeholder="secs"
+                      style="width: 60px" [ngClass]="{ 'is-invalid': submitted && f['ratingTime'].errors }" />
                   </td>
                 </tr>
               </tbody>
@@ -881,24 +670,16 @@
             <div class="row">
               <div class="col-md-6 mb-4" data-select2-id="45">
                 <div class="position-relative" data-select2-id="44">
-                  <textarea
-                    class="form-control"
-                    placeholder="image text"
-                    formControlName="imageText"
-                    [ngClass]="{ 'is-invalid': submitted && f['imageText'].errors }"
-
-                  ></textarea>
+                  <textarea class="form-control" placeholder="image text" formControlName="imageText"
+                    [ngClass]="{ 'is-invalid': submitted && f['imageText'].errors }"></textarea>
                 </div>
               </div>
               <!-- Multiple -->
               <div *ngIf="images.imageTemplate.imageUrl" class="col-md-2">
-               
-                  <img *ngIf="images.imageTemplate.imageUrl"
-                  [src]="images.imageTemplate.imageUrl"
-                  class="img-thumbnail"
-                  alt="..."
-                  />
-              
+
+                <img *ngIf="images.imageTemplate.imageUrl" [src]="images.imageTemplate.imageUrl" class="img-thumbnail"
+                  alt="..." />
+
               </div>
 
               <div class="col-md-2 mb-4">
@@ -913,19 +694,10 @@
                       </div>
                     </div>
                     <!--upload-content-->
-                    <input
-                      data-required="image"
-                      type="file"
-                      name="image_name"
-                      id="file_upload"
-                      formControlName="image"
-                      accept="image/*"
-                      class="image-input"
-                      accept="image/*"
-                      (change)="uploadImage($event,'imageTemplate')"
-                      data-traget-resolution="image_resolution"
-                      value=""
-                    />
+                    <input data-required="image" type="file" name="image_name" id="file_upload" formControlName="image"
+                      accept="image/*" class="image-input" accept="image/*"
+                      (change)="uploadImage($event,'imageTemplate')" data-traget-resolution="image_resolution"
+                      value="" />
                   </label>
                 </div>
               </div>
@@ -938,66 +710,67 @@
       <div class="col-12  justify-content-between">
         <button *ngIf="!processingVideo" class="btn btn-primary btn-next waves-effect waves-light">
           <i class="ti ti-device-floppy"></i>
-          <span class="align-middle d-sm-inline-block d-none me-sm-1"
-            >Save</span
-          >
+          <span class="align-middle d-sm-inline-block d-none me-sm-1">Save</span>
         </button>
-        <a (click)="processVideo(form,true)" style="margin-left:10px ;" *ngIf="!processingVideo" class="btn btn-primary  waves-effect waves-light">
+        <a (click)="processVideo(form,true)" style="margin-left:10px ;" *ngIf="!processingVideo"
+          class="btn btn-primary  waves-effect waves-light">
           <i class="ti ti-device-floppy"></i>
-          <span class="align-middle d-sm-inline-block d-none me-sm-1"
-            >Save As Draft</span
-          >
+          <span class="align-middle d-sm-inline-block d-none me-sm-1">Save As Draft</span>
         </a>
-        <button *ngIf="processingVideo"  class="btn btn-primary btn-next waves-effect waves-light" type="button" >
-          <span  class="spinner-border me-1" role="status" aria-hidden="true"></span>
+        <button *ngIf="processingVideo" class="btn btn-primary btn-next waves-effect waves-light" type="button">
+          <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
           Processing...
         </button>
       </div>
-     
+
     </div>
   </form>
-  <div
-    class="offcanvas offcanvas-end"
-    data-bs-scroll="true"
-    data-bs-backdrop="false"
-    tabindex="-1"
-    id="offcanvasScroll"
-    aria-labelledby="offcanvasScrollLabel"
-  >
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScroll"
+    aria-labelledby="offcanvasScrollLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasScrollLabel" class="offcanvas-title">Image Themes</h5>
-      <button
-        type="button"
-        id="close_image"
-        class="btn-close text-reset"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
+      <button type="button" id="close_image" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
     </div>
     <div class="offcanvas-body my-auto mx-0 flex-grow-0">
       <app-image-template-list (selectThemeEvent)="OnSelectThemeImageEvent($event)"></app-image-template-list>
     </div>
   </div>
-  <div
-    class="offcanvas offcanvas-end"
-    data-bs-scroll="true"
-    data-bs-backdrop="false"
-    tabindex="-1"
-    id="offcanvasScrollVideoTemplate"
-    aria-labelledby="offcanvasScrollLabel"
-  >
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasScrollVideoTemplate" aria-labelledby="offcanvasScrollLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasScrollLabel" class="offcanvas-title">Video Themes</h5>
-      <button
-        type="button"
-        id="close_video"
-        class="btn-close text-reset"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
+      <button type="button" id="close_video" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
     </div>
     <div class="offcanvas-body my-auto mx-0 flex-grow-0">
       <app-video-template-list (selectThemeEvent)="OnSelectThemeVideoEvent($event)"></app-video-template-list>
     </div>
   </div>
+  <button style="visibility:hidden" #cropImageModelBtn id="cropImageModelBtn"  class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#cropImageModel"> Show </button>
+  <div class="modal fade " id="cropImageModel" tabindex="-1"  aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+      <div class="modal-content p-3 p-md-5">
+        <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          
+          <form id="addNewCCForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="return false" novalidate="novalidate">
+            <div class="col-12 fv-plugins-icon-container">
+              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" format="png"
+              [cropperMinWidth]="720" [cropperMaxHeight]="720" [cropperMaxWidth]="720" [cropperMinHeight]="720"
+              (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"></image-cropper>
+            </div>
+            
+            <div class="col-12 text-center">
+              <a data-bs-dismiss="modal" (click)="processImageAfterCrop()" class="btn btn-primary">Ok</a>
+              <a   class="btn btn-label-secondary btn-reset waves-effect" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+            </div>
+          <!-- <input type="hidden"> -->
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>

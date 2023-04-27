@@ -6,6 +6,7 @@ import { TemplateService } from 'src/app/services/settings/template.service'
 
 import { Observable } from 'rxjs';
 import { RatingServiceService } from 'src/app/services/settings/rating-service.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-media-detail',
@@ -22,7 +23,7 @@ export class MediaDetailComponent implements OnInit {
   ) { }
 
   media$: Observable<any>
-  processingImage:boolean=false;
+  processingImage: boolean = false;
   @ViewChild('processImageButton') processImageButton: ElementRef;
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -32,14 +33,14 @@ export class MediaDetailComponent implements OnInit {
         let media = data.data;
         if (media.imageStatus == 0) {
           setTimeout(() => {
-          this.processImageButton.nativeElement.click();
+            this.processImageButton.nativeElement.click();
           }, 1000);
 
         }
-        
-          // this.processingImage=true;
-          
-          // this.processImage(data)
+
+        // this.processingImage=true;
+
+        // this.processImage(data)
         // }
       }
       )
@@ -97,4 +98,5 @@ export class MediaDetailComponent implements OnInit {
     })
 
   }
+ 
 }

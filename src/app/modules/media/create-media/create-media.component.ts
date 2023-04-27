@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,6 +20,7 @@ import { MediaService } from 'src/app/services/media.service'
 import { ToasterComponent } from 'src/app/modules/shared/toaster/toaster.component';
 import { ToastService } from 'src/app/services/shared/toast.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-create-media',
@@ -38,6 +39,7 @@ export class CreateMediaComponent implements OnInit {
   selectedRating = undefined;
   submitted: boolean = false;
   feed: any;
+  imageType: string;
   images = {
     claim: { imageUrl: undefined, audioUrl: undefined, name: '' },
     verify1: { imageUrl: undefined, audioUrl: undefined, name: '' },
@@ -80,6 +82,9 @@ export class CreateMediaComponent implements OnInit {
     { value: 'False', name: 'False' },
     { value: 'True', name: 'True' },
   ];
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  @ViewChild('cropImageModelBtn', { static: true }) cropImageModelBtn: any;
   constructor(private http: HttpClient,
     private fb: FormBuilder,
     private ratingService: RatingServiceService,
@@ -466,47 +471,55 @@ export class CreateMediaComponent implements OnInit {
       const verify3TtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.verify3TextToSpeechText });
       const ratingTtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.ratingTextToSpeechText });
       forkJoin([headlineTtsText, verify1TtsText, verify2TtsText, verify3TtsText, ratingTtsText]).pipe(take(1)).subscribe(result => {
-        if (this.form.value.claimTimeSetting && this.form.value.claimPerferTTS) {
+        if (this.form.value.claimPerferTTS) {
+          // this.form.value.claimTimeSetting &&
           this.videoTemplate.scenes[11].audioUrl = result[0].data
-
           // this.videoTemplate.scenes[8].duration = result[0].duration;
-          this.videoTemplate.scenes[11].duration = result[0].duration;
+
+          this.videoTemplate.scenes[11].duration = (this.form.value.claimTimeSetting ? result[0].duration : this.form.value.claimTime || 8)
           //headline claim video
-          this.videoTemplate.scenes[1].duration = result[0].duration + 1
+          this.videoTemplate.scenes[1].duration = (this.form.value.claimTimeSetting ? result[0].duration : this.form.value.claimTime || 8) + 1
           verificationStartTime = 3.6 + this.videoTemplate.scenes[11].duration;
           //this.videoTemplate.scenes[9]leadline[8]verification9 outro 10
           //this.videoTemplate.scenesleadline[8]verification9 outro 10
         }
-        if (this.form.value.verify1TimeSetting && this.form.value.verify1PerferTTS) {
+        if (this.form.value.verify1PerferTTS) {
           //verification 1
+          // this.form.value.verify1TimeSetting &&
           this.videoTemplate.scenes[12].audioUrl = result[1].data
-          this.videoTemplate.scenes[2].duration = result[1].duration + 1
-          this.videoTemplate.scenes[12].duration = result[1].duration
+          this.videoTemplate.scenes[2].duration = (this.form.value.verify1TimeSetting ? result[1].duration : this.form.value.verify1Time || 8) + 1
+          this.videoTemplate.scenes[12].duration = (this.form.value.verify1TimeSetting ? result[1].duration : this.form.value.verify1Time || 8)
           this.videoTemplate.scenes[12].startingTime = verificationStartTime
-          verification2StartTime = verificationStartTime + this.videoTemplate.scenes[12].duration
+          verification2StartTime = verificationStartTime + (this.form.value.verify2TimeSetting ? this.videoTemplate.scenes[12].duration : this.form.value.verify1Time || 8);
+          // verification2StartTime = verificationStartTime + this.videoTemplate.scenes[12].duration
         }
-        if (this.form.value.verify2TimeSetting && this.form.value.verify2PerferTTS) {
+        if (this.form.value.verify2PerferTTS) {
           //verification 2
+          // this.form.value.verify2TimeSetting &&
           this.videoTemplate.scenes[13].audioUrl = result[2].data
-          this.videoTemplate.scenes[3].duration = result[2].duration + 1
-          this.videoTemplate.scenes[13].duration = result[2].duration
+          this.videoTemplate.scenes[3].duration = (this.form.value.verify2TimeSetting ? result[2].duration : this.form.value.verify2Time || 8) + 1
+          this.videoTemplate.scenes[13].duration = (this.form.value.verify2TimeSetting ? result[2].duration : this.form.value.verify2Time || 8)
           this.videoTemplate.scenes[13].startingTime = verification2StartTime;
-          verification3StartTime = verification2StartTime + this.videoTemplate.scenes[13].duration
+          // verification3StartTime = verification2StartTime + this.videoTemplate.scenes[13].duration
+          verification3StartTime = verification2StartTime + (this.form.value.verify2TimeSetting ? this.videoTemplate.scenes[13].duration : this.form.value.verify2Time || 8);
         }
-        if (this.form.value.verify3TimeSetting && this.form.value.verify3PerferTTS) {
-          //verification 3
+        if (this.form.value.verify3PerferTTS) {
+
           this.videoTemplate.scenes[14].audioUrl = result[3].data
-          this.videoTemplate.scenes[4].duration = result[3].duration + 1
-          this.videoTemplate.scenes[14].duration = result[3].duration;
+          this.videoTemplate.scenes[4].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8) + 1
+          this.videoTemplate.scenes[14].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8)
           this.videoTemplate.scenes[14].startingTime = verification3StartTime;
-          ratingStartTime = verification3StartTime + this.videoTemplate.scenes[14].duration
+          ratingStartTime = verification3StartTime + (this.form.value.verify3TimeSetting ? this.videoTemplate.scenes[14].duration : this.form.value.verify3Time || 8);
         }
-        if (this.form.value.ratingTimeSetting && this.form.value.ratingPerferTTS) {
+        if (this.form.value.ratingPerferTTS) {
           //Rating
+          // this.form.value.ratingTimeSetting &&
           this.videoTemplate.scenes[15].audioUrl = result[4].data
-          this.videoTemplate.scenes[5].duration = result[4].duration + 1
-          this.videoTemplate.scenes[15].duration = result[4].duration;
+          this.videoTemplate.scenes[5].duration = (this.form.value.ratingTimeSetting ? result[4].duration : this.form.value.ratingTime || 8) + 1
+          this.videoTemplate.scenes[15].duration = (this.form.value.ratingTimeSetting ? result[4].duration : this.form.value.ratingTime || 8)
           this.videoTemplate.scenes[15].startingTime = ratingStartTime;
+
+
         }
         //verification background track
         let varficationBackgroundDuration = this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
@@ -626,25 +639,39 @@ export class CreateMediaComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
-  uploadImage(event: Event, type) {
-    let file: any = (event.target as HTMLInputElement).files[0];
-    console.log(type)
-    console.log(file);
+  base64ToFile(base64, fileName) {
+    const byteString = atob(base64.split(',')[1]);
+    const mimeString = base64.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: mimeString });
+    return new File([blob], fileName, { type: mimeString });
+  }
 
+  processImageAfterCrop() {
+
+    let file = this.croppedImage;
+    let type = this.imageType;
     let name = `${type}_${new Date().getTime()}_${file.name}`;
-    // this.form.patchValue({
-    //   [type+'Image']: file
-    // })
     this.images[type] = {};
     var reader = new FileReader();
     reader.onload = (event: any) => {
-      this.images[type].imageUrl = event.target.result;
+      this.images[type].imageUrl = file
     }
     reader.readAsDataURL(file);
     this.images[type].file = file;
     this.images[type].name = name;
 
     this.uploadFile(file, type, "images")
+  }
+  uploadImage(event: Event, type) {
+    this.imageChangedEvent = event;
+    let file: any = (event.target as HTMLInputElement).files[0];
+    this.imageType = type;
+    this.cropImageModelBtn.nativeElement.click();
 
   }
   // 
@@ -732,5 +759,21 @@ export class CreateMediaComponent implements OnInit {
         this.processingVideo = false;
       });
 
+  }
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = this.base64ToFile(event.base64, 'cropped-image.jpg');
+
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
   }
 }
