@@ -139,8 +139,7 @@ ngOnInit(){
     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
   // dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
   buttons: [
-   
-        
+  
     {
       text: '<i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block"></span>',
       className: 'create-new btn btn-primary btn-sm ',
