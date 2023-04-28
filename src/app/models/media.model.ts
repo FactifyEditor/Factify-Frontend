@@ -7,4 +7,10 @@ export class MediaModel {
   videoTemplate:string;
   metaData:  any;
   draft?: boolean;
+  audioStatus?:number;
+  videoStatus?:number;
+  imageStatus?:number;
+  audioUrl:string;
+  videoUrl:string;
+  imageUrl:string;
 }

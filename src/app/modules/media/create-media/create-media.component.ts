@@ -142,6 +142,7 @@ export class CreateMediaComponent implements OnInit {
         this.audios.ratingAudio.audioUrl = media.data.metaData.rating.ratingVoice;
         this.imageTemplate.factImage = media.data.metaData.imageJson.factImage;
         this.images.imageTemplate.imageUrl = media.data.metaData.imageJson.factImage;
+
         // this.langulage = langulage.data;
         // if(this.langulage.font)
         // this.fontFileName=this.getFileNameFromUrl(this.langulage.font)
@@ -617,7 +618,13 @@ export class CreateMediaComponent implements OnInit {
             },
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate
-          }
+          },
+          "audioStatus": this.feed.audioStatus,
+          "imageStatus": this.feed.imageStatus,
+          "videoStatus": this.feed.videoStatus,
+          "audioUrl": this.feed.audioUrl,
+          "imageUrl": this.feed.imageUrl,
+          "videoUrl": this.feed.videoUrl,
         }
         if (draft)
           _media.draft = true;
