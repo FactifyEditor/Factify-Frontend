@@ -434,6 +434,10 @@ export class CreateMediaComponent implements OnInit {
     if (!draft && (this.form.invalid || isInValid)) {
       return;
     }
+    if (draft && this.form.value.language == "" || this.form.value.rating == "") {
+      this.toastService.show("please select language and rating for draft", { classname: 'bg-danger text-dark', delay: 10000 });
+      return;
+    }
     let languageTracks = this.videoTemplate.languages.find(language => language._id == this.form.value.language);
     console.log(languageTracks)
 
