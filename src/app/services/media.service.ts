@@ -41,7 +41,7 @@ export class MediaService {
     return this.http.post(`${this.baseURL}/media/ttsToAudio`, tts)
   }
 
-  deleteMedia(id: string): Observable<any> {
-    return this.http.delete(`${this.baseURL}/media/${id}`);
+  deleteMedia(ids: string[]): Observable<any> {
+    return this.http.delete(`${this.baseURL}/media`,{ body: { ids } });
   }
 }

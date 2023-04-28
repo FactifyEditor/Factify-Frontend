@@ -100,7 +100,7 @@ export class AddUserComponent implements OnInit {
         roles: [this.registerForm.value.roles],
 
       }
-      if (this.user._id) {
+      if (this.user?._id) {
         this.userService.updateUser(_user, this.user._id).subscribe(
           result => {
             // Handle result
