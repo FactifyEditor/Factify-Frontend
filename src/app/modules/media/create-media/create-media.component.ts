@@ -651,7 +651,7 @@ export class CreateMediaComponent implements OnInit {
 
           this.mediaService.createMedia(_media).subscribe(
             async response => {
-              await this.processImage(result["data"]);
+              await this.processImage(response["data"]);
             },
             error => {
               console.log("error", error);

@@ -470,7 +470,7 @@
   box-sizing: border-box;
   width: auto;
   transition: border-color 0.1s, box-shadow 0.1s;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #ffffff;
   border-radius: 0.1875em;
   background: transparent;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06), 0 0 0 3px transparent;
