@@ -490,7 +490,8 @@ export class CreateMediaComponent implements OnInit {
       let ratingDuration = this.form.value.ratingTimeSetting ? this.audios.ratingAudio.duration : this.form.value.ratingTime || 8
 
       let ratingStartTime = verification3StartTime + ratingDuration;
-      this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verificationStartTime, verification1Duraton, verificationStartTime, verification1Duraton, ratingStartTime, ratingDuration)
+      this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verification2StartTime, verification2Duration, verification3StartTime, verification3Duration, ratingStartTime, ratingDuration)
+    
       //outro track
       this.imageTemplate.imageText = this.form.value.imageText;
       this.imageTemplate.factImage = this.images.imageTemplate.imageUrl;
@@ -531,6 +532,7 @@ export class CreateMediaComponent implements OnInit {
           verification3StartTime = verification2StartTime + verification2Duration;
         }
         if (this.form.value.verify3PerferTTS) {
+         
           this.audios.verify3.audioUrl = result[3].data;
           this.videoTemplate.scenes[14].audioUrl = result[3].data
           this.videoTemplate.scenes[4].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8) + 1
@@ -551,10 +553,11 @@ export class CreateMediaComponent implements OnInit {
         verificationStartTime = 3.6 + claimDuration;
         verification2StartTime = verificationStartTime + verification1Duraton;
         verification3StartTime = verification2StartTime + verification2Duration;
-        ratingStartTime = verification3StartTime + ratingDuration;
+        ratingStartTime = verification3StartTime + verification3Duration;
         this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verification2StartTime, verification2Duration, verification3StartTime, verification3Duration, ratingStartTime, ratingDuration)
+        
         //verification background track
-        let varficationBackgroundDuration = verification1Duraton + verification2Duration + verification3Duration + ratingDuration; //this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
+        let varficationBackgroundDuration =  verification1Duraton + verification2Duration + verification3Duration + ratingDuration; //this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
         this.videoTemplate.scenes[9].audioUrl = languageTracks.verificationTrack;
         this.videoTemplate.scenes[9].startingTime = verificationStartTime
         this.videoTemplate.scenes[9].duration = varficationBackgroundDuration
@@ -611,7 +614,7 @@ export class CreateMediaComponent implements OnInit {
               frameText: this.form.value.ratingVideoFrameText,
               TTSText: this.form.value.ratingTextToSpeechText,
               ratingImage: this.images['rating'].imageUrl,
-              ratingVoice: this.audios['rating'].audioUrl || "",
+              ratingVoice: this.audios['ratingAudio'].audioUrl || "",
               perferTTS: this.form.value.ratingPerferTTS,
               time: this.form.value.ratingTime,
               timeSetting: this.form.value.ratingTimeSetting
@@ -619,20 +622,21 @@ export class CreateMediaComponent implements OnInit {
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate
           },
-          "audioStatus": this.feed?.audioStatus || 0,
-          "imageStatus": this.feed?.imageStatus || 0,
-          "videoStatus": this.feed?.videoStatus || 0,
-          "audioUrl": this.feed?.audioUrl || "",
-          "imageUrl": this.feed?.imageUrl || "",
-          "videoUrl": this.feed?.videoUrl  || ""
+          "audioStatus":  0,
+          "imageStatus":  0,
+          "videoStatus":  0,
+          "audioUrl":  "",
+          "imageUrl": "",
+          "videoUrl":  ""
         }
         if (draft)
           _media.draft = true;
         if (this.feed) {
-          _media["_id"] = this.feed._id;
-          this.mediaService.updateMedia(_media, _media["_id"]).subscribe(
+          //_media["_id"] = this.feed._id;
+          this.mediaService.updateMedia(_media, this.feed._id).subscribe(
             async resposse => {
-              await this.processImage(resposse["data"]);
+              resposse.data._id=this.feed._id;
+              await this.processAll(resposse["data"]);
             },
             error => {
               console.log("error", error);
@@ -651,7 +655,7 @@ export class CreateMediaComponent implements OnInit {
 
           this.mediaService.createMedia(_media).subscribe(
             async response => {
-              await this.processImage(response["data"]);
+              await this.processAll(response["data"]);
             },
             error => {
               console.log("error", error);
@@ -705,10 +709,12 @@ export class CreateMediaComponent implements OnInit {
 
     this.uploadFile(file, type, "images")
   }
-  processImage(data) {
+  processAll(data) {
     return new Promise((resolve,reject)=>{
       let feed = data;
       feed.imageStatus = 1;
+      feed.audioStatus  = 1;
+      feed.videoStatus  = 1;
       let allImageTemplates = this.templateService.getImageTemplates();
       let selectedTemplate: any = allImageTemplates.find(template => template._id == feed.imageTemplate);
       let imageText = {
@@ -722,7 +728,7 @@ export class CreateMediaComponent implements OnInit {
       this.ratingService.getRating(feed.rating).subscribe(rating => {
         imageText.ratingImage = rating.data.image;
         console.log(feedData);
-        this.mediaService.processImage(feedData).subscribe((data: any) => {
+        this.mediaService.processAll(feedData).subscribe((data: any) => {
           feed.imageStatus = 2;
           feed.imageUrl = data.data;
           resolve(true);

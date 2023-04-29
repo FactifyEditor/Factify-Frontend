@@ -20,6 +20,9 @@ export class MediaService {
   processImage(data) {
     return this.http.post(`${this.baseURL}/media/render-image`, data);
   }
+  processAll(data){
+    return this.http.post(`${this.baseURL}/media/render-all`, data);
+  }
   processAudio(data) {
     return this.http.post(`${this.baseURL}/media/render-audio`, data);
   }
