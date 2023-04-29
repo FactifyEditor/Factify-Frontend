@@ -25,22 +25,22 @@
 
 
 <button style="visibility:hidden" #confirmContentBtn id="confirmContentBtn"
-class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#confirmContent"> Show
-</button>
-
-<div class="modal fade " id="confirmContent" tabindex="-1"  aria-modal="true" role="dialog">
-<div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
-  <div class="modal-content p-3 p-md-5">
-    <div class="modal-body">
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    <p>Are you sure you want to delete this item?</p>
-      
-
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" type="button"  data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-      <button type="button" class="btn btn-danger" (click)="deleteConfirm()">Delete</button>
+    class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#confirmContent"> Show
+  </button>
+  
+  <div class="modal fade " id="confirmContent" tabindex="-1"  aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+      <div class="modal-content p-3 p-md-5">
+        <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <p>Are you sure you want to delete this {{selectedMedia.length}} items ?</p>
+          
+   
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button"  data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="deleteConfirm()" data-bs-dismiss="modal" aria-label="Close">Delete</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>

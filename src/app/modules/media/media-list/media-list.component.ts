@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MediaService } from 'src/app/services/media.service';
+import { ToastService } from 'src/app/services/shared/toast.service';
 declare global {
   interface Window { functions: any }
 }
@@ -21,6 +22,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient,
     private router: Router,
     private mediaSerice: MediaService,
+    private toastService:ToastService,
     private route: ActivatedRoute) {
 
   }
@@ -69,7 +71,8 @@ export class MediaListComponent implements OnInit, AfterViewInit {
         targets: 1,
         orderable: false,
         render: function (data: any, type: any, full: any, meta: any) {
-          return '<input type="checkbox" type="checkbox" data-id=' + full.id + '   class="dt-checkboxes  tblChk form-check-input">';
+          var id = full['_id'];
+          return '<input type="checkbox" type="checkbox" id='+ id +' data-id=' + full.id + '   class="dt-checkboxes  tblChk form-check-input">';
         },
         checkboxes: {
           selectAllRender: '<input type="checkbox" class="form-check-input tblChkAll">'
@@ -117,7 +120,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
 
 
             $post = full['post'];
-          var $name = "ravi";//= full['creator']['firstName'] +' ' +full['creator']['lastName'];
+          var $name = full['creator']['firstName'] +' ' +full['creator']['lastName'];
           var assetsPath = "assets/"
           if ($user_img) {
             // For Avatar image
@@ -128,7 +131,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
             var stateNum = Math.floor(Math.random() * 6);
             var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
             var $state = states[stateNum];
-            var $name = "ravi"; //= full['creator']['firstName'] + ' ' + full['creator']['lastName'];
+            var $name = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
             var $initials: any = $name.match(/\b\w/g) || [];
             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
             $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
@@ -194,12 +197,18 @@ export class MediaListComponent implements OnInit, AfterViewInit {
    window.functions = window.functions || {};
    window.functions.editEntity = this.editEntity.bind(this);
    window.functions.deleteEntity = this.deleteEntity.bind(this);
+   window.functions.deleteBulkEntity = this.deletebulkEntity.bind(this);
  }
  deleteEntity(item: string) {
    console.log('Button clicked for ' + item);
    this.confirmContent.nativeElement.click();
    this.selectedMedia=[item]
  }
+ deletebulkEntity() {
+  // console.log('Button clicked for ' + item);
+  this.confirmContent.nativeElement.click();
+  // this.selectedMedia=[item]
+}
  editEntity(item) {
    console.log('Button clicked for ' + item);
  }
@@ -211,28 +220,35 @@ export class MediaListComponent implements OnInit, AfterViewInit {
 
     var that: any = this;
     $('.dt-scrollableTable').on('change', '.tblChk', function () {
-
-
       if ($('.tblChk:checked').length == $('.tblChk').length) {
-
       } else {
-
+        if ($(this).is(':checked')) {
+          var id = $(this).attr('id');
+          console.log('ID of checked element: ' + id);
+          that.selectedMedia.push(id);
+        }
+        else{
+          var id = $(this).attr('id');
+          console.log('ID of unchecked element: ' + id);
+          this.selectedMedia.splice(this.selectedMedia.indexOf(id), 1);
+        }
         var d1: any = document.getElementById('est');
         var d2: any = document.getElementById('bulk_action');
         if (d2 == null && $('.tblChk:checked').length > 1)
           d1.insertAdjacentHTML('beforeend', `
-      <div ID="bulk_action" class="dropdown" style="margin-top:17px">
-  <button class="btn btn-secondary create-new btn-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-Bulk Action
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Delete</a></li>
-    <li><a class="dropdown-item" href="#">Publish</a></li>
-  </ul>
-</div>
-    `);
+        <div ID="bulk_action" class="dropdown" style="margin-top:17px">
+    <button class="btn btn-secondary create-new btn-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Bulk Action
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="javascript:;" onclick="functions.deleteBulkEntity()">Delete</a></li>
+      <li><a class="dropdown-item" href="#">Publish</a></li>
+    </ul>
+  </div>
+      `);
         if ($('.tblChk:checked').length < 2) {
           // remove d2 button from ui
+          if(d2!=null)
           d2.remove();
         }
       }
@@ -244,7 +260,11 @@ Bulk Action
   deleteConfirm() {
     this.mediaSerice.deleteMedia(this.selectedMedia).subscribe(res => {
       // reload page 
-      this.router.navigate(['/feed']);
+      console.log(res);
+      this.toastService.show('Selected Items Deleted', { classname: 'bg-success text-dark', delay: 10000 });
+
+      window.location.reload();
+      // this.router.navigate(['/feed']);
     })
   }
 }

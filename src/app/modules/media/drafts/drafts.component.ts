@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MediaService } from 'src/app/services/media.service';
+import { ToastService } from 'src/app/services/shared/toast.service';
 declare global {
   interface Window { functions: any }
 }
@@ -20,7 +21,8 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private http: HttpClient,
     private router: Router,
-    private mediaSerice:MediaService,
+    private toastService:ToastService,
+    private mediaSerice: MediaService,
     private route: ActivatedRoute) {
 
   }
@@ -69,7 +71,8 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
         targets: 1,
         orderable: false,
         render: function (data: any, type: any, full: any, meta: any) {
-          return '<input type="checkbox" type="checkbox" data-id=' + full.id + '   class="dt-checkboxes  tblChk form-check-input">';
+          var id = full['_id'];
+          return '<input type="checkbox" type="checkbox" id=' + id + ' data-id=' + id + '   class="dt-checkboxes  tblChk form-check-input">';
         },
         checkboxes: {
           selectAllRender: '<input type="checkbox" class="form-check-input tblChkAll">'
@@ -117,7 +120,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
             $post = full['post'];
-          var $name = "ravi";//= full['creator']['firstName'] +' ' +full['creator']['lastName'];
+          var $name = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
           var assetsPath = "assets/"
           if ($user_img) {
             // For Avatar image
@@ -189,16 +192,21 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
 
       ],
       lengthMenu: [7, 10, 25, 50, 75, 100],
+
     }
     // $('div.toolbar').html('<b>Custom tool bar! Text/images etc.</b>');
     window.functions = window.functions || {};
     window.functions.editEntity = this.editEntity.bind(this);
     window.functions.deleteEntity = this.deleteEntity.bind(this);
+    window.functions.deleteBulkEntity = this.deleteBulkEntity.bind(this);
   }
   deleteEntity(item: string) {
     console.log('Button clicked for ' + item);
     this.confirmContent.nativeElement.click();
-    this.selectedDrafts=[item]
+    this.selectedDrafts = [item]
+  }
+  deleteBulkEntity(){
+    this.confirmContent.nativeElement.click();
   }
   editEntity(item) {
     console.log('Button clicked for ' + item);
@@ -210,11 +218,18 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     var that: any = this;
     $('.dt-scrollableTable').on('change', '.tblChk', function () {
-
       if ($('.tblChk:checked').length == $('.tblChk').length) {
-
       } else {
-
+        if ($(this).is(':checked')) {
+          var id = $(this).attr('id');
+          console.log('ID of checked element: ' + id);
+          that.selectedDrafts.push(id);
+        }
+        else{
+          var id = $(this).attr('id');
+          console.log('ID of unchecked element: ' + id);
+          this.selectedDrafts.splice(this.selectedDrafts.indexOf(id), 1);
+        }
         var d1: any = document.getElementById('est');
         var d2: any = document.getElementById('bulk_action');
         if (d2 == null && $('.tblChk:checked').length > 1)
@@ -224,13 +239,14 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
   Bulk Action
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><a class="dropdown-item" href="#">Delete</a></li>
+      <li><a class="dropdown-item" href="javascript:;" onclick="functions.deleteBulkEntity()">Delete</a></li>
       <li><a class="dropdown-item" href="#">Publish</a></li>
     </ul>
   </div>
       `);
         if ($('.tblChk:checked').length < 2) {
           // remove d2 button from ui
+          if(d2!=null)
           d2.remove();
         }
       }
@@ -241,10 +257,13 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
     window.functions = null;
   }
   deleteConfirm() {
-   this.mediaSerice.deleteMedia(this.selectedDrafts).subscribe(res=>{
-    // reload page 
-    this.router.navigate(['/feed/draft']);
-   })
+    this.mediaSerice.deleteMedia(this.selectedDrafts).subscribe(res => {
+      // reload page 
+      console.log(res);
+      this.toastService.show('Selected Items Deleted', { classname: 'bg-success text-dark', delay: 10000 });
+      // this.router.navigate(['/feed/draft']);
+      window.location.reload();
+    })
   }
 }
 
