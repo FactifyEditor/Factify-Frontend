@@ -143,8 +143,9 @@
                             </div>
 
                             <input data-required="image" type="file" formControlName="claimImage" name="image_name"
-                              id="file_upload_claim_image" accept="image/*" (change)="uploadImage($event, 'claim')"
-                              class="image-input" data-traget-resolution="image_resolution" value="" />
+                              id="file_upload_claim_image" accept="image/png,  image/jpeg"
+                              (change)="uploadImage($event, 'claim')" class="image-input"
+                              data-traget-resolution="image_resolution" value="" />
                           </label>
                         </div>
 
@@ -169,7 +170,7 @@
                             </div>
 
                             <input data-required="image" type="file" name="image_name" formControlName="claimVoice"
-                              id="file_upload_claim_audio" class="image-input" accept="audio/*"
+                              id="file_upload_claim_audio" class="image-input" accept="audio/mp3 ,audio/wav"
                               (change)="uploadAudio($event,'claimAudio')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -252,7 +253,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" formControlName="verify1Image"
-                              id="file_upload_image_verify1" class="image-input" accept="image/*"
+                              id="file_upload_image_verify1" class="image-input" accept="image/png,  image/jpeg"
                               (change)="uploadImage($event,'verify1')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -279,7 +280,7 @@
                             </div>
 
                             <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify1"
-                              class="image-input" formControlName="verify1Voice" accept="audio/*"
+                              class="image-input" formControlName="verify1Voice" accept="audio/mp3 ,audio/wav"
                               (change)="uploadAudio($event,'verify1Audio')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -359,7 +360,7 @@
                             </div>
 
                             <input data-required="image" type="file" name="image_name" id="file_upload_image_verify2"
-                              class="image-input" formControlName="verify2Image" accept="image/*"
+                              class="image-input" formControlName="verify2Image" accept="image/png,  image/jpeg"
                               (change)="uploadImage($event,'verify2')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -386,7 +387,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify2"
-                              class="image-input" formControlName="verify2Voice" accept="audio/*"
+                              class="image-input" formControlName="verify2Voice" accept="audio/mp3 ,audio/wav"
                               (change)="uploadAudio($event,'verify2Audio')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -468,7 +469,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" id="file_upload_image_verify3"
-                              class="image-input" formControlName="verify3Image" accept="image/*"
+                              class="image-input" formControlName="verify3Image" accept="image/png,  image/jpeg"
                               (change)="uploadImage($event,'verify3')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -496,7 +497,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" id="file_upload_audio_verify3"
-                              class="image-input" formControlName="verify3Voice" accept="audio/*"
+                              class="image-input" formControlName="verify3Voice" accept="audio/mp3 ,audio/wav"
                               (change)="uploadAudio($event,'verify3Audio')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -577,7 +578,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" id="file_upload_image_rating"
-                              class="image-input" formControlName="ratingImage" accept="image/*"
+                              class="image-input" formControlName="ratingImage" accept="image/png,  image/jpeg"
                               (change)="uploadImage($event,'rating')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -604,7 +605,7 @@
                             </div>
                             <!--upload-content-->
                             <input data-required="image" type="file" name="image_name" id="file_upload_audio_rating"
-                              class="image-input" formControlName="ratingVoice" accept="audio/*"
+                              class="image-input" formControlName="ratingVoice" accept="audio/mp3 ,audio/wav"
                               (change)="uploadAudio($event,'ratingAudio')" data-traget-resolution="image_resolution"
                               value="" />
                           </label>
@@ -695,7 +696,7 @@
                     </div>
                     <!--upload-content-->
                     <input data-required="image" type="file" name="image_name" id="file_upload" formControlName="image"
-                      accept="image/*" class="image-input" accept="image/*"
+                      accept="image/png,  image/jpeg" class="image-input" accept="image/png,  image/jpeg"
                       (change)="uploadImage($event,'imageTemplate')" data-traget-resolution="image_resolution"
                       value="" />
                   </label>
@@ -747,35 +748,34 @@
       <app-video-template-list (selectThemeEvent)="OnSelectThemeVideoEvent($event)"></app-video-template-list>
     </div>
   </div>
-  <button style="visibility:hidden" #cropImageModelBtn id="cropImageModelBtn"  class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#cropImageModel"> Show </button>
-  <div class="modal fade " id="cropImageModel" tabindex="-1"  aria-modal="true" role="dialog">
+  <button style="visibility:hidden" #cropImageModelBtn id="cropImageModelBtn"
+    class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#cropImageModel"> Show
+  </button>
+  <div class="modal fade " id="cropImageModel" tabindex="-1" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
       <div class="modal-content p-3 p-md-5">
         <div class="modal-body">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          
-          <form id="addNewCCForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="return false" novalidate="novalidate">
+
+          <form id="addNewCCForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" onsubmit="return false"
+            novalidate="novalidate">
             <div class="col-12 fv-plugins-icon-container">
-              <image-cropper [imageChangedEvent]="imageChangedEvent" 
-              [maintainAspectRatio]="true"
-              [aspectRatio]="1"
-              [resizeToWidth]="720"
-              [resizeToHeight]="720"
-              format="png"
-             
-              (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
-              (loadImageFailed)="loadImageFailed()"></image-cropper>
+              <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1"
+                [resizeToWidth]="720" [resizeToHeight]="720" format="png" (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"></image-cropper>
             </div>
-            
+
             <div class="col-12 text-center">
               <a data-bs-dismiss="modal" (click)="processImageAfterCrop()" class="btn btn-primary">Ok</a>
-              <a   class="btn btn-label-secondary btn-reset waves-effect" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
+              <a class="btn btn-label-secondary btn-reset waves-effect" data-bs-dismiss="modal"
+                aria-label="Close">Cancel</a>
             </div>
-          <!-- <input type="hidden"> -->
-        </form>
+            <!-- <input type="hidden"> -->
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
+
 </div>
