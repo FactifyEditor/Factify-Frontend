@@ -188,7 +188,7 @@ export class CreateMediaComponent implements OnInit {
       verify3TextToSpeechText: [feed?.verification3?.TTSText],
       verify3Image: ['', media?._id ? '' : Validators.required],
       verify3Voice: [''],
-      verify3PerferTTS: [feed?.claim ? feed.verification2.perferTTS : true],
+      verify3PerferTTS: [feed?.claim ? feed.verification3.perferTTS : true],
       verify3Time: [feed?.verification3?.time || 8, Validators.required],
       ratingVideoFrameText: [feed?.rating?.frameText, Validators.required],
       ratingTextToSpeechText: [feed?.rating?.TTSText],
@@ -660,7 +660,6 @@ export class CreateMediaComponent implements OnInit {
               // this.notificationService.showError(error.error.error)
             },
             async () => {
-             
               this.processingVideo = false;
               this.toastService.show('New Feed Added', { classname: 'bg-success text-dark', delay: 10000 });
               this._router.navigate(['/feed/list']);
