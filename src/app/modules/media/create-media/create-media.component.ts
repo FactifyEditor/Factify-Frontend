@@ -619,20 +619,20 @@ export class CreateMediaComponent implements OnInit {
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate
           },
-          "audioStatus": this.feed.audioStatus,
-          "imageStatus": this.feed.imageStatus,
-          "videoStatus": this.feed.videoStatus,
-          "audioUrl": this.feed.audioUrl,
-          "imageUrl": this.feed.imageUrl,
-          "videoUrl": this.feed.videoUrl,
+          "audioStatus": this.feed?.audioStatus || 0,
+          "imageStatus": this.feed?.imageStatus || 0,
+          "videoStatus": this.feed?.videoStatus || 0,
+          "audioUrl": this.feed?.audioUrl || "",
+          "imageUrl": this.feed?.imageUrl || "",
+          "videoUrl": this.feed?.videoUrl  || ""
         }
         if (draft)
           _media.draft = true;
         if (this.feed) {
           _media["_id"] = this.feed._id;
           this.mediaService.updateMedia(_media, _media["_id"]).subscribe(
-            result => {
-              console.log(result);
+            async resposse => {
+              await this.processImage(resposse["data"]);
             },
             error => {
               console.log("error", error);
@@ -640,18 +640,18 @@ export class CreateMediaComponent implements OnInit {
               this.processingVideo = false;
               // this.notificationService.showError(error.error.error)
             },
-            () => {
+              async () => {
+               
               this.processingVideo = false;
               this.toastService.show('New Feed Updated', { classname: 'bg-success text-dark', delay: 10000 });
               this._router.navigate(['/feed/list']);
-
             })
         }
         else {
 
           this.mediaService.createMedia(_media).subscribe(
-            result => {
-              console.log(result);
+            async response => {
+              await this.processImage(result["data"]);
             },
             error => {
               console.log("error", error);
@@ -659,7 +659,8 @@ export class CreateMediaComponent implements OnInit {
               this.processingVideo = false;
               // this.notificationService.showError(error.error.error)
             },
-            () => {
+            async () => {
+             
               this.processingVideo = false;
               this.toastService.show('New Feed Added', { classname: 'bg-success text-dark', delay: 10000 });
               this._router.navigate(['/feed/list']);
@@ -704,6 +705,33 @@ export class CreateMediaComponent implements OnInit {
     this.images[type].name = name;
 
     this.uploadFile(file, type, "images")
+  }
+  processImage(data) {
+    return new Promise((resolve,reject)=>{
+      let feed = data;
+      feed.imageStatus = 1;
+      let allImageTemplates = this.templateService.getImageTemplates();
+      let selectedTemplate: any = allImageTemplates.find(template => template._id == feed.imageTemplate);
+      let imageText = {
+        claim: feed.metaData.claim.frameText,
+        fact: feed.metaData.imageJson.imageText,
+        ratingImage: "",
+        factImage: feed.metaData.imageJson.factImage,
+        html: selectedTemplate.html
+      }
+      let feedData = { ...feed, ...imageText }
+      this.ratingService.getRating(feed.rating).subscribe(rating => {
+        imageText.ratingImage = rating.data.image;
+        console.log(feedData);
+        this.mediaService.processImage(feedData).subscribe((data: any) => {
+          feed.imageStatus = 2;
+          feed.imageUrl = data.data;
+          resolve(true);
+        });
+      })
+    })
+    
+
   }
   uploadImage(event: Event, type) {
     this.imageChangedEvent = event;

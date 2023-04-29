@@ -131,7 +131,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
             var stateNum = Math.floor(Math.random() * 6);
             var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
             var $state = states[stateNum];
-            var $name = "ravi"; //= full['creator']['firstName'] + ' ' + full['creator']['lastName'];
+            var $name  = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
             var $initials: any = $name.match(/\b\w/g) || [];
             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
             $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';

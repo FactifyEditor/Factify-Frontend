@@ -29,21 +29,21 @@ export class MediaDetailComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id != null) {
       this.media$ = this.mediaService.getMedia(id);
-      this.media$.subscribe(data => {
-        let media = data.data;
-        if (media.imageStatus == 0) {
-          setTimeout(() => {
-            this.processImageButton.nativeElement.click();
-          }, 1000);
+      // this.media$.subscribe(data => {
+      //   let media = data.data;
+      //   // if (media.imageStatus == 0) {
+      //   //   setTimeout(() => {
+      //   //     this.processImageButton.nativeElement.click();
+      //   //   }, 1000);
 
-        }
+      //   // }
 
-        // this.processingImage=true;
+      //   // this.processingImage=true;
 
-        // this.processImage(data)
-        // }
-      }
-      )
+      //   // this.processImage(data)
+      //   // }
+      // }
+      // )
     }
   }
   cancel() {
@@ -88,7 +88,6 @@ export class MediaDetailComponent implements OnInit {
     }
     let feedData = { ...feed, ...imageText }
     this.ratingService.getRating(feed.rating).subscribe(rating => {
-
       imageText.ratingImage = rating.data.image;
       console.log(feedData);
       this.mediaService.processImage(feedData).subscribe((data: any) => {
