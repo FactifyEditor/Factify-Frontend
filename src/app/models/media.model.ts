@@ -1,5 +1,5 @@
 export class MediaModel {
-  id?: string;
+  _id?: string;
   rating: string;
   link:String;
   language: string;

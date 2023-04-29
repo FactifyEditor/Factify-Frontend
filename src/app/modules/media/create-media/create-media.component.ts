@@ -635,8 +635,8 @@ export class CreateMediaComponent implements OnInit {
           //_media["_id"] = this.feed._id;
           this.mediaService.updateMedia(_media, this.feed._id).subscribe(
             async resposse => {
-              resposse.data._id=this.feed._id;
-              await this.processAll(resposse["data"]);
+              _media._id=this.feed._id;
+              await this.processAll(_media);
             },
             error => {
               console.log("error", error);
