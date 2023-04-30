@@ -491,7 +491,7 @@ export class CreateMediaComponent implements OnInit {
 
       let ratingStartTime = verification3StartTime + ratingDuration;
       this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verification2StartTime, verification2Duration, verification3StartTime, verification3Duration, ratingStartTime, ratingDuration)
-    
+
       //outro track
       this.imageTemplate.imageText = this.form.value.imageText;
       this.imageTemplate.factImage = this.images.imageTemplate.imageUrl;
@@ -532,7 +532,7 @@ export class CreateMediaComponent implements OnInit {
           verification3StartTime = verification2StartTime + verification2Duration;
         }
         if (this.form.value.verify3PerferTTS) {
-         
+
           this.audios.verify3.audioUrl = result[3].data;
           this.videoTemplate.scenes[14].audioUrl = result[3].data
           this.videoTemplate.scenes[4].duration = (this.form.value.verify3TimeSetting ? result[3].duration : this.form.value.verify3Time || 8) + 1
@@ -555,9 +555,9 @@ export class CreateMediaComponent implements OnInit {
         verification3StartTime = verification2StartTime + verification2Duration;
         ratingStartTime = verification3StartTime + verification3Duration;
         this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verification2StartTime, verification2Duration, verification3StartTime, verification3Duration, ratingStartTime, ratingDuration)
-        
+
         //verification background track
-        let varficationBackgroundDuration =  verification1Duraton + verification2Duration + verification3Duration + ratingDuration; //this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
+        let varficationBackgroundDuration = verification1Duraton + verification2Duration + verification3Duration + ratingDuration; //this.videoTemplate.scenes[12].duration + this.videoTemplate.scenes[13].duration + this.videoTemplate.scenes[14].duration + this.videoTemplate.scenes[15].duration
         this.videoTemplate.scenes[9].audioUrl = languageTracks.verificationTrack;
         this.videoTemplate.scenes[9].startingTime = verificationStartTime
         this.videoTemplate.scenes[9].duration = varficationBackgroundDuration
@@ -622,12 +622,13 @@ export class CreateMediaComponent implements OnInit {
             videoJson: this.videoTemplate,
             imageJson: this.imageTemplate
           },
-          "audioStatus":  0,
-          "imageStatus":  0,
-          "videoStatus":  0,
-          "audioUrl":  "",
+          "audioStatus": 0,
+          "imageStatus": 0,
+          "videoStatus": 0,
+          "audioUrl": "",
           "imageUrl": "",
-          "videoUrl":  ""
+          "videoUrl": "",
+          draft: draft || false
         }
         if (draft)
           _media.draft = true;
@@ -635,8 +636,10 @@ export class CreateMediaComponent implements OnInit {
           //_media["_id"] = this.feed._id;
           this.mediaService.updateMedia(_media, this.feed._id).subscribe(
             async resposse => {
-              _media._id=this.feed._id;
-              await this.processAll(_media);
+              if (!_media.draft){
+                _media._id = this.feed._id;
+                await this.processAll(_media);
+              }
             },
             error => {
               console.log("error", error);
@@ -644,8 +647,8 @@ export class CreateMediaComponent implements OnInit {
               this.processingVideo = false;
               // this.notificationService.showError(error.error.error)
             },
-              async () => {
-               
+            async () => {
+
               this.processingVideo = false;
               this.toastService.show('New Feed Updated', { classname: 'bg-success text-dark', delay: 10000 });
               this._router.navigate(['/feed/list']);
@@ -655,7 +658,9 @@ export class CreateMediaComponent implements OnInit {
 
           this.mediaService.createMedia(_media).subscribe(
             async response => {
-              await this.processAll(response["data"]);
+              if (!_media.draft){
+                await this.processAll(response["data"]);
+              }
             },
             error => {
               console.log("error", error);
@@ -710,11 +715,11 @@ export class CreateMediaComponent implements OnInit {
     this.uploadFile(file, type, "images")
   }
   processAll(data) {
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       let feed = data;
       feed.imageStatus = 1;
-      feed.audioStatus  = 1;
-      feed.videoStatus  = 1;
+      feed.audioStatus = 1;
+      feed.videoStatus = 1;
       let allImageTemplates = this.templateService.getImageTemplates();
       let selectedTemplate: any = allImageTemplates.find(template => template._id == feed.imageTemplate);
       let imageText = {
@@ -735,7 +740,7 @@ export class CreateMediaComponent implements OnInit {
         });
       })
     })
-    
+
 
   }
   uploadImage(event: Event, type) {

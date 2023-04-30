@@ -1,4 +1,4 @@
-import { Component,OnInit,AfterViewInit } from '@angular/core';
+import { Component,OnInit,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/settings/user.service';
 import {SharedService} from 'src/app/services/shared/shared.service';
@@ -11,6 +11,8 @@ import {Router,ActivatedRoute} from '@angular/router';
 })
 export class UserListComponent implements  OnInit,AfterViewInit {
   title = 'newschecker';
+  @ViewChild('confirmContentBtn') confirmContent: ElementRef;
+  selectedUsers: string[] =[];
   constructor(private http:HttpClient,
     private userService:UserService,
     private sharedService:SharedService,
@@ -150,9 +152,8 @@ ngOnInit(){
           <a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>
           <div class="dropdown-menu dropdown-menu-end m-0">
           <a   routerlink="/users/${$id}" ng-reflect-router-link="/users/${$id}" href="/users/${$id}"  class="dropdown-item">Details</a>
-          <a href="javascript:;" class="dropdown-item">Archive</a>
-          <div class="dropdown-divider"></div>
-          <a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>
+         
+          <a href="javascript:;" onclick="functions.deleteEntity('${$id}')"  class="dropdown-item text-danger delete-record">Delete</a>
           </div> 
           </div>`
         );
@@ -180,9 +181,33 @@ ngOnInit(){
   
     
   };
+  window.functions = window.functions || {};
+  window.functions.editEntity = this.editEntity.bind(this);
+  window.functions.deleteEntity = this.deleteEntity.bind(this);
+  window.functions.deleteBulkEntity = this.deleteBulkEntity.bind(this);
 
 }
 
 ngAfterViewInit(){
+}
+deleteEntity(item: string) {
+  console.log('Button clicked for ' + item);
+  this.confirmContent.nativeElement.click();
+  this.selectedUsers = [item]
+}
+deleteBulkEntity(){
+  this.confirmContent.nativeElement.click();
+}
+editEntity(item) {
+  console.log('Button clicked for ' + item);
+}
+deleteConfirm() {
+  this.userService.deleteUser(this.selectedUsers[0]).subscribe(res => {
+    // reload page 
+    console.log(res);
+    // this.toastService.show('Selected Items Deleted', { classname: 'bg-success text-dark', delay: 10000 });
+    // this.router.navigate(['/feed/draft']);
+    window.location.reload();
+  })
 }
 }
