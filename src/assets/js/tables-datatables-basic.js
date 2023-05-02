@@ -399,7 +399,7 @@ $(function () {
           ]
         },
         {
-          text: '<i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span>',
+          text: 'Add <span class="d-none d-sm-inline-block">Add New Record</span>',
           className: 'create-new btn btn-primary'
         }
       ],

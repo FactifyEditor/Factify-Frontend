@@ -81,7 +81,7 @@ ngOnInit(){
       <label class="form-check-label custom-option-content" for="customRadioImg2">
         <span class="custom-option-body">
           <img src="${full['image']}" height="200" alt="radioImg" style="
-          max-height: 100px;
+        
           max-width: 120px;
       ">
         </span>
@@ -141,7 +141,7 @@ ngOnInit(){
    
         
     {
-      text: '<i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block"></span>',
+      text: 'Add <span class="d-none d-sm-inline-block"></span>',
       className: 'create-new btn btn-primary btn-sm ',
       action: function ( e:any, dt:any, node:any, config:any ) {
         that.router.navigate(['templates/images/create']);

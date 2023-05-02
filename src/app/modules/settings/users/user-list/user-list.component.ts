@@ -170,7 +170,7 @@ ngOnInit(){
    
         
     {
-      text: '<i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block"></span>',
+      text: 'Add <span class="d-none d-sm-inline-block"></span>',
       className: 'create-new btn btn-primary btn-sm ',
       action: function ( e:any, dt:any, node:any, config:any ) {
         that.router.navigate(['users/create']);
