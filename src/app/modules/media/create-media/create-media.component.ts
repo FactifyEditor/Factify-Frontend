@@ -21,6 +21,7 @@ import { ToasterComponent } from 'src/app/modules/shared/toaster/toaster.compone
 import { ToastService } from 'src/app/services/shared/toast.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-create-media',
@@ -95,7 +96,8 @@ export class CreateMediaComponent implements OnInit {
     private _router: Router,
     private activatedRoute: ActivatedRoute,
     private toastService: ToastService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private audioService: AudioService
   ) {
 
   }
@@ -122,7 +124,6 @@ export class CreateMediaComponent implements OnInit {
     this.uploader.onCompleteItem = (item: any, status: any) => {
       console.log('Uploaded File Details:', item);
     };
-
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.initForm()
     if (id != null) {
@@ -351,7 +352,7 @@ export class CreateMediaComponent implements OnInit {
     //rating video
     this.videoTemplate.scenes[5].duration = ratingDuration + 1
   }
-  processVideo(form: FormGroup, draft: boolean = false) {
+  async processVideo(form: FormGroup, draft: boolean = false) {
     // console.log(this.form.value.language);
     let selectedLanguage = this.languages.find(x => x._id == this.form.value.language);
     if (!draft)
@@ -472,22 +473,22 @@ export class CreateMediaComponent implements OnInit {
       this.videoTemplate.scenes[7].audioUrl = languageTracks.introTrack;
       this.videoTemplate.scenes[7].name = "intro";
       //headline background track
-      let claimDuration = this.form.value.claimTimeSetting ? this.audios.claimAudio.duration : this.form.value.claimTime || 8;
-
+      let claimDuration = this.form.value.claimTimeSetting ? this.audios.claimAudio.duration == 0 ? await this.getAudioDuration(this.audios.claimAudio.audioUrl) : this.audios.claimAudio.duration : this.form.value.claimTime || 8;
+      console.log("claimDuration", claimDuration)
       this.videoTemplate.scenes[8].audioUrl = languageTracks.headlineTrack;
       this.videoTemplate.scenes[8].startingTime = 3.6
       this.videoTemplate.scenes[8].duration = claimDuration;
       this.videoTemplate.scenes[8].name = "headlineTrack";
 
-      let verification1Duraton = this.form.value.verify1TimeSetting ? this.audios.verify1Audio.duration : this.form.value.verify1Time || 8
+      let verification1Duraton = this.form.value.verify1TimeSetting ? this.audios.claimAudio.duration == 0 ? await this.getAudioDuration(this.audios.verify1Audio.audioUrl) : this.audios.verify1Audio.duration : this.form.value.verify1Time || 8
       let verificationStartTime = claimDuration + verification1Duraton;
-      let verification2Duration = this.form.value.verify2TimeSetting ? this.audios.verify2Audio.duration : this.form.value.verify2Time || 8
+      let verification2Duration = this.form.value.verify2TimeSetting ? this.audios.claimAudio.duration == 0 ? await this.getAudioDuration(this.audios.verify2Audio.audioUrl) : this.audios.verify2Audio.duration : this.form.value.verify2Time || 8
 
       let verification2StartTime = verificationStartTime + verification2Duration;
-      let verification3Duration = this.form.value.verify3TimeSetting ? this.audios.verify3Audio.duration : this.form.value.verify3Time || 8
+      let verification3Duration = this.form.value.verify3TimeSetting ? this.audios.claimAudio.duration == 0 ? await this.getAudioDuration(this.audios.verify3Audio.audioUrl) : this.audios.verify3Audio.duration : this.form.value.verify3Time || 8
 
       let verification3StartTime = verification2StartTime + verification3Duration;
-      let ratingDuration = this.form.value.ratingTimeSetting ? this.audios.ratingAudio.duration : this.form.value.ratingTime || 8
+      let ratingDuration = this.form.value.ratingTimeSetting ? this.audios.claimAudio.duration == 0 ? await this.getAudioDuration(this.audios.ratingAudio.audioUrl) : this.audios.ratingAudio.duration : this.form.value.ratingTime || 8
 
       let ratingStartTime = verification3StartTime + ratingDuration;
       this.calculateDuration(claimDuration, verificationStartTime, verification1Duraton, verification2StartTime, verification2Duration, verification3StartTime, verification3Duration, ratingStartTime, ratingDuration)
@@ -636,7 +637,7 @@ export class CreateMediaComponent implements OnInit {
           //_media["_id"] = this.feed._id;
           this.mediaService.updateMedia(_media, this.feed._id).subscribe(
             async resposse => {
-              if (!_media.draft){
+              if (!_media.draft) {
                 _media._id = this.feed._id;
                 await this.processAll(_media);
               }
@@ -658,7 +659,7 @@ export class CreateMediaComponent implements OnInit {
 
           this.mediaService.createMedia(_media).subscribe(
             async response => {
-              if (!_media.draft){
+              if (!_media.draft) {
                 await this.processAll(response["data"]);
               }
             },
@@ -851,5 +852,15 @@ export class CreateMediaComponent implements OnInit {
   }
   loadImageFailed() {
     // show message
+  }
+  async getAudioDuration(url) {
+    if (url == "" || url == undefined)
+      return 0
+    return new Promise((resolve, reject) => {
+      this.audioService.getAudioDuration(url).subscribe(duration => {
+        console.log(duration);
+        resolve(duration);
+      });
+    })
   }
 }
