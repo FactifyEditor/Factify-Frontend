@@ -10,4 +10,5 @@ export class User {
     email:string;
     roles:  any[];
     token?: string;
+    status:number;
 }

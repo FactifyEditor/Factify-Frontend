@@ -37,6 +37,14 @@
           </div>
       </div></div>
       <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsPassword">Password</label>
+        <input type="password" formControlName="password" name="multiStepsPassword" id="multiStepsPassword" class="form-control" placeholder="************" aria-label="john.doe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['password']">Password is required!</div>
+          </div>
+      </div></div>
+      <div class="col-sm-6 fv-plugins-icon-container">
         <label class="form-label" for="multiStepsEmail">Mobile</label>
         <input type="email" formControlName="mobile" name="multiStepsEmail" id="multiStepsEmail" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe">
       <div class="fv-plugins-message-container invalid-feedback">

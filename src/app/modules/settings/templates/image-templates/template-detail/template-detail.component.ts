@@ -101,6 +101,7 @@ export class TemplateDetailComponent  implements OnInit {
         email:this.registerForm.value.email,
         phone:this.registerForm.value.mobile,
         roles:[this.registerForm.value.roles],
+        status:1
         
       }
       

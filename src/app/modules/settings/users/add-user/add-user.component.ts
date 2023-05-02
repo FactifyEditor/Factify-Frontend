@@ -81,7 +81,8 @@ export class AddUserComponent implements OnInit {
       lastName: [user?.lastName || '', Validators.required],
       email: [user?.email || '', [Validators.required, Validators.email]],
       mobile: [user?.phone || '', [Validators.required]],
-      roles: [user?.roles?.[0] || '', [Validators.required]]
+      roles: [user?.roles?.[0] || '', [Validators.required]],
+      password:[user?.password?.[0] || '', [Validators.required]],
     }
     );
   }
@@ -97,8 +98,9 @@ export class AddUserComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,
         phone: this.registerForm.value.mobile,
+        password:this.registerForm.value.password,
         roles: [this.registerForm.value.roles],
-
+        status:1
       }
       if (this.user?._id) {
         this.userService.updateUser(_user, this.user._id).subscribe(

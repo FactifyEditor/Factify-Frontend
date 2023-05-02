@@ -140,8 +140,8 @@ export class CreateMediaComponent implements OnInit {
         this.audios.verify3Audio.audioUrl = media.data.metaData.verification3.verificationVoice;
         this.images['rating'].imageUrl = media.data.metaData.rating.ratingImage;
         this.audios.ratingAudio.audioUrl = media.data.metaData.rating.ratingVoice;
-        this.imageTemplate.factImage = media.data.metaData.imageJson.factImage;
-        this.images.imageTemplate.imageUrl = media.data.metaData.imageJson.factImage;
+        this.imageTemplate.factImage = media.data.metaData?.imageJson?.factImage;
+        this.images.imageTemplate.imageUrl = media.data.metaData?.imageJson?.factImage;
 
         // this.langulage = langulage.data;
         // if(this.langulage.font)
