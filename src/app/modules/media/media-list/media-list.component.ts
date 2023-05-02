@@ -28,7 +28,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
   }
 
 
-
+  // { $exists: true, $ne: true }
   dtOptions: any = {};
   selectedMedia = []
   ngOnInit() {
@@ -37,7 +37,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
       ajax: (dataTablesParameters: any, callback: any) => {
         that.http
           .get<any>(
-            `${this.baseURL}/media`
+            `${this.baseURL}/media?draft=false`
           ).subscribe((resp: any) => {
             callback({
               recordsTotal: resp.data.length,
