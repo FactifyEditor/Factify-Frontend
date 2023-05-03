@@ -21,7 +21,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private http: HttpClient,
     private router: Router,
-    private toastService:ToastService,
+    private toastService: ToastService,
     private mediaSerice: MediaService,
     private route: ActivatedRoute) {
 
@@ -131,7 +131,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
             var stateNum = Math.floor(Math.random() * 6);
             var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
             var $state = states[stateNum];
-            var $name  = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
+            var $name = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
             var $initials: any = $name.match(/\b\w/g) || [];
             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
             $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
@@ -205,7 +205,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.confirmContent.nativeElement.click();
     this.selectedDrafts = [item]
   }
-  deleteBulkEntity(){
+  deleteBulkEntity() {
     this.confirmContent.nativeElement.click();
   }
   editEntity(item) {
@@ -225,7 +225,7 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log('ID of checked element: ' + id);
           that.selectedDrafts.push(id);
         }
-        else{
+        else {
           var id = $(this).attr('id');
           console.log('ID of unchecked element: ' + id);
           this.selectedDrafts.splice(this.selectedDrafts.indexOf(id), 1);
@@ -240,14 +240,13 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <li><a class="dropdown-item" href="javascript:;" onclick="functions.deleteBulkEntity()">Delete</a></li>
-      <li><a class="dropdown-item" href="#">Publish</a></li>
     </ul>
   </div>
       `);
         if ($('.tblChk:checked').length < 2) {
           // remove d2 button from ui
-          if(d2!=null)
-          d2.remove();
+          if (d2 != null)
+            d2.remove();
         }
       }
     })

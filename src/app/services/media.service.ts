@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MediaService {
+  publishMedia(ids: any[]) {
+    return this.http.post(`${this.baseURL}/media/publish`,{ body: { ids } });
+  }
   private baseURL = environment.BASE_URL;
   private renderURL = environment.RENDERER_URL;
   constructor(private http: HttpClient) { }

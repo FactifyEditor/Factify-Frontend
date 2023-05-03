@@ -44,3 +44,23 @@
       </div>
     </div>
   </div>
+
+
+  <button style="visibility:hidden" #confirmPublishBtn id="confirmPublishBtn"
+    class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#confirmPublishContent"> Show
+  </button>
+  
+  <div class="modal fade " id="confirmPublishContent" tabindex="-1"  aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+      <div class="modal-content p-3 p-md-5">
+        <div class="modal-body">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <p>Are you sure you want to publish this {{selectedMedia.length}} items ?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button"  data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+          <button type="button" class="btn btn-success" (click)="publishConfirm()" data-bs-dismiss="modal" aria-label="Close">Yes Publish</button>
+        </div>
+      </div>
+    </div>
+  </div>
