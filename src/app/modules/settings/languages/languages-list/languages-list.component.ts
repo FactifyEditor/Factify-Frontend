@@ -54,6 +54,9 @@ export class LanguagesListComponent implements OnInit, AfterViewInit {
 
         {
           // Actions
+           // <a href="javascript:;" class="dropdown-item">Archive</a>
+          // <div class="dropdown-divider"></div>
+          // <a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>
           targets: -1,
           title: 'Actions',
           orderable: false,
@@ -63,9 +66,7 @@ export class LanguagesListComponent implements OnInit, AfterViewInit {
           <a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>
           <div class="dropdown-menu dropdown-menu-end m-0">
           <a   routerlink="/languages/${$id}" ng-reflect-router-link="/languages/${$id}" href="/languages/${$id}"  class="dropdown-item">Details</a>
-          <a href="javascript:;" class="dropdown-item">Archive</a>
-          <div class="dropdown-divider"></div>
-          <a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>
+         
           </div> 
           </div>`;
           },
