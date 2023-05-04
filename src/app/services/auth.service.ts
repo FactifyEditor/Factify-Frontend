@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ToastService } from './shared/toast.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +22,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   public loggedIn = new BehaviorSubject<boolean>(false); // {1}
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(private http: HttpClient, public router: Router,private toastService: ToastService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -39,7 +40,8 @@ export class AuthService {
   signIn(user: User) {
     return this.http
       .post<any>(`${this.baseURL}/auth/login`, user)
-      .subscribe((res: any) => {
+      .subscribe(
+        (res: any) => {
         localStorage.setItem('accessToken', res.accessToken);
         // this.getUserProfile(res._id).subscribe((res) => {
         //   this.currentUser = res;
@@ -50,7 +52,12 @@ export class AuthService {
         // this.router.navigateByUrl('/feed');
 
         // });
-      });
+      },error => {
+        console.log("error", error);
+        this.toastService.show("invalid user or password", { classname: 'bg-danger text-dark', delay: 10000 });
+   
+        // this.notificationService.showError(error.error.error)
+      },);
   }
 
   getToken() {

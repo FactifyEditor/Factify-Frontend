@@ -644,7 +644,7 @@ export class CreateMediaComponent implements OnInit {
             },
             error => {
               console.log("error", error);
-              this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+              this.toastService.show(JSON.stringify(error), { classname: 'bg-danger text-dark', delay: 10000 });
               this.processingVideo = false;
               // this.notificationService.showError(error.error.error)
             },
@@ -665,7 +665,7 @@ export class CreateMediaComponent implements OnInit {
             },
             error => {
               console.log("error", error);
-              this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+              this.toastService.show(JSON.stringify(error), { classname: 'bg-danger text-dark', delay: 10000 });
               this.processingVideo = false;
               // this.notificationService.showError(error.error.error)
             },

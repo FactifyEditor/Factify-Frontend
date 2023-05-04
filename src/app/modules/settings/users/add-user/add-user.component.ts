@@ -111,7 +111,7 @@ export class AddUserComponent implements OnInit {
           },
           error => {
             console.log("error", error);
-            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+            this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
           },
           () => {
             this.toastService.show(' User Upload', { classname: 'bg-success text-dark', delay: 10000 });
@@ -128,7 +128,7 @@ export class AddUserComponent implements OnInit {
           },
           error => {
             console.log("error", error);
-            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+            this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
           },
           () => {
             this.toastService.show('New User Added', { classname: 'bg-success text-dark', delay: 10000 });

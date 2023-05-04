@@ -127,7 +127,7 @@ export class CreateRatingComponent implements OnInit {
       },
       error => {
         console.log("error",error);
-        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+        this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
       },
       () => {
              this.toastService.show('Rating Updated', { classname: 'bg-success text-dark', delay: 10000 });
@@ -144,7 +144,7 @@ export class CreateRatingComponent implements OnInit {
       },
       error => {
         console.log("error",error);
-        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+        this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
       },
       () => {
              this.toastService.show('New Rating Added', { classname: 'bg-success text-dark', delay: 10000 });

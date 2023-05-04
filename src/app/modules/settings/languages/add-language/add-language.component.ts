@@ -105,7 +105,7 @@ export class AddLanguageComponent implements OnInit {
       },
       error => {
         console.log("error", error);
-        this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+        this.toastService.show(JSON.stringify(error), { classname: 'bg-danger text-dark', delay: 10000 });
       },
       () => {
         this.toastService.show('Language Updated', { classname: 'bg-success text-dark', delay: 10000 });
@@ -120,7 +120,7 @@ export class AddLanguageComponent implements OnInit {
           },
           error => {
             console.log("error", error);
-            this.toastService.show(JSON.stringify(error), { classname: 'bg-dander text-dark', delay: 10000 });
+            this.toastService.show(JSON.stringify(error), { classname: 'bg-danger text-dark', delay: 10000 });
           },
           () => {
             this.toastService.show('New Language Added', { classname: 'bg-success text-dark', delay: 10000 });

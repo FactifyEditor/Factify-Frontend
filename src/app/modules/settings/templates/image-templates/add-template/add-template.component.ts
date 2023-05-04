@@ -127,7 +127,7 @@ export class AddTemplateComponent implements OnInit {
       },
       error => {
         console.log("error",error);
-        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+        this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
       },
       () => {
              this.toastService.show('Template Updated', { classname: 'bg-success text-dark', delay: 10000 });
@@ -144,7 +144,7 @@ export class AddTemplateComponent implements OnInit {
       },
       error => {
         console.log("error",error);
-        this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+        this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
       },
       () => {
              this.toastService.show('New Template Added', { classname: 'bg-success text-dark', delay: 10000 });

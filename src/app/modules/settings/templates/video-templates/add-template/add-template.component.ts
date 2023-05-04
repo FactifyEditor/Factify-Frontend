@@ -170,7 +170,7 @@ export class AddTemplateComponent implements OnInit {
           },
           error => {
             console.log("error", error);
-            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+            this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
 
             // this.notificationService.showError(error.error.error)
 
@@ -190,7 +190,7 @@ export class AddTemplateComponent implements OnInit {
           },
           error => {
             console.log("error", error);
-            this.toastService.show(error, { classname: 'bg-dander text-dark', delay: 10000 });
+            this.toastService.show(error, { classname: 'bg-danger text-dark', delay: 10000 });
 
             // this.notificationService.showError(error.error.error)
 
