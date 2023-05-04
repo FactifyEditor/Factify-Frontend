@@ -197,7 +197,7 @@ export class CreateMediaComponent implements OnInit {
       ratingVoice: [''],
       ratingPerferTTS: [feed?.claim ? feed.rating.perferTTS : true],
       ratingTime: [feed?.rating?.time || 8, Validators.required],
-      imageText: [feed?.rating?.frameText, Validators.required],
+      imageText: [feed?.imageJson?.imageText, Validators.required],
       image: ['', media?._id ? '' : Validators.required],
       claimTimeSetting: [feed?.claim?.claimTimeSetting || false],
       verify1TimeSetting: [feed?.verification1?.timeSetting || false],
