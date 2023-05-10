@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
 
   show = false;
   onClick() {
-    alert()
     if (this.password === 'password') {
       this.password = 'text';
       this.show = true;
