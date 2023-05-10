@@ -29,6 +29,8 @@ import { AudioService } from 'src/app/services/audio.service';
   styleUrls: ['./create-media.component.css']
 })
 export class CreateMediaComponent implements OnInit {
+  
+  
   language: any;
   private baseUrl = environment.BASE_URL;
   processingVideo = false;
@@ -39,6 +41,8 @@ export class CreateMediaComponent implements OnInit {
   selectedLanguage = undefined;
   selectedRating = undefined;
   submitted: boolean = false;
+  ttsSupportedLanguage: boolean = true;
+
   feed: any;
   imageType: string;
   images = {
@@ -101,6 +105,42 @@ export class CreateMediaComponent implements OnInit {
   ) {
 
   }
+  onLanguageChange(arg0: EventTarget) {
+    console.log(arg0);
+    let selectedLanguage = this.languages.find(x => x._id == this.form.value.language);
+    if(selectedLanguage.value="") {
+     
+      this.disableForm();
+    }
+    else {
+     this.enableForm();
+    }
+    this.cd.detectChanges();
+  }
+  enableForm() {
+      this.form.get('claimTextToSpeechText')?.enable();
+      this.form.get('verify1TextToSpeechText')?.enable();
+      this.form.get('verify2TextToSpeechText')?.enable();
+      this.form.get('verify3TextToSpeechText')?.enable();
+      this.form.get('ratingTextToSpeechText')?.enable();
+      this.form.get('claimPerferTTS')?.enable();
+      this.form.get('verify1PerferTTS')?.enable();
+      this.form.get('verify2PerferTTS')?.enable();
+      this.form.get('verify3PerferTTS')?.enable();
+      this.form.get('ratingPerferTTS')?.enable();
+  }
+  disableForm(){
+    this.form.get('claimTextToSpeechText')?.disable();
+    this.form.get('verify1TextToSpeechText')?.disable();
+    this.form.get('verify2TextToSpeechText')?.disable();
+    this.form.get('verify3TextToSpeechText')?.disable();
+    this.form.get('ratingTextToSpeechText')?.disable();
+    this.form.get('claimPerferTTS')?.disable();
+    this.form.get('verify1PerferTTS')?.disable();
+    this.form.get('verify2PerferTTS')?.disable();
+    this.form.get('verify3PerferTTS')?.disable();
+    this.form.get('ratingPerferTTS')?.disable();
+  }
   ngOnInit() {
 
     this.languageService.getAllLanguages().subscribe(language => {
@@ -108,11 +148,12 @@ export class CreateMediaComponent implements OnInit {
     })
     this.ratings$ = this.ratingService.getAllRatings();
     this.templateService.getAllImageTemplate().subscribe(imageTemplates => {
+      if(this.imageTemplate==undefined)
       this.imageTemplate = imageTemplates.data[0]
     })
     this.templateService.getAllVideoTemplate().subscribe(videoTemplates => {
+      if(this.videoTemplate==undefined)
       this.videoTemplate = videoTemplates.data[0];
-      console.log(this.videoTemplate);
     })
 
     this.uploader.onAfterAddingFile = (file) => {
@@ -143,7 +184,8 @@ export class CreateMediaComponent implements OnInit {
         this.audios.ratingAudio.audioUrl = media.data.metaData.rating.ratingVoice;
         this.imageTemplate.factImage = media.data.metaData?.imageJson?.factImage;
         this.images.imageTemplate.imageUrl = media.data.metaData?.imageJson?.factImage;
-
+        this.imageTemplate=media.data.metaData?.imageJson;
+        this.videoTemplate=media.data.metaData?.videoJson;
         // this.langulage = langulage.data;
         // if(this.langulage.font)
         // this.fontFileName=this.getFileNameFromUrl(this.langulage.font)

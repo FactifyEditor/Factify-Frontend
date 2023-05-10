@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-md-4 mb-4" ƒ>
                 <div class="position-relative">
-                  <select formControlName="language" class="select2 form-select select2-hidden-accessible"
+                  <select (change)="onLanguageChange($event.target)" formControlName="language" class="select2 form-select select2-hidden-accessible"
                     [ngClass]="{ 'is-invalid': submitted && f['language'].errors }">
                     <!-- *ngIf="languages$ | async as languages" -->
 
@@ -120,7 +120,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f['claimVideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea class="form-control" formControlName="claimTextToSpeechText"
+                    <textarea class="form-control"  formControlName="claimTextToSpeechText"
                       [ngClass]="{ 'is-invalid': submitted && f['claimTextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
@@ -231,7 +231,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f['verify1VideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea class="form-control" formControlName="verify1TextToSpeechText"
+                    <textarea class="form-control"  formControlName="verify1TextToSpeechText"
                       [ngClass]="{ 'is-invalid': submitted && f['verify1TextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
@@ -337,7 +337,7 @@
                       formControlName="verify2VideoFrameText"></textarea>
                   </td>
                   <td>
-                    <textarea class="form-control"
+                    <textarea class="form-control" 
                       [ngClass]="{ 'is-invalid': submitted && f['verify2TextToSpeechText'].errors }"
                       formControlName="verify2TextToSpeechText"></textarea>
                   </td>
@@ -446,7 +446,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f['verify3VideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea class="form-control"
+                    <textarea class="form-control" 
                       [ngClass]="{ 'is-invalid': submitted && f['verify3TextToSpeechText'].errors }"
                       formControlName="verify3TextToSpeechText"></textarea>
                   </td>
@@ -556,7 +556,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f['ratingVideoFrameText'].errors }"></textarea>
                   </td>
                   <td>
-                    <textarea class="form-control" formControlName="ratingTextToSpeechText"
+                    <textarea class="form-control"  formControlName="ratingTextToSpeechText"
                       [ngClass]="{ 'is-invalid': submitted && f['ratingTextToSpeechText'].errors }"></textarea>
                   </td>
                   <td>
