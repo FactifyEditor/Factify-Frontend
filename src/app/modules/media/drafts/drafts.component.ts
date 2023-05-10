@@ -116,9 +116,10 @@ export class DraftsComponent implements OnInit, AfterViewInit, OnDestroy {
         // Avatar image/badge, Name and post
         targets: 7,
         render: function (data: any, type: any, full: any, meta: any) {
+          console.log(full)
           var $user_img = full['avatar'],
-
-
+        
+            
             $post = full['post'];
           var $name = full['creator']['firstName'] + ' ' + full['creator']['lastName'];
           var assetsPath = "assets/"
