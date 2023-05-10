@@ -48,7 +48,7 @@
                 </div>
                 <div class="input-group input-group-merge">
                   <input
-                    type="password"
+                    [type]="password"
                     id="password"
                     class="form-control"
                     name="password"
@@ -56,7 +56,11 @@
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                     aria-describedby="password"
                   />
-                  <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                  <span (click)="onClick()" class="input-group-text cursor-pointer">
+                    <i class="ti ti-eye-off" *ngIf="!show"></i>
+                    <i class="ti ti-eye" *ngIf="show"></i>
+                    
+                  </span>
                 </div>
               </div>
               

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/services/shared/toast.service';
 })
 export class LoginComponent implements OnInit {
   signinForm: FormGroup;
-
+  
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
@@ -30,6 +30,19 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/feed');
 
       // this.router.navigate(['feed']);
+    }
+  }
+  password="password";
+
+  show = false;
+  onClick() {
+    alert()
+    if (this.password === 'password') {
+      this.password = 'text';
+      this.show = true;
+    } else {
+      this.password = 'password';
+      this.show = false;
     }
   }
 
