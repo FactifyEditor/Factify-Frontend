@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,20 +22,17 @@ import { ToastService } from 'src/app/services/shared/toast.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AudioService } from 'src/app/services/audio.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-
 
 @Component({
   selector: 'app-create-media',
   templateUrl: './create-media.component.html',
   styleUrls: ['./create-media.component.css']
 })
-export class CreateMediaComponent implements OnInit,OnDestroy {
-
+export class CreateMediaComponent implements OnInit {
+  
   private SELECT_FILE_ERROR = 'Please select a file to upload';
-  private UPLOAD_ERROR = 'Error while uploading the file';
-  private ngUnsubscribe = new Subject<void>();
+private UPLOAD_ERROR = 'Error while uploading the file';
+
   language: any;
   private baseUrl = environment.BASE_URL;
   processingVideo = false;
@@ -113,28 +110,28 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
   onLanguageChange(arg0: EventTarget) {
     console.log(arg0);
     let selectedLanguage = this.languages.find(x => x._id == this.form.value.language);
-    if (selectedLanguage.value = "") {
-
+    if(selectedLanguage.value="") {
+     
       this.disableForm();
     }
     else {
-      this.enableForm();
+     this.enableForm();
     }
     this.cd.detectChanges();
   }
   enableForm() {
-    this.form.get('claimTextToSpeechText')?.enable();
-    this.form.get('verify1TextToSpeechText')?.enable();
-    this.form.get('verify2TextToSpeechText')?.enable();
-    this.form.get('verify3TextToSpeechText')?.enable();
-    this.form.get('ratingTextToSpeechText')?.enable();
-    this.form.get('claimPerferTTS')?.enable();
-    this.form.get('verify1PerferTTS')?.enable();
-    this.form.get('verify2PerferTTS')?.enable();
-    this.form.get('verify3PerferTTS')?.enable();
-    this.form.get('ratingPerferTTS')?.enable();
+      this.form.get('claimTextToSpeechText')?.enable();
+      this.form.get('verify1TextToSpeechText')?.enable();
+      this.form.get('verify2TextToSpeechText')?.enable();
+      this.form.get('verify3TextToSpeechText')?.enable();
+      this.form.get('ratingTextToSpeechText')?.enable();
+      this.form.get('claimPerferTTS')?.enable();
+      this.form.get('verify1PerferTTS')?.enable();
+      this.form.get('verify2PerferTTS')?.enable();
+      this.form.get('verify3PerferTTS')?.enable();
+      this.form.get('ratingPerferTTS')?.enable();
   }
-  disableForm() {
+  disableForm(){
     this.form.get('claimTextToSpeechText')?.disable();
     this.form.get('verify1TextToSpeechText')?.disable();
     this.form.get('verify2TextToSpeechText')?.disable();
@@ -148,17 +145,17 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
   }
   ngOnInit() {
 
-    this.languageService.getAllLanguages().pipe(takeUntil(this.ngUnsubscribe)).subscribe(language => {
+    this.languageService.getAllLanguages().subscribe(language => {
       this.languages = language.data
     })
     this.ratings$ = this.ratingService.getAllRatings();
-    this.templateService.getAllImageTemplate() .pipe(takeUntil(this.ngUnsubscribe)).subscribe(imageTemplates => {
-      if (this.imageTemplate == undefined)
-        this.imageTemplate = imageTemplates.data[0]
+    this.templateService.getAllImageTemplate().subscribe(imageTemplates => {
+      if(this.imageTemplate==undefined)
+      this.imageTemplate = imageTemplates.data[0]
     })
-    this.templateService.getAllVideoTemplate() .pipe(takeUntil(this.ngUnsubscribe)).subscribe(videoTemplates => {
-      if (this.videoTemplate == undefined)
-        this.videoTemplate = videoTemplates.data[0];
+    this.templateService.getAllVideoTemplate().subscribe(videoTemplates => {
+      if(this.videoTemplate==undefined)
+      this.videoTemplate = videoTemplates.data[0];
     })
 
     this.uploader.onAfterAddingFile = (file) => {
@@ -173,7 +170,7 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.initForm()
     if (id != null) {
-      this.mediaService.getMedia(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((media) => {
+      this.mediaService.getMedia(id).subscribe((media) => {
         // console.log(media.data)
         this.feed = media.data
         this.initForm(this.feed);
@@ -189,8 +186,8 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
         this.audios.ratingAudio.audioUrl = media.data.metaData.rating.ratingVoice;
         this.imageTemplate.factImage = media.data.metaData?.imageJson?.factImage;
         this.images.imageTemplate.imageUrl = media.data.metaData?.imageJson?.factImage;
-        this.imageTemplate = media.data.metaData?.imageJson;
-        this.videoTemplate = media.data.metaData?.videoJson;
+        this.imageTemplate=media.data.metaData?.imageJson;
+        this.videoTemplate=media.data.metaData?.videoJson;
         // this.langulage = langulage.data;
         // if(this.langulage.font)
         // this.fontFileName=this.getFileNameFromUrl(this.langulage.font)
@@ -548,7 +545,7 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
       const verify2TtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.verify2TextToSpeechText });
       const verify3TtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.verify3TextToSpeechText });
       const ratingTtsText = this.mediaService.getAudioFromText({ languageCode: selectedLanguage.value, ttsText: this.form.value.ratingTextToSpeechText });
-      forkJoin([headlineTtsText, verify1TtsText, verify2TtsText, verify3TtsText, ratingTtsText]) .pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+      forkJoin([headlineTtsText, verify1TtsText, verify2TtsText, verify3TtsText, ratingTtsText]).subscribe(result => {
         if (this.form.value.claimPerferTTS) {
           this.audios.claim.audioUrl = result[0].data;
           this.videoTemplate.scenes[11].audioUrl = result[0].data
@@ -682,7 +679,7 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
           _media.draft = true;
         if (this.feed) {
           //_media["_id"] = this.feed._id;
-          this.mediaService.updateMedia(_media, this.feed._id) .pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+          this.mediaService.updateMedia(_media, this.feed._id).subscribe(
             async resposse => {
               if (!_media.draft) {
                 _media._id = this.feed._id;
@@ -704,7 +701,7 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
         }
         else {
 
-          this.mediaService.createMedia(_media) .pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+          this.mediaService.createMedia(_media).subscribe(
             async response => {
               if (!_media.draft) {
                 await this.processAll(response["data"]);
@@ -778,10 +775,10 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
         html: selectedTemplate.html
       }
       let feedData = { ...feed, ...imageText }
-      this.ratingService.getRating(feed.rating) .pipe(takeUntil(this.ngUnsubscribe)).subscribe(rating => {
+      this.ratingService.getRating(feed.rating).subscribe(rating => {
         imageText.ratingImage = rating.data.image;
         console.log(feedData);
-        this.mediaService.processAll(feedData) .pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any) => {
+        this.mediaService.processAll(feedData).subscribe((data: any) => {
           feed.imageStatus = 2;
           feed.imageUrl = data.data;
           resolve(true);
@@ -797,10 +794,6 @@ export class CreateMediaComponent implements OnInit,OnDestroy {
     this.imageType = type;
     this.cropImageModelBtn.nativeElement.click();
 
-  }
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
   // 
   getStartingTime(lastFrameTime, duration) {
