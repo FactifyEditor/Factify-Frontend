@@ -50,7 +50,7 @@ export class TemplateService {
          
           <style>
           body {
-            font-family: 'Noto+Sans';
+            font-family: "Noto+Sans";
           }
               .container {
                 position: relative;
@@ -221,6 +221,13 @@ export class TemplateService {
           left: 80;
           max-width:300px
       }
+      @font-face {
+        font-family: "Noto+Sans";
+        src: url("{{fontUrl}}") format('woff2');;
+      }
+      body {
+        font-family: "Noto+Sans";
+      }
       </style>
         <body>
           <div class="container" style="font-family: 'Noto Sans Devanagari', sans-serif;">
@@ -269,8 +276,13 @@ export class TemplateService {
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
          
           <style>
+          @font-face {
+            font-family: "Noto+Sans";
+            src: url("{{fontUrl}}") format('woff2');;
+          }
+         
           body {
-            font-family: 'Noto+Sans';
+            font-family: "Noto+Sans";
           }
               .container {
                 position: relative;
@@ -440,7 +452,7 @@ export class TemplateService {
           max-width: 300px;
       }
       body {
-        font-family: 'Noto+Sans';
+        font-family: "Noto+Sans";
       }
       </style>
         <body>
@@ -489,8 +501,12 @@ export class TemplateService {
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
           <style>
+          @font-face {
+            font-family: "Noto+Sans";
+            src: url("{{fontUrl}}") format('woff2'); 
+          }
           body {
-            font-family: 'Noto+Sans';
+            font-family: "Noto+Sans";
           }
               .container {
                 position: relative;
