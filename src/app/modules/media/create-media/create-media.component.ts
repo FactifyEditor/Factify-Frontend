@@ -406,6 +406,7 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.get('claimTextToSpeechText').addValidators(Validators.required);
       this.form.controls.claimTextToSpeechText.updateValueAndValidity();
     } else {
+      this.form.get('claimTextToSpeechText').clearValidators(Validators.required);
       // add validation 
       if (!draft && (this.audios.claimAudio.audioUrl == undefined && this.form.get('claimPerferTTS').value == false)) {
         this.toastService.show("please upload audio  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
@@ -417,7 +418,8 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.controls.verify1TextToSpeechText.updateValueAndValidity();
 
     } else {
-      // add validation  
+      // add validation 
+      this.form.get('verify1TextToSpeechText').clearValidators(Validators.required); 
       if (!draft && (this.form.get('verify1PerferTTS').value == false && this.audios.verify1Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 1 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
@@ -427,15 +429,17 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.get('verify2TextToSpeechText').addValidators(Validators.required);
       this.form.controls.verify2TextToSpeechText.updateValueAndValidity();
     } else {
+      this.form.get('verify2TextToSpeechText').clearValidators(Validators.required);
       if (!draft && (this.form.get('verify2PerferTTS').value == false && this.audios.verify2Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 2 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
     }
     if (this.form.get('verify3PerferTTS').value) {
-      this.form.get('verify3TextToSpeechText').addValidators(Validators.required);
+      this.form.get('verify3TextToSpeechText').clearValidators(Validators.required);
       this.form.controls.verify3TextToSpeechText.updateValueAndValidity();
     } else {
+      this.form.get('verify3TextToSpeechText').addValidators(Validators.required);
       if (!draft && (this.form.get('verify3PerferTTS').value == false && this.audios.verify3Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
@@ -445,6 +449,7 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.get('ratingTextToSpeechText').addValidators(Validators.required);
       this.form.controls.ratingTextToSpeechText.updateValueAndValidity();
     } else {
+      this.form.get('ratingTextToSpeechText').clearValidators(Validators.required);
       if (!draft && (this.form.get('ratingPerferTTS').value == false && this.audios.ratingAudio.audioUrl == undefined)) {
         this.toastService.show("please upload rating 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
