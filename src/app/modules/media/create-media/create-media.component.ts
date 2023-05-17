@@ -234,13 +234,13 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       verify3TextToSpeechText: [feed?.verification3?.TTSText],
       verify3Image: ['', media?._id ? '' : Validators.required],
       verify3Voice: [''],
-      verify3PerferTTS: [feed?.claim ? feed.verification3.perferTTS : true],
+      verify3PerferTTS: [feed?.verification3 ? feed?.verification3?.perferTTS : true],
       verify3Time: [feed?.verification3?.time || 8, Validators.required],
       ratingVideoFrameText: [feed?.rating?.frameText, Validators.required],
       ratingTextToSpeechText: [feed?.rating?.TTSText],
       ratingImage: ['', media?._id ? '' : Validators.required],
       ratingVoice: [''],
-      ratingPerferTTS: [feed?.claim ? feed.rating.perferTTS : true],
+      ratingPerferTTS: [feed?.rating ? feed.rating.perferTTS : true],
       ratingTime: [feed?.rating?.time || 8, Validators.required],
       imageText: [feed?.imageJson?.imageText, Validators.required],
       image: ['', media?._id ? '' : Validators.required],
@@ -408,6 +408,8 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.controls.claimTextToSpeechText.updateValueAndValidity();
     } else {
       this.form.get('claimTextToSpeechText').clearValidators(Validators.required);
+      this.form.controls.claimTextToSpeechText.updateValueAndValidity();
+
       // add validation 
       if (!draft && (this.audios.claimAudio.audioUrl == undefined && this.form.get('claimPerferTTS').value == false)) {
         this.toastService.show("please upload audio  for claim", { classname: 'bg-danger text-dark', delay: 10000 });
@@ -421,6 +423,8 @@ private UPLOAD_ERROR = 'Error while uploading the file';
     } else {
       // add validation 
       this.form.get('verify1TextToSpeechText').clearValidators(Validators.required); 
+      this.form.controls.verify1TextToSpeechText.updateValueAndValidity();
+
       if (!draft && (this.form.get('verify1PerferTTS').value == false && this.audios.verify1Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 1 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
@@ -431,16 +435,19 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.controls.verify2TextToSpeechText.updateValueAndValidity();
     } else {
       this.form.get('verify2TextToSpeechText').clearValidators(Validators.required);
+      this.form.controls.verify2TextToSpeechText.updateValueAndValidity();
+
       if (!draft && (this.form.get('verify2PerferTTS').value == false && this.audios.verify2Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 2 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
       }
     }
     if (this.form.get('verify3PerferTTS').value) {
-      this.form.get('verify3TextToSpeechText').clearValidators(Validators.required);
+      this.form.get('verify3TextToSpeechText').addValidators(Validators.required);
       this.form.controls.verify3TextToSpeechText.updateValueAndValidity();
     } else {
-      this.form.get('verify3TextToSpeechText').addValidators(Validators.required);
+      this.form.get('verify3TextToSpeechText').clearValidators(Validators.required);
+      this.form.controls.verify3TextToSpeechText.updateValueAndValidity();
       if (!draft && (this.form.get('verify3PerferTTS').value == false && this.audios.verify3Audio.audioUrl == undefined)) {
         this.toastService.show("please upload verification 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
@@ -451,6 +458,8 @@ private UPLOAD_ERROR = 'Error while uploading the file';
       this.form.controls.ratingTextToSpeechText.updateValueAndValidity();
     } else {
       this.form.get('ratingTextToSpeechText').clearValidators(Validators.required);
+      this.form.controls.ratingTextToSpeechText.updateValueAndValidity();
+
       if (!draft && (this.form.get('ratingPerferTTS').value == false && this.audios.ratingAudio.audioUrl == undefined)) {
         this.toastService.show("please upload rating 3 audio", { classname: 'bg-danger text-dark', delay: 10000 });
         isInValid = true;
