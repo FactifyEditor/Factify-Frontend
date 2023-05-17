@@ -118,6 +118,7 @@ private UPLOAD_ERROR = 'Error while uploading the file';
      this.enableForm();
     }
     this.cd.detectChanges();
+    
   }
   enableForm() {
       this.form.get('claimTextToSpeechText')?.enable();
