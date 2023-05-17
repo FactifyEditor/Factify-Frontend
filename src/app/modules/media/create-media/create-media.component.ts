@@ -110,15 +110,14 @@ private UPLOAD_ERROR = 'Error while uploading the file';
   onLanguageChange(arg0: EventTarget) {
     console.log(arg0);
     let selectedLanguage = this.languages.find(x => x._id == this.form.value.language);
-    if(selectedLanguage.value="") {
-     
+    if(selectedLanguage.value=="") {
       this.disableForm();
     }
     else {
      this.enableForm();
     }
     this.cd.detectChanges();
-    
+
   }
   enableForm() {
       this.form.get('claimTextToSpeechText')?.enable();
@@ -147,7 +146,8 @@ private UPLOAD_ERROR = 'Error while uploading the file';
   ngOnInit() {
 
     this.languageService.getAllLanguages().subscribe(language => {
-      this.languages = language.data
+      this.languages = language.data;
+      console.log(this.languages)
     })
     this.ratings$ = this.ratingService.getAllRatings();
     this.templateService.getAllImageTemplate().subscribe(imageTemplates => {
