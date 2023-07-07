@@ -272,205 +272,230 @@ export class TemplateService {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
-         
-          <style>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+        
+        <style>
           @font-face {
             font-family: "Noto+Sans";
-            src: url("{{fontUrl}}") format('woff2');;
+            src: url("{{fontUrl}}") format('woff2');
+            ;
           }
-         
+        
           body {
             font-family: "Noto+Sans";
           }
-              .container {
-                position: relative;
-                text-align: center;
-                color: white;
-              }
-              
-              .bottom-left {
-                position: absolute;
-                bottom: 8px;
-                left: 16px;
-              }
-              
-              .top-left {
-                position: absolute;
-          width: 350px;
-          font-size: 1.7em;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: left;
-          top: 200px;
-          left: 450px;
-              }
-              
-              .top-right {
-                position: absolute;
-                top: 8px;
-                right: 16px;
-              }
-              
-              .bottom-right {
-                position: absolute;
-                bottom: 8px;
-                right: 16px;
-              }
-              
-              .centered {
-                position: absolute;
-          top: 390px;
-          left: 450px;
-          width: 300px;
-          font-size: 1.3em;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: left;
-      
-             
-              }
-              button {
-        position: absolute;
-        width: 200px;
-        height: 100px;
-        border-radius: 40px;
-      }
-      .btn {
-        position: relative;
-        display: inline-block;
-        border: 0;
-        border-radius: 30px;
-        text-align: center;
-        white-space: nowrap;
-        cursor: pointer;
-        font-size: 14px;
-      }
-      .btn:hover {
-        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
-      }
-      .btn:active {
-        transform: translateY(1px);
-        box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);
-      }
-      .btn:focus {
-        outline: none;
-      }
-      .btn--basic {
-        background-color: #e3eacc;
-        color: #455a00;
-      }
-      .btn--ghost {
-        background-color: transparent;
-        border: 1px solid #739600;
-        color: #739600;
-      }
-      .btn--dark {
-        background-color: #455a00;
-        color: white;
-      }
-      .btn--action {
-        background-color: #17A597;
-        color: white;
-      }
-      .btn--danger {
-        background-color: #ff0000;
-        color: white;
-      }
-      .btn--link {
-        background-color: transparent;
-        color: #5786bd;
-      }
-      .btn--dropdown {
-        padding-right: 3em;
-      }
-      .btn--dropdown:before {
-        content: "";
-        right: 24px;
-        top: 22px;
-        width: 2px;
-        height: 6px;
-        background-color: rgba(0, 0, 0, 0.1);
-        position: absolute;
-        transform: rotate(-45deg);
-      }
-      .btn--dropdown:after {
-        content: "";
-        right: 20px;
-        top: 22px;
-        width: 2px;
-        height: 6px;
-        background-color: rgba(0, 0, 0, 0.1);
-        position: absolute;
-        transform: rotate(45deg);
-      }
-      .fact-btn{
-        position: absolute;
-          font-size: 1em;
-          height: 100px;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: center;
-          top: 153px;
-          left: 450px;
-          max-height: 30px;
-          max-width: 100px;
-      
-      }
-      .claim-btn{
-        position: absolute;
-          font-size: 1em;
-          height: 100px;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: center;
-          top: 340px;
-          left: 460px;
-          max-height: 30px;
-          max-width: 100px;
-      }
-      .rating{
-          position: absolute;
-          top: 20px;
-          left: 5px;
-          max-height: 60px;
-      }
-      .fact_image{
-        position: absolute;
-          color: white;
-          font-family: 'Nunito Sans';
-          text-align: center;
-          top: 125px;
-          left: 20px;
-          max-width: 420px;
-      }
-      .footer{
-        position: absolute;
-          top: 650px;
-          left: 30px;
-          max-width: 300px;
-      }
-      body {
-        font-family: "Noto+Sans";
-      }
-      </style>
+        
+          .container {
+            position: relative;
+            text-align: center;
+            color: white;
+          }
+        
+          .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+          }
+        
+          .top-left {
+            position: absolute;
+            width: 350px;
+            font-size: 1.7em;
+            color: white;
+            font-family: 'Nunito Sans';
+            text-align: left;
+            top: 200px;
+            left: 450px;
+          }
+        
+          .top-right {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+          }
+        
+          .bottom-right {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+          }
+        
+          .centered {
+            position: absolute;
+            top: 390px;
+            left: 450px;
+            width: 300px;
+            font-size: 1.7em;
+            color: white;
+            font-family: 'Nunito Sans';
+            text-align: left;
+          }
+        
+          button {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            border-radius: 40px;
+          }
+        
+          .btn {
+            position: relative;
+            display: inline-block;
+            border: 0;
+            border-radius: 30px;
+            text-align: center;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 14px;
+          }
+        
+          .btn:hover {
+            box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+          }
+        
+          .btn:active {
+            transform: translateY(1px);
+            box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);
+          }
+        
+          .btn:focus {
+            outline: none;
+          }
+        
+          .btn--basic {
+            background-color: #e3eacc;
+            color: #455a00;
+          }
+        
+          .btn--ghost {
+            background-color: transparent;
+            border: 1px solid #739600;
+            color: #739600;
+          }
+        
+          .btn--dark {
+            background-color: #455a00;
+            color: white;
+          }
+        
+          .btn--action {
+            background-color: #17A597;
+            color: white;
+          }
+        
+          .btn--danger {
+            background-color: #ff0000;
+            color: white;
+          }
+        
+          .btn--link {
+            background-color: transparent;
+            color: #5786bd;
+          }
+        
+          .btn--dropdown {
+            padding-right: 3em;
+          }
+        
+          .btn--dropdown:before {
+            content: "";
+            right: 24px;
+            top: 22px;
+            width: 2px;
+            height: 6px;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            transform: rotate(-45deg);
+          }
+        
+          .btn--dropdown:after {
+            content: "";
+            right: 20px;
+            top: 22px;
+            width: 2px;
+            height: 6px;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            transform: rotate(45deg);
+          }
+        
+          .fact-btn {
+            position: absolute;
+            font-size: 1em;
+            height: 100px;
+            color: white;
+            font-family: 'Nunito Sans';
+            text-align: center;
+            top: 153px;
+            left: 450px;
+            max-height: 30px;
+            max-width: 100px;
+        
+          }
+        
+          .claim-btn {
+            position: absolute;
+            font-size: 1em;
+            height: 100px;
+            color: white;
+            font-family: 'Nunito Sans';
+            text-align: center;
+            top: 350px;
+            left: 450px;
+            max-height: 30px;
+            max-width: 100px;
+          }
+        
+          .rating {
+            position: absolute;
+            top: 20px;
+            left: 5px;
+            max-height: 60px;
+          }
+        
+          .fact_image {
+            position: absolute;
+            color: white;
+            font-family: 'Nunito Sans';
+            text-align: center;
+            top: 125px;
+            left: 20px;
+            max-width: 420px;
+          }
+        
+          .footer {
+            position: absolute;
+            top: 650px;
+            left: 30px;
+            max-width: 300px;
+          }
+        
+          body {
+            font-family: "Noto+Sans";
+          }
+        
+        </style>
+        
         <body>
           <div class="container" style="font-family: 'Noto Sans Devanagari', sans-serif;">
-              <img class="fact_image"  src="{{factImage}}">
-              <img class="rating "  src="{{ratingImage}}">
-              <img style="width:100%;" src="https://storage.googleapis.com/factify/ZeHZ58PzIsvOfJ801678355841739.png">
-              <button class="btn fact-btn btn--action">C L A I M</button>
-              <div class="top-left">{{claim}}</div>
-              <button class="btn claim-btn btn--action">F A C T</button>
-              <div class="centered">{{fact}}</div>
-                  <img class="footer" style="width:50%;"   src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
-            </div>
+            <img class="fact_image" src="{{factImage}}">
+            <img class="rating " src="{{ratingImage}}">
+            <img style="width:100%;" src="https://storage.googleapis.com/factify/ZeHZ58PzIsvOfJ801678355841739.png">
+            <button class="btn fact-btn btn--action">C L A I M</button>
+            <div class="top-left">{{claim}}</div>
+            <button class="btn claim-btn btn--action">F A C T</button>
+            <div class="centered">{{fact}}</div>
+            <img class="footer" style="width:50%;"
+              src="https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png">
+          </div>
           <div>
-             
-          <div>
-        </body>  
-      </html> `,
+        
+            <div>
+        </body>
+        
+        </html>
+        `,
         "status": 0,
         "__v": 0
       },
