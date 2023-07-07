@@ -1,0 +1,83 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">    <a  class="" routerLink="/feed">
+
+      <i  class="ti ti-chevron-left" style="font-size: 2rem;"></i>
+     <span class="text-muted fw-light">My Profile</span> </a></h4>
+      <div class="card">
+        <div class="card-body">
+
+
+<div id="accountDetailsValidation" class="content active dstepper-block fv-plugins-bootstrap5 fv-plugins-framework">
+    <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsUsername">First Name</label>
+        <input type="text" formControlName="firstName" name="multiStepsUsername" id="multiStepsUsername" class="form-control" placeholder="johndoe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['firstName'].touched && f['firstName'].errors" class="invalid-feedback">
+            <div *ngIf="f['firstName'].errors['firstName']">First Name is required!</div>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsUsername">Last Name</label>
+        <input type="text" formControlName="lastName" name="multiStepsUsername" id="multiStepsUsername" class="form-control" placeholder="johndoe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['lastName'].touched && f['lastName'].errors" class="invalid-feedback">
+            <div *ngIf="f['lastName'].errors['lastName']">Last Name is required!</div>
+          </div>
+      </div>
+    </div>
+      <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsEmail">Email</label>
+        <input type="email" formControlName="email" name="multiStepsEmail" id="multiStepsEmail" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['email'].touched && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['email']">Email is required!</div>
+          </div>
+      </div></div>
+      <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsPassword">Password</label>
+        <input type="password" formControlName="password" name="multiStepsPassword" id="multiStepsPassword" class="form-control" placeholder="************" aria-label="john.doe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['password']">Password is required!</div>
+          </div>
+      </div></div>
+      <div class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsEmail">Mobile</label>
+        <input type="email" formControlName="mobile" name="multiStepsEmail" id="multiStepsEmail" class="form-control" placeholder="john.doe@email.com" aria-label="john.doe">
+      <div class="fv-plugins-message-container invalid-feedback">
+        <div *ngIf="f['mobile'].touched && f['mobile'].errors" class="invalid-feedback">
+            <div *ngIf="f['mobile'].errors['mobile']">Mobile is required!</div>
+          </div>
+      </div></div>
+      
+      <div  class="col-sm-6 fv-plugins-icon-container">
+        <label class="form-label" for="multiStepsEmail">Role</label>
+        <select  class="form-control" formControlName="roles">
+
+            <option [ngValue]="role._id" [selected]="i === 0" *ngFor="let role of roles$|async;let i = index">{{role.name}}
+            </option>
+                <option value="">Select Role</option>
+            </select>
+      <div class="fv-plugins-message-container invalid-feedback">
+        
+      </div>
+    </div>
+      
+      
+      
+      <div class="col-12 d-flex justify-content-between mt-4">
+       
+        <button [disabled]="registerForm.invalid" class="btn btn-primary btn-next waves-effect waves-light">
+          <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">{{buttonText}}</span>
+          <i class="ti ti-arrow-right ti-xs"></i>
+        </button>
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+</div>
+</div>

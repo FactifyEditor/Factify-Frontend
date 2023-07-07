@@ -127,6 +127,10 @@ export class AuthService {
     let currentUser= localStorage.getItem('currentUser');
     return currentUser!=null?JSON.parse(currentUser)?.roles:[]
   }
+  public getCurrentUser(){
+    let currentUser= localStorage.getItem('currentUser');
+    return currentUser!=null?JSON.parse(currentUser):null
+  }
 
   // User profile
   getUserProfile(id: any): Observable<any> {

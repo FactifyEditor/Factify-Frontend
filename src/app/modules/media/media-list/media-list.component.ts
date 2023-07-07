@@ -268,11 +268,12 @@ export class MediaListComponent implements OnInit, AfterViewInit {
         } else {
           var id = $(this).attr("id");
           console.log("ID of unchecked element: " + id);
+          if(this.selectedMedia &&  this.selectedMedia.length)
           this.selectedMedia.splice(this.selectedMedia.indexOf(id), 1);
         }
         var d1: any = document.getElementById("est");
         var d2: any = document.getElementById("bulk_action");
-        if (d2 == null && $(".tblChk:checked").length > 1)
+        if (d2 == null && $(".tblChk:checked").length > 0)
           d1.insertAdjacentHTML(
             "beforeend",
             `
@@ -287,7 +288,7 @@ export class MediaListComponent implements OnInit, AfterViewInit {
   </div>
       `
           );
-        if ($(".tblChk:checked").length < 2) {
+        if ($(".tblChk:checked").length ==0) {
           // remove d2 button from ui
           if (d2 != null) d2.remove();
         }

@@ -16,6 +16,11 @@ const routes: Routes = [{
   loadChildren: () => import('./modules/settings/users/users.module').then(m => m.UsersModule)
 },
 {
+  path:'account',
+  canActivate: [AuthGuard],
+  loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule)
+},
+{
   path:'ratings',
   canActivate: [AuthGuard],
   loadChildren:()=>import('./modules/settings/ratings/ratings.module').then(m=>m.RatingsModule)
