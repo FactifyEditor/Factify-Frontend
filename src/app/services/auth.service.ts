@@ -59,6 +59,34 @@ export class AuthService {
         // this.notificationService.showError(error.error.error)
       },);
   }
+    // forgot-password
+    forgotPassword(user) {
+      return this.http
+        .post<any>(`${this.baseURL}/auth/forgot-password`, user)
+        .subscribe(
+          (res: any) => {
+            this.toastService.show(`${res.message} to ${user.email}`, { classname: 'bg-success text-dark', delay: 10000 });
+        },error => {
+          console.log("error", error);
+          this.toastService.show("invalid email", { classname: 'bg-danger text-dark', delay: 10000 });
+     
+          // this.notificationService.showError(error.error.error)
+        },);
+    }
+     // forgot-password
+     resetPassword(user) {
+      return this.http
+        .post<any>(`${this.baseURL}/auth/reset-password`, user)
+        .subscribe(
+          (res: any) => {
+            this.toastService.show(`${res.message}`, { classname: 'bg-success text-dark', delay: 10000 });
+        },error => {
+          console.log("error", error);
+          this.toastService.show("faild to reset password try again", { classname: 'bg-danger text-dark', delay: 10000 });
+     
+          // this.notificationService.showError(error.error.error)
+        },);
+    }
 
   getToken() {
     return localStorage.getItem('accessToken');
