@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MediaService {
   publishMedia(ids: any[]) {
-    return this.http.post(`${this.baseURL}/media/publish`,{ body: { ids } });
+    return this.http.post(`${this.baseURL}/media/publish`,{ ids  });
   }
   private baseURL = environment.BASE_URL;
   private renderURL = environment.RENDERER_URL;
