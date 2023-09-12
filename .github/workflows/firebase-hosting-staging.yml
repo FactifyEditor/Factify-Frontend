@@ -7,10 +7,9 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Firebase JSON File
-        env:
-          FIREBASE_JSON_STAGING: ${{ secrets.FIREBASE_JSON_STAGING }}
-        run: echo $FIREBASE_JSON_STAGING | base64 -di > ./firebase.json
+      - name: 'Create frebase json file' 
+        run: |
+          echo "${{ secrets.FIREBASE_JSON_STAGING }}" > firebase.json
       - uses: actions/checkout@v2
       - run:  npm i --force && npm run build 
       - uses: FirebaseExtended/action-hosting-deploy@v0
