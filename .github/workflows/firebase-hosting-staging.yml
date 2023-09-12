@@ -8,7 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run:  npm i --force && npm run build && touch firebase.json && echo -e ${{ secrets.FIREBASE_JSON_STAGING }} >> firebase.json && echo firebase.json
+      - name: 'Create frebase json file' 
+        run: |
+          echo '{ "hosting": { "public": "public", "site": "factify-staging", "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ], "rewrites": [{ "source": "**", "destination": "/index.html" }] } }' > firebase.json && cat firebase.json
+      - run:  npm i --force && npm run build 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
