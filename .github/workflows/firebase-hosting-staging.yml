@@ -7,8 +7,14 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Create file
+        run: cat firebase.json | base64
+      - name: Putting data
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA > firebase.json
       - uses: actions/checkout@v2
-      - run:  printf "${{ secrets.FIREBASE_JSON_STAGING }}" >> firebase.json && echo firebase.json && npm i --force && npm run build 
+      - run:  npm i --force && npm run build 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
