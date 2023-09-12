@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Create frebase json file' 
         run: |
-          echo "${{ secrets.FIREBASE_JSON_STAGING }}" > firebase.json && cat firebase.json
+          echo ${{ secrets.FIREBASE_JSON_STAGING }} &&  echo "${{ secrets.FIREBASE_JSON_STAGING }}" > firebase.json && cat firebase.json
       - run:  npm i --force && npm run build 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
