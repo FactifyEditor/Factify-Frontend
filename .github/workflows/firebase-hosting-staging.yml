@@ -1,0 +1,17 @@
+name: Deploy to Firebase Hosting on Staging
+'on':
+  push:
+    branches:
+      - staging
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run:  npm i --force && npm run build && touch firebase.json && echo -e ${{ secrets.FIREBASE_JSON_STAGING }} >> firebase.json && echo firebase.json
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RICH_SUPRSTATE_367315 }}'
+          channelId: live
+          projectId: rich-suprstate-367315
