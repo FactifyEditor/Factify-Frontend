@@ -1,20 +1,37 @@
 name: Deploy to Firebase Hosting on Staging
-'on':
+
+on:
   push:
     branches:
       - staging
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: 'Create frebase json file' 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Firebase JSON file
         run: |
           echo '{ "hosting": { "public": "public", "site": "factify-staging", "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ], "rewrites": [{ "source": "**", "destination": "/index.html" }] } }' > firebase.json && cat firebase.json
-      - run:  npm i --force && npm run build 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RICH_SUPRSTATE_367315 }}'
-          channelId: live
+          node-version: '14' # Use the Node.js version appropriate for your project
+
+      - name: Install Dependencies and Build
+        run: |
+          npm install -g @angular/cli
+          npm i --force
+          ng build --configuration=staging
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RICH_SUPRSTATE_367315 }}
+          channelId: staging # Change to your Firebase Hosting channel for staging
           projectId: rich-suprstate-367315
