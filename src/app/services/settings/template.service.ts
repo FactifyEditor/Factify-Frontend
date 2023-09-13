@@ -23,6 +23,58 @@ export class TemplateService {
   getImageTemplates() {
     return [
       {
+        "_id": "6500425a2f88795a4b7fafb3",
+        "name": "Theme 1",
+        "description": "Theme 1",
+        "image": "https://storage.googleapis.com/factify/FoFnr0eqMZTolk7d1679218554978.png",
+        "languages": [
+            {
+                "language": "English",
+                "_id": "650038ab413f962f96426e98",
+                "image": "https://storage.googleapis.com/factify-staging/mG3FUNRBEMr92bzS1694518008570.png",
+                "isEnabled": true
+            },
+            {
+                "language": "Hindi",
+                "_id": "650038ab413f962f96426e99",
+                "image": "https://storage.googleapis.com/factify-staging/LYiW6jPV3fA2jIEN1694518026581.png",
+                "isEnabled": true
+            },
+            {
+                "language": "Malayalam",
+                "_id": "650038ab413f962f96426e9a",
+                "isEnabled": false
+            },
+            {
+                "language": "Kannada",
+                "_id": "650038ab413f962f96426e9b",
+                "isEnabled": false
+            },
+            {
+                "language": "Gujarati",
+                "_id": "650038ab413f962f96426e9c",
+                "isEnabled": false
+            },
+            {
+                "language": "Tamil",
+                "_id": "650038ab413f962f96426e9d",
+                "isEnabled": false
+            },
+            {
+                "language": "Bengali",
+                "_id": "650038ab413f962f96426e9e",
+                "isEnabled": false
+            },
+            {
+                "language": "Punjabi ",
+                "_id": "650038ab413f962f96426e9f",
+                "isEnabled": false
+            }
+        ],
+        "status": 0,
+        "html": "<html>\n  <link rel='preconnect' href='https://fonts.googleapis.com'> \n<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>          <link href='{{fontUrl}}' rel='stylesheet'>\n      <style>\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n          <style>\n              .container {\n                position: relative;\n                text-align: center;\n                color: white;\n              }\n              \n              .bottom-left {\n                position: absolute;\n                bottom: 8px;\n                left: 16px;\n              }\n              \n              .top-left {\n                position: absolute;\n                width: 500px;\n                font-size: 1.7em;\n                color:white;\n                font-family: 'Nunito Sans';\n                text-align: left;\n                top: 120px;\n                left: 80px;\n              }\n              \n              .top-right {\n                position: absolute;\n                top: 8px;\n                right: 16px;\n              }\n              \n              .bottom-right {\n                position: absolute;\n                bottom: 8px;\n                right: 16px;\n              }\n              \n              .centered {\n                position: absolute;\n                top: 345px;\n          left: 410px;\n          width: 250px;\n          font-size: 1.3em;\n          color: #226099;\n          font-family: 'Nunito Sans';\n          text-align: left;\n      \n             \n              }\n              button {\n        position: absolute;\n        width: 200px;\n        height: 100px;\n        border-radius: 40px;\n      }\n      .btn {\n        position: relative;\n        display: inline-block;\n        border: 0;\n        border-radius: 30px;\n        text-align: center;\n        white-space: nowrap;\n        cursor: pointer;\n        font-size: 14px;\n      }\n      .btn:hover {\n        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);\n      }\n      .btn:active {\n        transform: translateY(1px);\n        box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.15);\n      }\n      .btn:focus {\n        outline: none;\n      }\n      .btn--basic {\n        background-color: #e3eacc;\n        color: #455a00;\n      }\n      .btn--ghost {\n        background-color: transparent;\n        border: 1px solid #739600;\n        color: #739600;\n      }\n      .btn--dark {\n        background-color: #455a00;\n        color: white;\n      }\n      .btn--action {\n        background-color: #17A597;\n        color: white;\n      }\n      .btn--danger {\n        background-color: #ff0000;\n        color: white;\n      }\n      .btn--link {\n        background-color: transparent;\n        color: #5786bd;\n      }\n      .btn--dropdown {\n        padding-right: 3em;\n      }\n      .btn--dropdown:before {\n        content: \"\";\n        right: 24px;\n        top: 22px;\n        width: 2px;\n        height: 6px;\n        background-color: rgba(0, 0, 0, 0.1);\n        position: absolute;\n        transform: rotate(-45deg);\n      }\n      .btn--dropdown:after {\n        content: \"\";\n        right: 20px;\n        top: 22px;\n        width: 2px;\n        height: 6px;\n        background-color: rgba(0, 0, 0, 0.1);\n        position: absolute;\n        transform: rotate(45deg);\n      }\n      .fact-btn{\n          position: absolute;\n          font-size: 1em;\n          height: 100px;\n          color: white;\n          font-family: 'Nunito Sans';\n          text-align: center;\n          top: 70px;\n          left: 80px;\n          max-height: 30px;\n          max-width: 100px;\n      \n      }\n      .claim-btn {\n          position: absolute;\n          font-size: 1em;\n          height: 100px;\n          color: white;\n          font-family: 'Nunito Sans';\n          text-align: center;\n          top: 300px;\n          left: 410px;\n          max-height: 30px;\n          max-width: 100px;\n      }\n      .rating{\n        position: absolute;\n          top: 660px;\n          left: 620px;\n          max-height: 60px;\n      }\n      .fact_image{\n          position: absolute;\n      \n          color: white;\n          font-family: 'Nunito Sans';\n          text-align: center;\n          top: 300px;\n          left: 80px;\n          max-width:300px\n      \n      }\n      .footer{\n          position: absolute;\n          top: 670px;\n          left: 80;\n          max-width:300px\n      }\n      </style>\n        <body>\n          <div class=\"container\">\n              <img class=\"fact_image\"  src=\"{{factImage}}\">\n              <img class=\"rating \"  src=\"{{ratingImage}}\">\n              <img style=\"width:100%;\" src=\"https://storage.googleapis.com/factify/z3rOWEpuCyocw2hX1678355786088.png\">\n              <button class=\"btn fact-btn btn--action\">C L A I M</button>\n              <div class=\"top-left\">{{claim}}</div>\n              <button class=\"btn claim-btn btn--action\">F A C T</button>\n              \n              <div class=\"centered\">{{fact}}</div>\n                  <img class=\"footer\" style=\"width:50%;\"   src=\"https://storage.googleapis.com/factify/tzpY8NepK0CqIhpu1678355909448.png\">\n            </div>\n          <div>\n             \n          <div>\n        </body>  \n      </html> "
+    },
+      {
         "_id": "6416d78ea808d8d5975816ac",
         "name": "Theme 1",
         "description": "Theme 1",
